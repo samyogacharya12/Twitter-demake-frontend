@@ -1,0 +1,60 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Social Dashboard</h2>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Messages</a></li>
+      <li><a href="#">Notifications</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </aside>
+  
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1>Dashboard</h1>
+      <div class="notification-container">
+        <!-- Notification Bell Icon -->
+        <div class="notification-icon" (click)="toggleNotifications()">
+          <img src="assets/bell-860.png" alt="Notifications" />
+          <!-- Notification Badge -->
+          <span class="badge">{{ notifications.length }}</span>
+        </div>
+      
+        <!-- Notification Dropdown -->
+        <div class="notification-dropdown" *ngIf="showNotifications">
+          <h4>Notifications</h4>
+          <ul>
+            <li *ngFor="let notification of notifications">
+              <p>{{ notification.message }}</p>
+              <small>{{ notification.time }}</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="user-profile">
+        <img src="assets/pexels-photo-771742.jpeg" alt="Profile Picture" />
+        <span>{{ userName }}</span>
+      </div>
+    </header>
+    
+    <!-- Status Post Container -->
+    <div class="status-post-container">
+      <h2>Status Post</h2>
+      <form #statusForm="ngForm">
+        <textarea [(ngModel)]="newPost" name="post" rows="3" placeholder="What's on your mind?" required></textarea>
+        <button type="submit" [disabled]="!statusForm.valid">Post</button>
+      </form>
+    
+      <div class="posts">
+        <h3>Recent Posts:</h3>
+        <div *ngFor="let post of statusList" class="post">
+          <p>{{ post }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,11 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule
 import { RegistrationComponent } from './registration/registration.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChatComponent } from './chat/chat.component';
+import { StatusPostComponent } from './status-post/status-post.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DashboardComponent,
+    ChatComponent,
+    StatusPostComponent
   ],
   imports: [
     BrowserModule,
