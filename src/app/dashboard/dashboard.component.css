@@ -138,8 +138,12 @@ button:hover {
   display: flex;
   align-items: center; /* Proper alignment for centering */
   position: relative;
-  margin-left: auto; /* Add a small margin for minimal rightward movement */
+  /*margin-left: auto;*/ /* Add a small margin for minimal rightward movement */
 }
+.header-width{
+  width: 86%;
+}
+
 
 .notification-icon {
   position: relative;
