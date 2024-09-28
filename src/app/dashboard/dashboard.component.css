@@ -323,4 +323,112 @@
   background-color: #ff0000; /* Darker red on hover */
 }
 
+.reactions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+
+.reaction-container {
+  display: flex;
+  position: relative;
+}
+
+.like-button {
+  margin-right: 100px; /* Add space to the right of the like button */
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-button {
+  background: none; /* Remove default background */
+  border: none; /* Remove border */
+  cursor: pointer; /* Change cursor to pointer */
+  padding: 5px; /* Add some padding for clickable area */
+}
+
+
+
+.reaction-options {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  border-radius: 30px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.reaction-options.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reaction-option {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.reaction-option:hover {
+  transform: scale(1.5); /* Enlarge the emoji on hover */
+}
+
+.comment-icon {
+  fill: #6e767d; /* Default icon color */
+  width: 20px; /* Set icon width */
+  height: 20px; /* Set icon height */
+  transition: fill 0.2s; /* Smooth transition for color change */
+}
+
+.comment-button:hover .comment-icon {
+  fill: #1da1f2; /* Change icon color on hover */
+}
+
+.comment-icon {
+  fill: #6e767d; /* Default gray icon color */
+  width: 20px;
+  height: 20px;
+  transition: fill 0.2s ease;
+}
+
+.comment-button:hover .comment-icon {
+  fill: #1da1f2; /* Twitter's blue color on hover */
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Position above the button */
+  left: 50%;
+  margin-left: -50px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.comment-button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
 

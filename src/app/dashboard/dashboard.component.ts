@@ -11,6 +11,9 @@ export class DashboardComponent implements OnInit  {
   followers?: number = 1500;
   following?: number = 300;
   posts?: number = 45;
+  commentCount = 123;
+  retweetCount = 456;
+  likeCount = 789;
   showNotifications: boolean = false;
 
   // Sample notifications data
@@ -35,5 +38,36 @@ export class DashboardComponent implements OnInit  {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  increaseCount(reaction: string) {
+    if (reaction === 'comment') {
+      this.commentCount++;
+    } else if (reaction === 'retweet') {
+      this.retweetCount++;
+    } else if (reaction === 'like') {
+      this.likeCount++;
+    }
+  }
+
+  showReactionOptions = false;
+
+  // Selected reaction, default to like
+  selectedReaction = '👍';
+
+  // Method to show reactions on hover
+  showReactions() {
+    this.showReactionOptions = true;
+  }
+
+  // Method to hide reactions when not hovering
+  hideReactions() {
+    this.showReactionOptions = false;
+  }
+
+  // Method to select a reaction
+  selectReaction(reaction: string) {
+    this.selectedReaction = reaction;
+    this.hideReactions();  // Hide the options after selecting
   }
 }

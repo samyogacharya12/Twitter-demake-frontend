@@ -53,17 +53,51 @@
 <section>
   <h3>Recent Posts</h3>
   <div class="user-info">
-  <!-- Example of an Individual Post with Image and Profile Picture -->
-      <div class="circle-container">
-        <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="circular-image">
-      </div>
-      <span class="username">{{ userName }}</span>
-      </div>
-    <div class="post">
-    <div class="post-header">
-    <img src="https://i.postimg.cc/DysNyrS1/elonfeed.jpg" alt="Example post image" class="post-image" />  </div>
+    <div class="circle-container">
+      <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="circular-image">
     </div>
+    <span class="username">{{ userName }}</span>
+  </div>
+
+  <div class="post">
+    <div class="post-header">
+      <img src="https://i.postimg.cc/DysNyrS1/elonfeed.jpg" alt="Example post image" class="post-image" />
+    </div>
+
+    <div class="reactions">
+      <div class="reaction-container">
+        <!-- Like button with hover reactions -->
+        <button (mouseover)="showReactions()" (mouseleave)="hideReactions()" class="like-button">
+          ❤️
+          <span class="tooltip">Reactions</span>
+        </button>
+    
+        <!-- Comment button with icon and tooltip -->
+        <button (click)="increaseCount('comment')" class="comment-button">
+          <!-- Custom SVG for comment icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="comment-icon">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 3.45 1.91 6.45 4.93 8.18V22l4.07-2.18c.66.09 1.35.18 2 .18 5.52 0 10-4.48 10-10S17.52 2 12 2zm0 17c-.63 0-1.3-.09-1.94-.26l-3.06 1.64v-2.71C5.41 16.41 4 14.33 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+          </svg>
+          <span class="tooltip">Comment</span>
+        </button>
+        
+        <!-- Additional reactions on hover -->
+        <div class="reaction-options" [class.show]="showReactionOptions">
+          <button (click)="selectReaction('like')" class="reaction-option">👍</button>
+          <button (click)="selectReaction('love')" class="reaction-option">❤️</button>
+          <button (click)="selectReaction('wow')" class="reaction-option">😮</button>
+          <button (click)="selectReaction('haha')" class="reaction-option">😂</button>
+          <button (click)="selectReaction('sad')" class="reaction-option">😢</button>
+          <button (click)="selectReaction('angry')" class="reaction-option">😡</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+
+
+
 
 
   </main>
