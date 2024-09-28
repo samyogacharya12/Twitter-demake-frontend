@@ -1,7 +1,7 @@
 <div class="dashboard-container">
   <!-- Sidebar -->
   <aside class="sidebar">
-    <h2>Social Dashboard</h2>
+    <h2>Sarcastic Twitter</h2>
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">Messages</a></li>
@@ -10,53 +10,61 @@
       <li><a href="#">Settings</a></li>
     </ul>
   </aside>
-  
-  <!-- Main Content Area -->
-  <div class="main-content">
-    <!-- Header -->
-    <header class="header">
-       <div class="header-width">  
-      <h1>Dashboard</h1>
-      </div>
-      <div class="notification-container">
-        <!-- Notification Bell Icon -->
-        <div class="notification-icon" (click)="toggleNotifications()">
-          <img src="assets/bell-860.png" alt="Notifications" />
-          <!-- Notification Badge -->
-          <span class="badge">{{ notifications.length }}</span>
-        </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Status Post Box -->
+
+    <!-- Posts Feed -->
+    <section class="status-post">
+      <h3>Post a Status</h3>
       
-        <!-- Notification Dropdown -->
-        <div class="notification-dropdown" *ngIf="showNotifications">
-          <h4>Notifications</h4>
-          <ul>
-            <li *ngFor="let notification of notifications">
-              <p>{{ notification.message }}</p>
-              <small>{{ notification.time }}</small>
-            </li>
-          </ul>
-        </div>
+      <!-- Status Textarea -->
+      <textarea id="statusInput" placeholder="What's on your mind?" class="status-input"></textarea>
+      
+      <!-- Emoji Picker Button -->
+      <button id="emojiButton" class="emoji-button">😊</button>
+
+
+      <input type="file" id="mediaUpload" class="media-upload" accept="image/*,video/*" style="display: none;">
+      <button id="mediaUploadButton" class="media-upload-button">📷/GIF</button>
+
+      <div id="mediaPreview" class="media-preview" style="display: none;">
+        <img id="mediaPreviewImg" src="" alt="Media preview" />
+        <video id="mediaPreviewVideo" controls style="display: none;"></video>
+        <button id="removeMediaButton" class="remove-media-button">❌</button>
       </div>
-      <div class="user-profile">
-        <img src="assets/pexels-photo-771742.jpeg" alt="Profile Picture" />
-        <span>{{ userName }}</span>
+      
+      <!-- Image Upload -->
+      <input type="file" id="imageUpload" class="image-upload" accept="image/*" style="display: none;">
+      <button id="imageUploadButton" class="image-upload-button">📷</button>
+      
+      <!-- Selected Image Preview -->
+      <div id="imagePreview" class="image-preview" style="display: none;">
+        <img id="imagePreviewImg" src="" alt="Image preview" />
+        <button id="removeImageButton" class="remove-image-button">❌</button>
       </div>
-    </header>
     
-    <!-- Status Post Container -->
-    <div class="status-post-container">
-      <h2>Status Post</h2>
-      <form #statusForm="ngForm">
-        <textarea [(ngModel)]="newPost" name="post" rows="3" placeholder="What's on your mind?" required></textarea>
-        <button type="submit" [disabled]="!statusForm.valid">Post</button>
-      </form>
-    
-      <div class="posts">
-        <h3>Recent Posts:</h3>
-        <div *ngFor="let post of statusList" class="post">
-          <p>{{ post }}</p>
-        </div>
+      <!-- Post Button -->
+      <button class="post-button" id="postButton">Post</button>
+    </section>
+  <!-- Posts Feed Section -->
+<!-- Posts Feed Section -->
+<section>
+  <h3>Recent Posts</h3>
+  <div class="user-info">
+  <!-- Example of an Individual Post with Image and Profile Picture -->
+      <div class="circle-container">
+        <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="circular-image">
       </div>
+      <span class="username">{{ userName }}</span>
+      </div>
+    <div class="post">
+    <div class="post-header">
+    <img src="https://i.postimg.cc/DysNyrS1/elonfeed.jpg" alt="Example post image" class="post-image" />  </div>
     </div>
-  </div>
+</section>
+
+
+  </main>
 </div>
