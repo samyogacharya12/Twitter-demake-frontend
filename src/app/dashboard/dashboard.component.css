@@ -10,6 +10,48 @@
   padding: 20px;
   border-right: 1px solid #e6ecf0;
 }
+.sidebar ul li a::before {
+  content: "";
+  display: inline-block;
+  width: 1000px; /* Adjust width for spacing */
+  text-align: center;
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.icon-home::before {
+  content: "\2302"; /* Home icon (⌂) */
+}
+
+.icon-messages::before {
+  content: "\2709"; /* Envelope icon (✉) */
+}
+
+.icon-notifications::before {
+  content: "\1F514"; /* Bell icon (🔔) */
+}
+
+.icon-profile::before {
+  content: "\1F464"; /* User icon (👤) */
+}
+
+.icon-settings::before {
+  content: "\2699"; /* Gear icon (⚙) */
+}
+
+/* Optional styling for icons */
+i[class^="icon-"]::before {
+  margin-right: 8px;  /* Space between icon and text */
+  font-size: 24px;    /* Increase this value to make icons larger */
+  display: inline-block;
+  vertical-align: middle; /* Align icons with text */
+}
+
+/* Optional: Styling for hover effects or any additional customization */
+i[class^="icon-"]:hover::before {
+  color: #007bff; /* Change icon color on hover */
+}
+
+
 
 .sidebar h2 {
   font-size: 24px;
@@ -38,7 +80,7 @@
 /* Main Content Styling */
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 10px;
   background-color: #f5f8fa;
 }
 
@@ -46,6 +88,7 @@
 .status-post {
   background-color: #ffffff;
   padding: 15px;
+  width: 1000px;
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -56,7 +99,7 @@
 }
 
 .status-input {
-  width: 100%;
+  width: 40%;
   height: 80px;
   padding: 10px;
   border: 1px solid #ccd6dd;
@@ -93,7 +136,7 @@
 }
 
 .post {
-  padding: 10px;
+  padding: 1px;
   margin-bottom: 10px;
   border-bottom: 1px solid #e6ecf0;
 }
@@ -206,6 +249,9 @@
   justify-content: space-between;
   color: #657786;
 }
+.input-changes{
+  margin-right: 100px; /* Space to the right of the emoji button */
+}
 
 /* Emoji Button */
 .emoji-button {
@@ -213,7 +259,6 @@
   cursor: pointer;
   background: none;
   border: none;
-  margin-right: 10px; /* Space to the right of the emoji button */
 }
 
 /* Image Upload Button */
@@ -429,6 +474,100 @@
   opacity: 1;
 }
 
+.people-you-may-know {
+  width: 350px;
+  padding: 20px;
+  margin-left: 600px;
+  margin-top: -400px; /* or use any of the other methods */
+  background-color: #f5f8fa;
+  border-left: 1px solid #e1e8ed;
+}
+
+/* People You May Know section */
+.people-you-may-know h3 {
+  font-size: 16px;
+  color: #14171a;
+  margin-bottom: 16px;
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #14171a;
+  display: block;
+}
+
+.user-handle {
+  color: #657786;
+  font-size: 14px;
+}
+
+.follow-btn {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.follow-btn:hover {
+  background-color: #0d95e8;
+}
+
+/* Responsive adjustments (Optional) */
+@media (max-width: 768px) {
+  .page-container {
+      flex-direction: column;
+  }
+
+  .sidebar, .people-you-may-know {
+      width: 100%;
+  }
+}
+
+.page-container {
+  display: flex;
+  justify-content: space-between; /* Aligns the left and right sections */
+  width: 100%;
+}
+
+/* Sidebar on the left */
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  background-color: #f5f8fa;
+  border-right: 1px solid #e1e8ed;
+}
+
+.show-more-label {
+color: #14171a;
+cursor: pointer;
+display: block; /* Make it a block element */
+font-weight: bold; /* Make the text bold */
+}
+
+.show-more-label:hover {
+  background-color: #0d95e8; /* Darken the blue on hover */
+  text-decoration: underline; /* Underline on hover for better indication */
+}
 
 
 

@@ -3,13 +3,15 @@
   <aside class="sidebar">
     <h2>Sarcastic Twitter</h2>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Messages</a></li>
-      <li><a href="#">Notifications</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Settings</a></li>
+        <li><a href="#"><i class="icon-home"></i> Home</a></li>
+        <li><a href="#"><i class="icon-messages"></i> Messages</a></li>
+        <li><a href="#"><i class="icon-notifications"></i> Notifications</a></li>
+        <li><a href="#"><i class="icon-profile"></i> Profile</a></li>
+        <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
     </ul>
-  </aside>
+</aside>
+
+  
 
   <!-- Main Content -->
   <main class="main-content">
@@ -21,7 +23,7 @@
       
       <!-- Status Textarea -->
       <textarea id="statusInput" placeholder="What's on your mind?" class="status-input"></textarea>
-      
+      <div class="input-changes">
       <!-- Emoji Picker Button -->
       <button id="emojiButton" class="emoji-button">😊</button>
 
@@ -43,10 +45,10 @@
       <div id="imagePreview" class="image-preview" style="display: none;">
         <img id="imagePreviewImg" src="" alt="Image preview" />
         <button id="removeImageButton" class="remove-image-button">❌</button>
-      </div>
-    
-      <!-- Post Button -->
+        </div>
+              <!-- Post Button -->
       <button class="post-button" id="postButton">Post</button>
+      </div>
     </section>
   <!-- Posts Feed Section -->
 <!-- Posts Feed Section -->
@@ -93,12 +95,37 @@
       </div>
     </div>
   </div>
+
+  <div class="people-you-may-know">
+    <h3>People You May Know</h3>
+    <div class="suggestion">
+        <img src="https://i.postimg.cc/WzRtQ5sf/profilepic.jpg" alt="User 1" class="user-avatar">
+        <div class="user-info">
+            <span class="user-name">Samyog Acharya</span>
+            <span class="user-handle">@acharyasamyog</span>
+        </div>
+        <button class="follow-btn">Follow</button>
+    </div>
+    <div class="suggestion">
+        <img src="https://via.placeholder.com/50" alt="User 2" class="user-avatar">
+        <div class="user-info">
+            <span class="user-name">Jane Smith</span>
+            <span class="user-handle">@janesmith</span>
+        </div>
+        <button class="follow-btn">Follow</button>
+    </div>
+    <div class="suggestion">
+        <img src="https://via.placeholder.com/50" alt="User 3" class="user-avatar">
+        <div class="user-info">
+            <span class="user-name">Alex Johnson</span>
+            <span class="user-handle">@alexjohnson</span>
+        </div>
+        <button class="follow-btn">Follow</button>
+    </div>
+    <span class="show-more-label">Show More</span>
+</div>
+
 </section>
-
-
-
-
-
 
   </main>
 </div>
