@@ -137,6 +137,8 @@ i[class^="icon-"]:hover::before {
 
 .post {
   padding: 1px;
+  height: 500px;
+  width:1000px;
   margin-bottom: 10px;
   border-bottom: 1px solid #e6ecf0;
 }
@@ -168,12 +170,15 @@ i[class^="icon-"]:hover::before {
   padding: 15px;
   margin-bottom: 20px;
   border-bottom: 1px solid #e6ecf0;
+  height: 500px;
+  width:1000px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
-.post-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.post-image {
+  margin-left: 300px;
+  height: 250px;
+  width: 3000px; /* Ensure the image takes up full width */
 }
 
 /* Profile Picture Styling */
@@ -369,10 +374,13 @@ i[class^="icon-"]:hover::before {
 }
 
 .reactions {
+  margin-left: 300px;
   display: flex;
   justify-content: flex-start;
   margin-top: 10px;
   padding: 10px 0;
+  height: auto;
+  width: auto;
 }
 
 .reaction-container {
@@ -477,8 +485,8 @@ i[class^="icon-"]:hover::before {
 .people-you-may-know {
   width: 350px;
   padding: 20px;
-  margin-left: 600px;
-  margin-top: -400px; /* or use any of the other methods */
+  margin-left: 1100px;
+  margin-top: -350px; /* or use any of the other methods */
   background-color: #f5f8fa;
   border-left: 1px solid #e1e8ed;
 }
