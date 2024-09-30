@@ -83,12 +83,6 @@
   <span class="tooltip">Comment</span>
 </button>
 
-
-<!-- Display comments section -->
-<div class="comment-display" *ngIf="showComment">
-  <app-comment-box></app-comment-box>
-</div>
-
         <!-- Additional reactions on hover -->
         <div class="reaction-options" [class.show]="showReactionOptions">
           <button (click)="selectReaction('like')" class="reaction-option">👍</button>
@@ -99,6 +93,13 @@
           <button (click)="selectReaction('angry')" class="reaction-option">😡</button>
         </div>
       </div>
+    </div>
+
+    <div class="view-all">
+      <a href="#">View all 214 comments</a>
+  </div>
+    <div class="comment-display">
+      <app-comment-box></app-comment-box>
     </div>
   </div>
   

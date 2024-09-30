@@ -1,59 +1,66 @@
+/* General resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+/* Add comment section */
 .add-comment {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #e6e6e6;
-  }
-  
-/* Container for the comments section */
-.comments-section {
-  padding: 10px 15px; /* Add some padding to the comments section */
-  border-top: 1px solid #e6e6e6; /* Separate the comments section from the post content */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #dbdbdb;
+  background-color: #fff;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
-/* Individual comment layout */
-@media (max-width: 600px) {
-  .comment img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-
-  .comment {
-    font-size: 13px;
-  }
+.profile-pic-input {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
 }
 
-
-/* Username styling */
-.comment strong {
-  color: #262626; /* Instagram-style dark color for username */
-  margin-right: 8px; /* Space between username and comment text */
-  font-weight: 600;
+.comment-input {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  outline: none;
+  font-size: 0.9rem;
 }
 
-/* Comment text */
-.comment span {
-  color: #444; /* Slightly lighter color for the comment text */
-  word-wrap: break-word; /* Handle long words by breaking them */
-  flex-grow: 1; /* Ensure comment text takes up remaining space */
+.comment-input::placeholder {
+  color: #999;
 }
-
 
 .post-button {
-    background: none;
-    border: none;
-    color: #0095f6;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 5px;
-  }
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px;
+}
 
-  .profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
+.post-button[disabled] {
+  color: #b2dffc;
+  cursor: not-allowed;
+}
+.comments-section {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 
+}
