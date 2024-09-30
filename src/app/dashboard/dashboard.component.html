@@ -62,8 +62,9 @@
   </div>
 
   <div class="post">
-      <img src="https://i.postimg.cc/DysNyrS1/elonfeed.jpg" alt="Example post image" class="post-image" />
-
+      <div class="box">
+        <img src="https://i.postimg.cc/DyptQ6Kt/image.jpg" alt="Example post image" class="post-image" />
+      </div>
     <div class="reactions">
       <div class="reaction-container">
         <!-- Like button with hover reactions -->
@@ -73,14 +74,21 @@
         </button>
     
         <!-- Comment button with icon and tooltip -->
-        <button (click)="increaseCount('comment')" class="comment-button">
-          <!-- Custom SVG for comment icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="comment-icon">
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 3.45 1.91 6.45 4.93 8.18V22l4.07-2.18c.66.09 1.35.18 2 .18 5.52 0 10-4.48 10-10S17.52 2 12 2zm0 17c-.63 0-1.3-.09-1.94-.26l-3.06 1.64v-2.71C5.41 16.41 4 14.33 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
-          </svg>
-          <span class="tooltip">Comment</span>
-        </button>
-        
+       <!-- Comment Button -->
+<button (click)="toggleCommentPopup()" class="comment-button">
+  <!-- Custom SVG for comment icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="comment-icon">
+    <path d="M12 2C6.48 2 2 6.48 2 12c0 3.45 1.91 6.45 4.93 8.18V22l4.07-2.18c.66.09 1.35.18 2 .18 5.52 0 10-4.48 10-10S17.52 2 12 2zm0 17c-.63 0-1.3-.09-1.94-.26l-3.06 1.64v-2.71C5.41 16.41 4 14.33 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+  </svg>
+  <span class="tooltip">Comment</span>
+</button>
+
+
+<!-- Display comments section -->
+<div class="comment-display" *ngIf="showComment">
+  <app-comment-box></app-comment-box>
+</div>
+
         <!-- Additional reactions on hover -->
         <div class="reaction-options" [class.show]="showReactionOptions">
           <button (click)="selectReaction('like')" class="reaction-option">👍</button>
@@ -93,6 +101,7 @@
       </div>
     </div>
   </div>
+  
 
   <div class="people-you-may-know">
     <h3>People You May Know</h3>
@@ -101,22 +110,6 @@
         <div class="user-info">
             <span class="user-name">Samyog Acharya</span>
             <span class="user-handle">@acharyasamyog</span>
-        </div>
-        <button class="follow-btn">Follow</button>
-    </div>
-    <div class="suggestion">
-        <img src="https://via.placeholder.com/50" alt="User 2" class="user-avatar">
-        <div class="user-info">
-            <span class="user-name">Jane Smith</span>
-            <span class="user-handle">@janesmith</span>
-        </div>
-        <button class="follow-btn">Follow</button>
-    </div>
-    <div class="suggestion">
-        <img src="https://via.placeholder.com/50" alt="User 3" class="user-avatar">
-        <div class="user-info">
-            <span class="user-name">Alex Johnson</span>
-            <span class="user-handle">@alexjohnson</span>
         </div>
         <button class="follow-btn">Follow</button>
     </div>

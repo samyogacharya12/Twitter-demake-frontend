@@ -11,14 +11,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChatComponent } from './chat/chat.component';
 import { StatusPostComponent } from './status-post/status-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommentBoxComponent } from './comment-box/comment-box.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    CommentBoxComponent,
     RegistrationComponent,
     DashboardComponent,
     ChatComponent,
-    StatusPostComponent
+    StatusPostComponent,
+    CommentBoxComponent
   ],
   imports: [
     BrowserModule,

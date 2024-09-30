@@ -1,0 +1,59 @@
+.add-comment {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #e6e6e6;
+  }
+  
+/* Container for the comments section */
+.comments-section {
+  padding: 10px 15px; /* Add some padding to the comments section */
+  border-top: 1px solid #e6e6e6; /* Separate the comments section from the post content */
+}
+
+/* Individual comment layout */
+@media (max-width: 600px) {
+  .comment img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .comment {
+    font-size: 13px;
+  }
+}
+
+
+/* Username styling */
+.comment strong {
+  color: #262626; /* Instagram-style dark color for username */
+  margin-right: 8px; /* Space between username and comment text */
+  font-weight: 600;
+}
+
+/* Comment text */
+.comment span {
+  color: #444; /* Slightly lighter color for the comment text */
+  word-wrap: break-word; /* Handle long words by breaking them */
+  flex-grow: 1; /* Ensure comment text takes up remaining space */
+}
+
+
+.post-button {
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  

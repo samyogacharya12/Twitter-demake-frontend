@@ -1,0 +1,16 @@
+
+    <div class="add-comment">
+        <input [(ngModel)]="commentInput" class="comment-input" placeholder="Add a comment..." (keyup.enter)="addComment()">
+        <button (click)="addComment()" [disabled]="!commentInput.trim()" class="post-button">Post</button>
+      </div>
+  
+      <div class="comments-section" *ngIf="showCommentPopup">
+        <div class="comment" *ngFor="let comment of comments">
+          <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="profile-pic">
+          <div>
+            <strong>@username</strong>
+            <span>{{ comment }}</span>
+          </div>
+        </div>
+      </div>
+      

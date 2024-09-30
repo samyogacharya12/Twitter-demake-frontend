@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit  {
   retweetCount = 456;
   likeCount = 789;
   showNotifications: boolean = false;
+  showComment: boolean = false;
 
   // Sample notifications data
   notifications = [
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit  {
   increaseCount(reaction: string) {
     if (reaction === 'comment') {
       this.commentCount++;
+      this.showComment=true;
     } else if (reaction === 'retweet') {
       this.retweetCount++;
     } else if (reaction === 'like') {
@@ -58,6 +60,13 @@ export class DashboardComponent implements OnInit  {
   // Method to show reactions on hover
   showReactions() {
     this.showReactionOptions = true;
+  }
+
+
+
+
+  toggleCommentPopup() {
+    this.showComment = !this.showComment;
   }
 
   // Method to hide reactions when not hovering
