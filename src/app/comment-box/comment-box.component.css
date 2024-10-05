@@ -1,0 +1,66 @@
+/* General resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+/* Add comment section */
+.add-comment {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #dbdbdb;
+  background-color: #fff;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.profile-pic-input {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.comment-input {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.comment-input::placeholder {
+  color: #999;
+}
+
+.post-button {
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.post-button[disabled] {
+  color: #b2dffc;
+  cursor: not-allowed;
+}
+.comments-section {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 
+}
