@@ -1,23 +1,45 @@
-.cover-photo {
-    margin-right: 400px;
-    position: relative;
-    width: 100%; /* Full width of the parent container */
-    height: 300px; /* Set your desired height */
-    overflow: hidden; /* Hide any overflow */
-    margin-right: 800px;
+/* Add a border to the cover photo */
+.cover-photo img {
+    border: 2px solid #ddd; /* Light gray border */
+    border-radius: 8px;     /* Optional: Slightly rounded corners */
+    width: 100%;            /* Ensure it fits within the container */
+    height: 150px;          /* Adjust to the height you need */
+    object-fit: cover;      /* Makes sure the image doesn't distort */
+    object-position: top;   /* Displays the top part of the image */
+}
 
-  }
-  
-  .cover-photo img {
-    margin-right: 400px;
-    width: 100%; /* Make the image span the full width of the cover */
-    height: auto; /* Maintain the aspect ratio */
-    max-height: 100%; /* Ensure the image does not exceed the height of the container */
-    object-fit: cover; /* Ensure the image covers the area properly */
-    display: block; /* Remove bottom space below the image */
-  }
-  
-  
+/* Add a border to the profile picture */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;         /* Makes it a circle */
+    border: 5px solid white;    /* Adds a thick white border around the profile picture */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+}
+
+/* Add a border around the whole profile section */
+.profile-header {
+    margin-right: 1000px;
+    width: 80%;               /* Decreases the width to 80% of the parent container */
+    max-width: 900px;          /* Ensures the width does not exceed 900px */
+    margin: 0 auto;            /* Centers the box horizontally */
+    border: 2px solid #ddd;    /* Light gray border */
+    border-radius: 10px;       /* Rounded corners */
+    padding: 20px;
+    background-color: #f9f9f9; /* Optional: Light background color */
+}
+
+.bio {
+    width: 80%;                /* Decreases the width to 80% of the parent container */
+    max-width: 900px;          /* Ensures the width does not exceed 900px */
+    margin: 0 auto;            /* Centers the bio box */
+    border-top: 1px solid #ddd;/* Border separating the bio */
+    padding: 15px;
+    font-size: 16px;
+    color: #14171A;
+    background-color: white;
+}
+
 
 .dashboard-container {
     display: flex;
@@ -110,7 +132,7 @@
 
 /* Main content styles */
 .main-content {
-    margin-left: 270px; /* Space for sidebar */
+    margin-left: -200px; /* Space for sidebar */
     width: calc(100% - 270px); /* Ensure the content uses the remaining width */
     padding: 20px;
 }
@@ -197,17 +219,13 @@ body {
     background-color: #f5f8fa;
 }
 
-.profile-header, .tweets-section {
-    max-width: 800px; /* Adjust this value to set the desired width */
-    margin: 0 auto;   /* Centers the content horizontally */
-}
-
 .profile-info {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 50px;
+    margin-left: 40px;
 }
 
 .profile-pic {
@@ -240,14 +258,6 @@ body {
 
 .follow-info div {
     font-size: 14px;
-}
-
-.bio {
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid #e1e8ed;
-    margin-right: 800px;
 }
 
 .bio p {
