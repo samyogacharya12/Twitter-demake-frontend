@@ -13,12 +13,15 @@
         <img src="https://via.placeholder.com/50" alt="User Avatar" class="user-avatar">
         <span class="username">post_user</span>
       </div>
+
+<div *ngFor="let comment of comments" class="comment">
+    <img src="https://i.postimg.cc/WzRtQ5sf/profilepic.jpg" alt="Post Image" class="comment-avatar">
+    <div class="comment-text-container">
+      <span class="username">{{ comment.username }}</span>
+      <span class="comment-text">{{ comment.text }}</span>
+    </div>
+  </div>
   
-      <!-- Comments List -->
-      <div *ngFor="let comment of comments" class="comment">
-        <span class="username">{{ comment.username }}</span>
-        <span class="comment-text">{{ comment.text }}</span>
-      </div>
   
       <!-- Like, Comment, Share Icons -->
       <div class="post-actions">

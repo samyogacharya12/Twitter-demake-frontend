@@ -32,7 +32,7 @@ body {
 
 .post-details {
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,15 +51,47 @@ body {
   height: 60px;
 }
 
-.username {
-  font-weight: bold;
-  font-size: 1.2em;
+.comment {
+  display: flex;
+  align-items: flex-start; /* Align username and text */
+  margin-bottom: 15px; /* Space between comments */
+  padding: 10px; /* Space inside comment box */
+  background-color: #f9f9f9; /* Light background for comments */
+  border-radius: 5px; /* Rounded corners */
 }
 
-.comment {
-  margin-bottom: 10px;
-  font-size: 1em;
+.comment-avatar {
+  border-radius: 50%; /* Circular profile image */
+  width: 40px; /* Set width for profile image */
+  height: 40px; /* Set height for profile image */
+  margin-right: 10px; /* Space between image and text */
 }
+
+.comment-text-container {
+  display: flex;
+  flex-direction: column; /* Stack username and text vertically */
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 5px; /* Space between username and comment text */
+}
+
+.comment-text {
+  font-size: 0.95em; /* Slightly smaller font for comment */
+  line-height: 1.4; /* Improve readability */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .comment {
+    flex-direction: column; /* Stack vertically on small screens */
+    align-items: flex-start; /* Align items to start */
+  }
+}
+
+
 
 .post-actions {
   display: flex;
