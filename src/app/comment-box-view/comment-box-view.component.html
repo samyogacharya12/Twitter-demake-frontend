@@ -1,0 +1,50 @@
+
+
+<div class="post-content">
+    <!-- Post Image on the Left -->
+    <div class="post-image-container">
+      <img src="https://i.postimg.cc/WzRtQ5sf/profilepic.jpg" alt="Post Image" class="post-image">
+    </div>
+  
+    <!-- Post Details and Comments on the Right -->
+    <div class="post-details">
+      <!-- Post Header -->
+      <div class="post-header">
+        <img src="https://via.placeholder.com/50" alt="User Avatar" class="user-avatar">
+        <span class="username">post_user</span>
+      </div>
+  
+      <!-- Comments List -->
+      <div *ngFor="let comment of comments" class="comment">
+        <span class="username">{{ comment.username }}</span>
+        <span class="comment-text">{{ comment.text }}</span>
+      </div>
+  
+      <!-- Like, Comment, Share Icons -->
+      <div class="post-actions">
+        <button class="action-btn like-btn">❤️</button>
+        <button class="action-btn comment-btn">💬</button>
+      </div>
+  
+      <!-- Number of Likes -->
+      <div class="likes-count">
+        <strong>{{ likesCount }}</strong> likes
+      </div>
+  
+      <!-- Comment Input Box -->
+      <div class="comment-input">
+        <input 
+          type="text" 
+          placeholder="Add a comment..." 
+          class="comment-field" 
+          [(ngModel)]="newComment">
+        <button 
+          class="submit-btn" 
+          (click)="addComment()" 
+          [disabled]="!newComment.trim()">
+          Post
+        </button>
+      </div>
+    </div>
+  </div>
+  

@@ -12,6 +12,7 @@ import { ChatComponent } from './chat/chat.component';
 import { StatusPostComponent } from './status-post/status-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
+import { CommentBoxViewComponent } from './comment-box-view/comment-box-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { CommentBoxComponent } from './comment-box/comment-box.component';
     DashboardComponent,
     ChatComponent,
     StatusPostComponent,
-    CommentBoxComponent
+    CommentBoxComponent,
+    CommentBoxViewComponent
   ],
   imports: [
     BrowserModule,

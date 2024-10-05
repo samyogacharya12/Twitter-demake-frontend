@@ -25,6 +25,30 @@ export class DashboardComponent implements OnInit  {
     { message: 'David commented on your photo', time: '3 days ago' }
   ];
 
+  isVisible = false;
+
+  isModalVisible = false;
+  commentInput = '';
+  comments = ['Great post!', 'Love this!'];
+
+  // Function to open the modal
+  openModal() {
+    this.isModalVisible = true;
+  }
+
+  // Function to close the modal
+  closeModal() {
+    this.isModalVisible = false;
+  }
+
+  // Function to add a comment
+  addComment() {
+    if (this.commentInput.trim()) {
+      this.comments.push(this.commentInput);
+      this.commentInput = '';
+    }
+  }
+
   newPost?: string = '';
 
   recentPosts: { content: string, timestamp: string }[] = [
