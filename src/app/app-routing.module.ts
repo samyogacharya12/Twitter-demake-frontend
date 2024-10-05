@@ -6,6 +6,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StatusPostComponent } from './status-post/status-post.component';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'status', component: StatusPostComponent},
   { path: 'dashboard', component: DashboardComponent},
   {path:'comment', component: CommentBoxComponent},
+  {path: 'profile', component: ProfileComponent},
   { path: '**', redirectTo: 'login' }
 ];
 @NgModule({

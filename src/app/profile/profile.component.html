@@ -1,0 +1,57 @@
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Sarcastic Twitter</h2>
+        <ul>
+          <li><a href="#"><i class="icon-home"></i> Home</a></li>
+          <li><a href="#"><i class="icon-messages"></i> Messages</a></li>
+          <li><a href="#"><i class="icon-notifications"></i> Notifications</a></li>
+          <li><a href="#"><i class="icon-profile"></i> Profile</a></li>
+          <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+        </ul>
+    </aside>
+  
+    <!-- Main content container -->
+    <div class="main-content">
+        <div class="profile-header">
+            <div class="cover-photo">
+                <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture"/>
+              <!-- Cover photo background or color -->
+            </div>
+            <div class="profile-info">
+              <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="profile-pic" />
+              <div class="username">
+                <h1>{{ name }}</h1>
+                <p>@{{ handle }}</p>
+              </div>
+            </div>
+            <div class="follow-info">
+              <div class="following">
+                <strong>{{ following }}</strong> Following
+              </div>
+              <div class="followers">
+                <strong>{{ followers }}</strong> Followers
+              </div>
+            </div>
+          </div>
+          
+          <div class="bio">
+            <p>{{ bio }}</p>
+          </div>
+          
+        <!-- People You May Know -->
+        <div class="people-you-may-know">
+            <h3>People You May Know</h3>
+            <div class="suggestion">
+                <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="User 1" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">Samyog Acharya</span>
+                    <span class="user-handle">@acharyasamyog</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            <span class="show-more-label">Show More</span>
+        </div>
+    </div>
+    </div>
+  
