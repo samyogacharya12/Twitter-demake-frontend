@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule
 @Component({
@@ -14,6 +15,8 @@ export class RegistrationComponent{
     dobDay: '',
     dobYear: ''
   };
+  showSignUpModal=false;
+  
 
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -25,5 +28,8 @@ export class RegistrationComponent{
 
   useEmailInstead() {
     console.log('Switching to email input');
+  }
+
+  closeSignUpPopup() {
   }
 }

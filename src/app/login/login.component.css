@@ -53,21 +53,20 @@ body {
   flex-direction: column; /* Align children vertically */
   justify-content: flex-start; /* Change to adjust alignment (e.g., flex-start or center) */
 }
-.close-button{
-  font-size: 28px;
-  color: white;
-  width: 35px;
-  height: 35px;
-  background: black;
-  border-radius: 20px;
-  margin-left: 10px;
-  margin-top: 10px;
-  float: left;
-  cursor: pointer;
+
+.close-button {
+  position: absolute; /* Position the close button absolutely */
+  top: 100px;  /* Adjust the distance from the top */
+  font-size: 24px; /* Make it larger for better visibility */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  color: white; /* Change color for visibility */
+  margin-left: 620px;
 }
-.close-button:hover{
-  background: #21201f;
+
+.close-button:hover {
+  color: red; /* Optional: change color on hover */
 }
+
 .logo-img{
   margin-left: 240px;
   margin-top: 7px;
