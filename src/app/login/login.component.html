@@ -1,9 +1,34 @@
-<div class="login-container">
-    <form>
-      <input type="email"  name="email" placeholder="Email" required />
-      <br>
-      <input type="password" name="password" placeholder="Password" required />
-      <br>
-      <button type="submit">Login</button>
-    </form>
+<body>
+  <div class="main">
+      <div class="login-portal">
+          <div class="header">
+              <h1 class="title">Sign in to Twitter Demake</h1>
+          </div>
+          <form class="twitter-form">
+              <div class="login">
+                  <p class="line">_________________or________________</p><br>
+                  <div *ngIf="!showPassword">
+                      <input class="username-btn" type="text" placeholder="Phone, email, or username"><br>
+                  </div>
+                  <div *ngIf="showPassword">
+                      <input class="username-btn" type="password" placeholder="Password"><br>
+                  </div>
+                  <button class="login-btn" type="button" (click)="showPasswordTab()">
+                      <span class="next-label">Next</span>
+                  </button>
+                  <button class="forgot-btn" type="submit">
+                      <span class="forgot-label">Forgot password?</span>
+                  </button>
+              </div>
+              <div class="sign-up">
+                  <p class="para">Don't have an account?</p>
+                  <a class="link" (click)="openSignUpPopup()">Sign up</a>
+              </div>
+          </form>
+      </div>
   </div>
+  <div class="modal" *ngIf="showSignUpModal">
+    <span class="close-button" (click)="closeSignUpPopup()">✖</span>
+    <app-registration></app-registration> 
+  </div>
+</body>

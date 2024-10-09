@@ -1,90 +1,77 @@
-/* Container for the registration form */
 .registration-container {
-    max-width: 400px;           /* Limit the form width */
-    margin: 50px auto;          /* Center the form horizontally */
-    padding: 30px;              /* Add padding inside the form */
-    background-color: #ffffff;  /* White background for the form */
-    border-radius: 8px;         /* Rounded corners */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a card-like effect */
-    font-family: 'Arial', sans-serif; /* Use a clean, readable font */
-  }
-  
-  /* Form title */
-  h2 {
-    text-align: center;         /* Center the heading */
-    color: #333333;             /* Dark text color */
-    font-size: 24px;            /* Size the text appropriately */
-    margin-bottom: 20px;        /* Add some spacing below the title */
-  }
-  
-  /* Group for each form field */
-  .form-group {
-    margin-bottom: 20px;        /* Add spacing between fields */
-  }
-  
-  /* Label for the form fields */
-  label {
-    font-weight: bold;          /* Bold labels */
-    display: block;             /* Force labels to appear on their own lines */
-    margin-bottom: 5px;         /* Add space between the label and input */
-    color: #555555;             /* Medium grey label color */
-  }
-  
-  /* Input fields */
-  input.form-control {
-    width: 100%;                /* Full width for input fields */
-    padding: 10px;              /* Add padding inside the inputs */
-    border: 1px solid #cccccc;  /* Light grey border */
-    border-radius: 5px;         /* Rounded input edges */
-    font-size: 16px;            /* Larger font for readability */
-    color: #333333;             /* Dark text color */
-    box-sizing: border-box;     /* Ensure padding is included in width */
-    transition: border-color 0.3s ease; /* Smooth border color change on focus */
-  }
-  
-  /* Change border color when input is focused */
-  input.form-control:focus {
-    border-color: #007bff;      /* Blue border on focus */
-    outline: none;              /* Remove the default focus outline */
-  }
-  
-  /* Error message styling */
-  small {
-    color: #dc3545;             /* Red color for error messages */
-    display: block;             /* Display error messages on their own lines */
-    margin-top: 5px;            /* Add spacing above error messages */
-  }
-  
-  /* Submit button styling */
-  button.btn {
-    width: 100%;                /* Full width button */
-    padding: 12px;              /* Padding inside the button */
-    background-color: #28a745;  /* Blue background */
-    color: #ffffff;             /* White text */
-    border: none;               /* No border */
-    border-radius: 5px;         /* Rounded button edges */
-    font-size: 16px;            /* Larger font size */
-  }
-  
-  button.btn {
-    cursor: pointer; /* Ensures the pointer cursor appears on hover */
-    /* Other styles */
-  }
-  
-  
-  
-  /* Red border for invalid input fields */
-  input.ng-invalid.ng-touched {
-    border-color: #dc3545;       /* Red border for invalid fields */
-  }
-  
-  /* Responsive Design - Mobile View */
-  @media (max-width: 576px) {
-    .registration-container {
-      padding: 20px;            /* Reduce padding for smaller screens */
-    }
-  
-    h2 {
-      font-size: 20px;          /* Reduce font size of the title */
-    }
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000; /* Black background */
+}
+
+.registration-form {
+  background-color: #333; /* Dark background for the form */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light shadow */
+  width: 400px;
+}
+
+.registration-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #fff; /* White text for the heading */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #fff; /* White label text */
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #000; /* Black input background */
+  color: #fff; /* White text inside inputs */
+  border: 1px solid #444; /* Darker border */
+  border-radius: 5px;
+}
+
+.dob-fields {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dob-fields select {
+  width: 30%;
+}
+
+.alternate-option {
+  margin-bottom: 15px;
+}
+
+.alternate-option a {
+  color: #1d9bf0; /* Blue link color */
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #1d9bf0; /* Blue button background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #0d8af0; /* Hover effect */
+}
