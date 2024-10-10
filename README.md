@@ -14,7 +14,7 @@ Tweet Viewing
 The project follows the Scrum methodology and will be updated progressively over future sprints.
 
 Technology Stack
-Front End Framework: Angular 18.2.6
+Front End Framework: Angular 16.1.0.
 Dependency Management:  Dependency Injection (DI) framework. 
 Installation Instructions
 You can verify the installation by running these commands in your terminal/command prompt:
@@ -32,23 +32,8 @@ git clone https://github.com/samyogacharya12/Twitter-demake-frontend.git
 
 
 Build and run the application:
-
-docker-compose up
-The FastAPI server will be accessible at http://localhost:8000 and the API documentation can be accessed at http://localhost:8000/docs.
-
-Step 4: Manual Setup (Without Docker)
-If you prefer not to use Docker, follow these steps:
-
-Install the project dependencies using Poetry:
-
-poetry install
-Activate the virtual environment:
-
-poetry shell
-Run the FastAPI server using Uvicorn:
-
-uvicorn src.main:app --reload
-The application will be running at http://localhost:8000.
+ng serve
+The application will be running at http://localhost:4200
 
 The project includes unit tests for key features such as user login and registration. To run the tests:
 
@@ -56,15 +41,6 @@ pytest -s
 Course Information
 This project is part of the CSC 532 - Advanced Topics in Software Engineering course at Louisiana Tech University (Ruston). The backend is being developed in multiple sprints using the Scrum methodology.
 
-
-
-<<<<<<< HEAD
-# Twitter Demake - Frontend
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
