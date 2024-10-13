@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule
 @Component({
@@ -6,31 +7,29 @@ import { ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsMo
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit{
-  registrationForm: FormGroup;
+export class RegistrationComponent{
+  user = {
+    name: '',
+    phone: '',
+    dobMonth: '',
+    dobDay: '',
+    dobYear: ''
+  };
+  showSignUpModal=false;
+  
 
-  constructor(private fb: FormBuilder) {
-    this.registrationForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validator: this.passwordMatchValidator });
-  }
-
-  ngOnInit(): void {}
-
-  passwordMatchValidator(form: FormGroup) {
-    return form.get('password')?.value === form.get('confirmPassword')?.value 
-      ? null : { 'mismatch': true };
-  }
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  days = Array.from({ length: 31 }, (_, i) => i + 1);
+  years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
 
   onSubmit() {
-    if (this.registrationForm.valid) {
-      console.log(this.registrationForm.value);
-      // Send registration data to your API
-    } else {
-      console.log("Form is invalid");
-    }
+    console.log('User data:', this.user);
+  }
+
+  useEmailInstead() {
+    console.log('Switching to email input');
+  }
+
+  closeSignUpPopup() {
   }
 }

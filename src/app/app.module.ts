@@ -13,6 +13,7 @@ import { StatusPostComponent } from './status-post/status-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { CommentBoxViewComponent } from './comment-box-view/comment-box-view.component';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { CommentBoxViewComponent } from './comment-box-view/comment-box-view.com
     ChatComponent,
     StatusPostComponent,
     CommentBoxComponent,
-    CommentBoxViewComponent
+    CommentBoxViewComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
