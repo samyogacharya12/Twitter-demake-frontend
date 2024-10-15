@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="submit-btn" [disabled]="!userForm.form.valid">Save</button>
+        <button type="submit" class="submit-btn" [disabled]="!userForm.form.valid">Save</button>
     </div>
   </form>
 </div>
@@ -46,7 +46,7 @@
   <!-- Popup Modal -->
   <div class="modal" *ngIf="showSignUpModal">
     <div class="modal-content">
-      <div class="close-button-register" (click)="closeSignUpPopup()">✖</div>
+      <div class="close-button" (click)="closeSignUpPopup()">✖</div>
       <h2>Registration Successful!</h2>
       <p>Your account has been created successfully.</p>
     </div>
