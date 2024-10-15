@@ -1,16 +1,19 @@
-<div class="registration-form">
-  <div class="header">
-    <h1 class="title"><b>Create your Own</b></h1>
-  </div>
+<div class="registration-form ">
+    <div class="registrationl header">
+      <h1 class="title"><b>Create your Own</b></h1>
+
+    </div>
+  <div class="registration">
   <form class="twitter-form" (ngSubmit)="onSubmit()" #userForm="ngForm">
-    <input class="username-btn" type="text" placeholder="UserName" [(ngModel)]="user.username" (keydown)="onSelectUsername($event)" name="name" required><br><br><br>
-    <div *ngIf="this.checkUsername" class="error-message">
-      <span>Username must be at least 3 characters.</span>
-    </div>
-    <input class="email-input" type="text" placeholder="Email" [(ngModel)]="user.email" (keydown)="validateEmail($event)" name="email" required><br>
-    <div *ngIf="this.isInvalidEmail" class="email-error-message">
-      <span>Email is not valid</span>
-    </div>
+      <input class="username-btn" type="text" placeholder="UserName" [(ngModel)]="user.username" (keydown)="onSelectUsername($event)" name="name" required><br><br><br>
+      <div *ngIf="this.checkUsername" class="error-message">
+        <span>Username must be at least 3 characters.</span>
+      </div>
+      <input class="email-input" type="text" placeholder="Email" [(ngModel)]="user.email" (keydown)="validateEmail($event)" name="email" required><br>
+      <div *ngIf="this.isInvalidEmail" class="email-error-message">
+        <span>Email is not valid</span>
+      </div>
+  
     <input class="username-btn" type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required><br>
     <div class="alternate-option">
       <a href="#" id="use-email" (click)="useEmailInstead()">Use email instead</a>
@@ -37,11 +40,13 @@
       <button type="submit" class="submit-btn" [disabled]="!userForm.form.valid">Save</button>
     </div>
   </form>
+</div>
+
 
   <!-- Popup Modal -->
   <div class="modal" *ngIf="showSignUpModal">
     <div class="modal-content">
-      <span class="close-button" (click)="closeSignUpPopup()">✖</span>
+      <div class="close-button-register" (click)="closeSignUpPopup()">✖</div>
       <h2>Registration Successful!</h2>
       <p>Your account has been created successfully.</p>
     </div>

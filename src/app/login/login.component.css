@@ -88,11 +88,12 @@ body {
 
 .close-button {
   position: absolute; /* Position the close button absolutely */
-  top: 100px;  /* Adjust the distance from the top */
+  top: 25px;  /* Adjust the distance from the top */
   font-size: 24px; /* Make it larger for better visibility */
   cursor: pointer; /* Change cursor to pointer on hover */
   color: white; /* Change color for visibility */
-  margin-left: 620px;
+  margin-right: 542px;
+  /* margin-left: 620px; */
 }
 
 .close-button:hover {
@@ -117,7 +118,8 @@ body {
   height: 45px;
   background: white;
   margin-left: 160px;
-  margin-top: 10px;
+  margin-top:12px;
+  margin-bottom: 12px;
   padding-right: 80px;
   border-radius: 30px;
 }
