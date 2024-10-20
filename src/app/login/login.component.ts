@@ -10,7 +10,6 @@ import { IUser, User } from '../models/user';
 })
 export class LoginComponent {
   username: string = ''; 
-
   password: string = '';
   credentials = { username: '', password: '' };
   user: IUser | any=new User();
