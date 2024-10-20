@@ -34,7 +34,7 @@
               <span class="next-label">Sign In</span>
             </button>
   
-            <button class="forgot-btn" type="submit">
+            <button class="forgot-btn" type="button" (click)="sendPasswordReset()">
               <span class="forgot-label">Forgot password?</span>
             </button>
           </div>
@@ -56,6 +56,14 @@
     <div class="error-modal-content">
       <h2>Authentication Failed</h2>
       <p>Incorrect username or password. Please try again.</p>
+    </div>
+  </div>
+
+  <div class="forgot-password-modal" *ngIf="showForgotPasswordModal">
+    <div class="forgot-password-content">
+      <h2>Reset Password</h2>
+      <input type="email" placeholder="Enter your email" [(ngModel)]="forgotPasswordEmail">
+      <button class="reset-btn" type="button" (click)="sendPasswordReset()">Send Reset Link</button>
     </div>
   </div>
   

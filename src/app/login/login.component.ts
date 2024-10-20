@@ -17,6 +17,8 @@ export class LoginComponent {
   showPassword = false;
   showSignUpModal: boolean = false;
   showAuthFailModal: boolean = false;
+  showForgotPasswordModal: boolean = false;
+  forgotPasswordEmail: string = '';
 
 
   ngOnInit(): void {
@@ -38,6 +40,20 @@ export class LoginComponent {
   closeLoginPopup() {
     this.showAuthFailModal = false;
   }
+
+  sendPasswordReset() {
+    this.showForgotPasswordModal=true;
+    if (this.forgotPasswordEmail) {
+      // Your logic to send password reset email
+      console.log('Sending password reset to:', this.forgotPasswordEmail);
+
+      // Optionally, hide the forgot password modal after sending the reset link
+      this.showForgotPasswordModal = false;
+    } else {
+      // Handle error (e.g., show an error message that email is required)
+    }
+  }
+
   login() {
 
     this.credentials.username=this.username;

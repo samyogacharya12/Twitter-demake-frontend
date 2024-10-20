@@ -1,3 +1,64 @@
+body {
+  display: block;
+  margin: 0;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
+}
+
+.container-dashboard{
+  height: 100%;
+  display: flex;
+}
+
+/* Sidebar style */
+.sidebar {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  z-index: 3;
+  width:25%;
+  height: 100vh;
+  border-right: 1px solid;
+  padding: 15px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+        /* Style the sidebar items */
+        .sidebar ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          list-style-type: none; /* Remove default bullet points */
+          padding: 0;
+          margin: 0;
+         
+      }
+
+      .sidebar li {
+          display: flex; /* Use flexbox to align icon and text */
+          align-items: center; /* Vertically center icon and text */
+          padding: 15px 20px; /* Add padding to the items */
+          font-size: 18px; /* Increase font size */
+          color: #e1e8ed; /* Text color */
+      }
+
+      .sidebar li i {
+          margin-right: 15px; /* Space between icon and text */
+      }
+
+      /* Hover effect for links */
+      .sidebar li:hover {
+          background-color: #1da1f2; /* Twitter blue background on hover */
+          color: white; /* White text on hover */
+          border-radius: 25px;
+      }
+
+
 /* Modal styles */
 .modal-overlay {
     position: fixed;
@@ -88,23 +149,11 @@
   /* Container Layout */
   .dashboard-container {
     display: flex;
-    background-color: black; /* Change background color to black */
+    background-color:rgba(0, 0, 0, 0.00);
+    ; /* Change background color to black */
   }
   
-  /* Sidebar Styling */
-  .sidebar {
-    width: 250px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-right: 1px solid #e6ecf0;
-  }
-  .sidebar ul li a::before {
-    content: "";
-    display: inline-block;
-    width: 1000px; /* Adjust width for spacing */
-    text-align: center;
-    margin-right: 8px; /* Space between icon and text */
-  }
+  
   
   .icon-home::before {
     content: "\2302"; /* Home icon (⌂) */
@@ -138,32 +187,7 @@
   i[class^="icon-"]:hover::before {
     color: #007bff; /* Change icon color on hover */
   }
-  
-  
-  
-  .sidebar h2 {
-    font-size: 24px;
-    color: #1da1f2;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin: 20px 0;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    font-size: 18px;
-    color: #14171a;
-  }
-  
-  .sidebar ul li a:hover {
-    color: #1da1f2;
-  }
+
   
   /* Main Content Styling */
   .main-content {
@@ -322,14 +346,11 @@
   
   .username {
     margin-left: 10px; /* Adds space between profile image and username */
-    font-size: 16px; /* You can adjust the font size to match the style */
-    font-weight: bold; /* Optional: Make the username bold */
+    font-size: 15px; /* You can adjust the font size to match the style */
+    font-weight:300; /* Optional: Make the username bold */
   }
   
-  .user-info {
-    display: flex; /* Aligns profile image and username horizontally */
-    align-items: center; /* Vertically centers the image and username */
-  }
+  
   
   
   .circle-container {
@@ -631,18 +652,27 @@
     border-radius: 50%;
     width: 25px;
     height: 25px;
-    margin-right: 10px;
+    margin-right: 15px;
   }
   
   .user-info {
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+}
   
-  .user-name {
-    font-weight: bold;
-    color: #14171a;
-    display: block;
-  }
+  .three-dots {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #e1e8ed;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
   
   .user-handle {
     color: #657786;
@@ -680,13 +710,6 @@
     width: 100%;
   }
   
-  /* Sidebar on the left */
-  .sidebar {
-    width: 250px;
-    padding: 20px;
-    background-color: #f5f8fa;
-    border-right: 1px solid #e1e8ed;
-  }
   
   .show-more-label {
   color: #14171a;
@@ -699,6 +722,38 @@
     background-color: #0d95e8; /* Darken the blue on hover */
     text-decoration: underline; /* Underline on hover for better indication */
   }
+
+  .btn{
+    background-color: #0d95e8;;
+    width: 111%; 
+    margin-top: 50px;
+    border-bottom-left-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    font-weight: 700;
+    padding: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #0d8bdf; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+.user-name {
+  margin-top: 210px;
+  display: flex;
+  padding: 15px; /* Padding around username */
+  color: #e1e8ed; /* Text color */
+  align-items: center;
+  
+}
+
+
+
+
+  
   
   
   
