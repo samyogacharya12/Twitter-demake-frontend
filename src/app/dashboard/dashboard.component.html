@@ -1,8 +1,6 @@
 <body>
   <div class="container-dashboard">
-
-    <div class="sidebar">
-     
+   <div class="sidebar">
       <ul>
         <div class="logo-container">
           <img src="assets/twitter-logo.png" alt="Twitter Logo" class="twitter-logo">
@@ -27,6 +25,35 @@
         <i class="fas fa-ellipsis-h three-dots"></i>
       </div>
     </div>
-    <router-outlet></router-outlet>
+    <div class="main-content text-center">
+      <div class="custom-underline">
+      <div class="row">
+         <div class="col-md-6 item-spacing">
+          <a class="nav-link active" aria-current="page" href="#">For You</a>
+          
+        </div>
+        <div class="col-md-6 item-spacing">
+          <a class="nav-link active" aria-current="page" href="#">Following</a>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <aside class="col-md-4 d-none d-md-block">
+          <div class="sidebar-sticky">
+            <h4>Trending</h4>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Trend 1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Trend 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Trend 3</a>
+              </li>
+            </ul>
+          </div>
+        </aside>
   </div>
 </body>

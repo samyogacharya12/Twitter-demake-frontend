@@ -1,7 +1,9 @@
 body {
   display: block;
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   background-color: rgb(0, 0, 0);
   scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
 }
@@ -9,6 +11,8 @@ body {
 .container-dashboard {
   display: flex;
   height: 100vh;
+  flex-direction: row;
+  width: 100%;
 
 }
 
@@ -205,13 +209,6 @@ i[class^="icon-"]:hover::before {
   /* Change icon color on hover */
 }
 
-
-/* Main Content Styling */
-.main-content {
-  flex-grow: 1;
-  padding: 10px;
-  background-color: #f5f8fa;
-}
 
 /* Status Post Box Styling */
 .status-post {
@@ -839,4 +836,40 @@ i[class^="icon-"]:hover::before {
 .twitter-logo {
   width: 50px; /* Adjust logo size */
   height: auto; /* Maintain aspect ratio */
+}
+
+/* Main content next to sidebar */
+.main-content {
+  flex: 1;
+  margin-left: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-right: 1px solid;
+  overflow-y: auto;
+}
+
+.custom-underline {
+  padding-bottom: 5px; /* Adjust as needed */
+  backdrop-filter: blur(10px);
+}
+
+
+.custom-underline .nav-link {
+  color: white;
+  transition: border-bottom 0.3s;
+}
+.nav-link.active {
+  width: 50%;
+  border-bottom: 4px solid  #0d95e8; /* Change to your preferred color */
+  border-radius: 3px;
+}
+
+.custom-nav-underline .nav-link:hover {
+  background-color: lightslategray;
+  margin-left: 10px;
+  border-bottom: 2px solid #eaedf1; /* Change to your preferred color */
+}
+
+.item-spacing{
+  padding-left: 70px;
 }
