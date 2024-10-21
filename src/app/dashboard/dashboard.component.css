@@ -6,21 +6,23 @@ body {
   scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
 }
 
-.container-dashboard{
-  height: 100%;
+.container-dashboard {
   display: flex;
+  height: 100vh;
+
 }
 
 /* Sidebar style */
 .sidebar {
   display: flex;
-  justify-content: space-around;
-  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 300px;
+  align-items: flex-start;
   z-index: 3;
-  width:25%;
   height: 100vh;
   border-right: 1px solid;
-  padding: 15px;
+  padding: 20px;
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -28,732 +30,813 @@ body {
 }
 
 
-        /* Style the sidebar items */
-        .sidebar ul {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          list-style-type: none; /* Remove default bullet points */
-          padding: 0;
-          margin: 0;
-         
-      }
+/* Style the sidebar items */
+.sidebar ul {
+  list-style-type: none;
+  padding: 30px;
+  margin: 0;
 
-      .sidebar li {
-          display: flex; /* Use flexbox to align icon and text */
-          align-items: center; /* Vertically center icon and text */
-          padding: 15px 20px; /* Add padding to the items */
-          font-size: 18px; /* Increase font size */
-          color: #e1e8ed; /* Text color */
-      }
+}
 
-      .sidebar li i {
-          margin-right: 15px; /* Space between icon and text */
-      }
+.sidebar li {
+  display: flex;
+  /* Use flexbox to align icon and text */
+  align-items: center;
+  /* Vertically center icon and text */
+  padding: 15px 20px;
+  /* Add padding to the items */
+  font-size: 18px;
+  /* Increase font size */
+  color: #e1e8ed;
+  /* Text color */
+}
 
-      /* Hover effect for links */
-      .sidebar li:hover {
-          background-color: #1da1f2; /* Twitter blue background on hover */
-          color: white; /* White text on hover */
-          border-radius: 25px;
-      }
+.sidebar li i {
+  margin-right: 15px;
+  /* Space between icon and text */
+}
+
+/* Hover effect for links */
+.sidebar li:hover {
+  background-color: #1da1f2;
+  /* Twitter blue background on hover */
+  color: white;
+  /* White text on hover */
+  border-radius: 25px;
+}
 
 
 /* Modal styles */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 0px;
-    border-radius: 5px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-  }
-  
-  .close-button {
-    position: absolute;
-    margin-top: -300px;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  /* Other styling for the dashboard (add-comment, comments-section, etc.) */
-  .add-comment {
-    margin-top: 20px;
-  }
-  
-  .profile-pic-input {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-  }
-  
-  .comment-input {
-    width: 80%;
-    padding: 10px;
-    margin-left: 10px;
-    border-radius: 20px;
-  }
-  
-  .post-button {
-    background-color: #0095f6;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  .comments-section {
-    margin-top: 20px;
-  }
-  
-  .comment {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .profile-pic {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  .comment-body {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .comment-body strong {
-    font-weight: bold;
-  }
-  
-  
-  /* Container Layout */
-  .dashboard-container {
-    display: flex;
-    background-color:rgba(0, 0, 0, 0.00);
-    ; /* Change background color to black */
-  }
-  
-  
-  
-  .icon-home::before {
-    content: "\2302"; /* Home icon (⌂) */
-  }
-  
-  .icon-messages::before {
-    content: "\2709"; /* Envelope icon (✉) */
-  }
-  
-  .icon-notifications::before {
-    content: "\1F514"; /* Bell icon (🔔) */
-  }
-  
-  .icon-profile::before {
-    content: "\1F464"; /* User icon (👤) */
-  }
-  
-  .icon-settings::before {
-    content: "\2699"; /* Gear icon (⚙) */
-  }
-  
-  /* Optional styling for icons */
-  i[class^="icon-"]::before {
-    margin-right: 8px;  /* Space between icon and text */
-    font-size: 24px;    /* Increase this value to make icons larger */
-    display: inline-block;
-    vertical-align: middle; /* Align icons with text */
-  }
-  
-  /* Optional: Styling for hover effects or any additional customization */
-  i[class^="icon-"]:hover::before {
-    color: #007bff; /* Change icon color on hover */
-  }
-
-  
-  /* Main Content Styling */
-  .main-content {
-    flex-grow: 1;
-    padding: 10px;
-    background-color: #f5f8fa;
-  }
-  
-  /* Status Post Box Styling */
-  .status-post {
-    background-color: #ffffff;
-    padding: 15px;
-    width: 1000px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .status-post h3 {
-    margin-bottom: 10px;
-  }
-  
-  .status-input {
-    width: 40%;
-    height: 80px;
-    padding: 10px;
-    border: 1px solid #ccd6dd;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
-  
-  .post-button {
-    background-color: #1da1f2;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 25px;
-    cursor: pointer;
-  }
-  
-  .post-button:hover {
-    background-color: #1991da;
-  }
-  
-  /* Posts Feed Styling */
-  .posts-feed {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .posts-feed h3 {
-    margin-bottom: 10px;
-  }
-  
-  .post p {
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  .box {
-    background-color: white;
-    flex: 1; /* The box will match the image's size */
-  }
-  
-  .post {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #e6ecf0;
-    width: 100%; /* The image will fill its container */
-    height: auto; /* The height adjusts based on the width */
-  
-  }
-  .post-image-container {
-    width: 100%;
-    margin-top: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 16px; /* Rounded corners like Twitter images */
-  }
-  
-  .post-image {
-    align-items: left;
-    width: 1400px; /* Set the image width */
-    height: 500px; /* Maintain aspect ratio */
-    object-fit: cover; /* Cover the container without distortion */
-  }
-  
-  /* Profile Picture Styling */
-  .profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .comment-box {
-    margin-top: 20px;
-    padding: 30px;
-    border: 1px solid #e6ecf0;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  .comment-input {
-    width: 200px;
-    height: 80px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    box-sizing: border-box;
-    resize: none; /* Disable resizing */
-  }
-  
-  .submit-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #1da1f2; /* Twitter-like blue color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    display: block;
-    width: 100%;
-  }
-  
-  .submit-button:hover {
-    background-color: #0d95e8;
-  }
-  
-  .comment-display {
-    margin-top: 16px;
-    margin-right: 1370px;
-  }
-  
-  .comment {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  /* User Info */
-  .post-user-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .username {
-    margin-left: 10px; /* Adds space between profile image and username */
-    font-size: 15px; /* You can adjust the font size to match the style */
-    font-weight:300; /* Optional: Make the username bold */
-  }
-  
-  
-  
-  
-  .circle-container {
-    display: inline-block;
-    width: 50px;  /* Reduced width for the circle */
-    height: 50px; /* Reduced height for the circle */
-    border-radius: 50%;  /* Keeps it a perfect circle */
-    overflow: hidden;  /* Ensures the image doesn't overflow outside the circle */
-    border: 2px solid white; /* Optional: Adjust border size */
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
-  }
-  
-  .circular-image {
-    width: 100%;  /* Ensures the image fills the container */
-    height: 100%;  /* Ensures the image fills the container */
-    object-fit: cover; /* Ensures the image covers the entire circle without distortion */
-  }
-  
-  .username {
-    color: #657786;
-    font-size: 14px;
-  }
-  
-  .timestamp {
-    font-size: 12px;
-    color: #657786;
-  }
-  
-  /* Post Content */
-  .post-content {
-    font-size: 16px;
-    color: #14171a;
-    line-height: 1.5;
-  }
-  
-  .post-content strong {
-    font-weight: bold;
-  }
-  
-  /* Post Footer for Actions (Optional) */
-  .post-footer {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    color: #657786;
-  }
-  .input-changes{
-    margin-right: 100px; /* Space to the right of the emoji button */
-  }
-  
-  /* Emoji Button */
-  .emoji-button {
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-  }
-  
-  /* Image Upload Button */
-  .image-upload-button {
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    margin-right: 10px; /* Space to the right of the image upload button */
-  }
-  
-  /* Image Preview */
-  .image-preview {
-    margin-top: 10px; /* Space above the image preview */
-    margin-bottom: 10px; /* Space below the image preview */
-    position: relative;
-  }
-  
-  .image-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 10px; /* Space above the image */
-  }
-  
-  .remove-image-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Media Upload Button */
-  .media-upload-button {
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    margin-right: 10px; /* Space to the right of the upload button */
-  }
-  
-  /* Media Preview */
-  .media-preview {
-    margin-top: 10px; /* Space above the media preview */
-    margin-bottom: 10px; /* Space below the media preview */
-    position: relative;
-  }
-  
-  .media-preview img,
-  .media-preview video {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 10px; /* Space above the media preview image/video */
-  }
-  
-  /* Remove Media Button */
-  .remove-media-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  
-  .posts-feed {
-    margin-top: 20px; /* Space above the posts feed */
-  }
-  
-  .post h4 {
-    margin: 0; /* Remove default margin */
-  }
-  
-  .post p {
-    margin: 10px 0; /* Space above and below the post text */
-  }
-  
-  .post img,
-  .post video {
-    max-width: 25%; /* Ensure images and videos fit within the container */
-    border-radius: 4px; /* Rounded corners for media */
-  }
-  
-  .remove-post-button {
-    background-color: #ff4444; /* Red for remove button */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .remove-post-button:hover {
-    background-color: #ff0000; /* Darker red on hover */
-  }
-  
-  .reactions {
-    align-items:left;
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-    padding: 10px 0;
-    height: auto;
-    width: auto;
-  }
-  
-  .reaction-container {
-    display: flex;
-    position: relative;
-  }
-  
-  .like-button {
-    margin-right: 100px; /* Add space to the right of the like button */
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .comment-button {
-    background: none; /* Remove default background */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
-    padding: 5px; /* Add some padding for clickable area */
-  }
-  
-  
-  
-  .reaction-options {
-    position: absolute;
-    top: -60px;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    background-color: #f1f1f1;
-    border-radius: 30px;
-    padding: 10px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-  }
-  
-  .reaction-options.show {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .reaction-option {
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .reaction-option:hover {
-    transform: scale(1.5); /* Enlarge the emoji on hover */
-  }
-  
-  .comment-icon {
-    fill: #6e767d; /* Default icon color */
-    width: 20px; /* Set icon width */
-    height: 20px; /* Set icon height */
-    transition: fill 0.2s; /* Smooth transition for color change */
-  }
-  
-  .comment-button:hover .comment-icon {
-    fill: #1da1f2; /* Change icon color on hover */
-  }
-  
-  .comment-icon {
-    fill: #6e767d; /* Default gray icon color */
-    width: 20px;
-    height: 20px;
-    transition: fill 0.2s ease;
-  }
-  
-  .comment-button:hover .comment-icon {
-    fill: #1da1f2; /* Twitter's blue color on hover */
-  }
-  
-  .tooltip {
-    visibility: hidden;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 100%; /* Position above the button */
-    left: 50%;
-    margin-left: -50px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  
-  .comment-button:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .people-you-may-know {
-    width: 350px;
-    padding: 20px;
-    margin-left: 1100px;
-    margin-top: -950px; /* or use any of the other methods */
-    background-color: #f5f8fa;
-    border-left: 1px solid #e1e8ed;
-  }
-  
-  /* People You May Know section */
-  .people-you-may-know h3 {
-    font-size: 16px;
-    color: #14171a;
-    margin-bottom: 16px;
-  }
-  .comments-section {
-    width: 400px;
-    margin: 50px auto;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
-    border-radius: 8px;
-  }
-  
-  .suggestion {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
-  .user-avatar {
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    margin-right: 15px;
-  }
-  
-  .user-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .user-details {
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
-  
-  .three-dots {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #e1e8ed;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
+
+.modal-content {
+  background-color: white;
+  padding: 0px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
 }
-  
-  .user-handle {
-    color: #657786;
-    font-size: 14px;
-  }
-  
-  .follow-btn {
-    background-color: #1da1f2;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .follow-btn:hover {
-    background-color: #0d95e8;
-  }
-  
-  /* Responsive adjustments (Optional) */
-  @media (max-width: 768px) {
-    .page-container {
-        flex-direction: column;
-    }
-  
-    .sidebar, .people-you-may-know {
-        width: 100%;
-    }
-  }
-  
+
+.close-button {
+  position: absolute;
+  margin-top: -300px;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Other styling for the dashboard (add-comment, comments-section, etc.) */
+.add-comment {
+  margin-top: 20px;
+}
+
+.profile-pic-input {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.comment-input {
+  width: 80%;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 20px;
+}
+
+.post-button {
+  background-color: #0095f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.comment-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-body strong {
+  font-weight: bold;
+}
+
+
+/* Container Layout */
+.dashboard-container {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.00);
+  ;
+  /* Change background color to black */
+}
+
+
+
+.icon-home::before {
+  content: "\2302";
+  /* Home icon (⌂) */
+}
+
+.icon-messages::before {
+  content: "\2709";
+  /* Envelope icon (✉) */
+}
+
+.icon-notifications::before {
+  content: "\1F514";
+  /* Bell icon (🔔) */
+}
+
+.icon-profile::before {
+  content: "\1F464";
+  /* User icon (👤) */
+}
+
+.icon-settings::before {
+  content: "\2699";
+  /* Gear icon (⚙) */
+}
+
+/* Optional styling for icons */
+i[class^="icon-"]::before {
+  margin-right: 8px;
+  /* Space between icon and text */
+  font-size: 24px;
+  /* Increase this value to make icons larger */
+  display: inline-block;
+  vertical-align: middle;
+  /* Align icons with text */
+}
+
+/* Optional: Styling for hover effects or any additional customization */
+i[class^="icon-"]:hover::before {
+  color: #007bff;
+  /* Change icon color on hover */
+}
+
+
+/* Main Content Styling */
+.main-content {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #f5f8fa;
+}
+
+/* Status Post Box Styling */
+.status-post {
+  background-color: #ffffff;
+  padding: 15px;
+  width: 1000px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.status-post h3 {
+  margin-bottom: 10px;
+}
+
+.status-input {
+  width: 40%;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #ccd6dd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.post-button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.post-button:hover {
+  background-color: #1991da;
+}
+
+/* Posts Feed Styling */
+.posts-feed {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.posts-feed h3 {
+  margin-bottom: 10px;
+}
+
+.post p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.box {
+  background-color: white;
+  flex: 1;
+  /* The box will match the image's size */
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e6ecf0;
+  width: 100%;
+  /* The image will fill its container */
+  height: auto;
+  /* The height adjusts based on the width */
+
+}
+
+.post-image-container {
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  /* Rounded corners like Twitter images */
+}
+
+.post-image {
+  align-items: left;
+  width: 1400px;
+  /* Set the image width */
+  height: 500px;
+  /* Maintain aspect ratio */
+  object-fit: cover;
+  /* Cover the container without distortion */
+}
+
+/* Profile Picture Styling */
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-box {
+  margin-top: 20px;
+  padding: 30px;
+  border: 1px solid #e6ecf0;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.comment-input {
+  width: 200px;
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: none;
+  /* Disable resizing */
+}
+
+.submit-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #1da1f2;
+  /* Twitter-like blue color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #0d95e8;
+}
+
+.comment-display {
+  margin-top: 16px;
+  margin-right: 1370px;
+}
+
+.comment {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* User Info */
+.post-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  margin-left: 10px;
+  /* Adds space between profile image and username */
+  font-size: 15px;
+  /* You can adjust the font size to match the style */
+  font-weight: 300;
+  /* Optional: Make the username bold */
+}
+
+
+
+
+.circle-container {
+  display: inline-block;
+  width: 50px;
+  /* Reduced width for the circle */
+  height: 50px;
+  /* Reduced height for the circle */
+  border-radius: 50%;
+  /* Keeps it a perfect circle */
+  overflow: hidden;
+  /* Ensures the image doesn't overflow outside the circle */
+  border: 2px solid white;
+  /* Optional: Adjust border size */
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  /* Optional: Adds a subtle shadow */
+}
+
+.circular-image {
+  width: 100%;
+  /* Ensures the image fills the container */
+  height: 100%;
+  /* Ensures the image fills the container */
+  object-fit: cover;
+  /* Ensures the image covers the entire circle without distortion */
+}
+
+.username {
+  color: #657786;
+  font-size: 14px;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #657786;
+}
+
+/* Post Content */
+.post-content {
+  font-size: 16px;
+  color: #14171a;
+  line-height: 1.5;
+}
+
+.post-content strong {
+  font-weight: bold;
+}
+
+/* Post Footer for Actions (Optional) */
+.post-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #657786;
+}
+
+.input-changes {
+  margin-right: 100px;
+  /* Space to the right of the emoji button */
+}
+
+/* Emoji Button */
+.emoji-button {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Image Upload Button */
+.image-upload-button {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin-right: 10px;
+  /* Space to the right of the image upload button */
+}
+
+/* Image Preview */
+.image-preview {
+  margin-top: 10px;
+  /* Space above the image preview */
+  margin-bottom: 10px;
+  /* Space below the image preview */
+  position: relative;
+}
+
+.image-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+  /* Space above the image */
+}
+
+.remove-image-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Media Upload Button */
+.media-upload-button {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin-right: 10px;
+  /* Space to the right of the upload button */
+}
+
+/* Media Preview */
+.media-preview {
+  margin-top: 10px;
+  /* Space above the media preview */
+  margin-bottom: 10px;
+  /* Space below the media preview */
+  position: relative;
+}
+
+.media-preview img,
+.media-preview video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+  /* Space above the media preview image/video */
+}
+
+/* Remove Media Button */
+.remove-media-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+.posts-feed {
+  margin-top: 20px;
+  /* Space above the posts feed */
+}
+
+.post h4 {
+  margin: 0;
+  /* Remove default margin */
+}
+
+.post p {
+  margin: 10px 0;
+  /* Space above and below the post text */
+}
+
+.post img,
+.post video {
+  max-width: 25%;
+  /* Ensure images and videos fit within the container */
+  border-radius: 4px;
+  /* Rounded corners for media */
+}
+
+.remove-post-button {
+  background-color: #ff4444;
+  /* Red for remove button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.remove-post-button:hover {
+  background-color: #ff0000;
+  /* Darker red on hover */
+}
+
+.reactions {
+  align-items: left;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+  padding: 10px 0;
+  height: auto;
+  width: auto;
+}
+
+.reaction-container {
+  display: flex;
+  position: relative;
+}
+
+.like-button {
+  margin-right: 100px;
+  /* Add space to the right of the like button */
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-button {
+  background: none;
+  /* Remove default background */
+  border: none;
+  /* Remove border */
+  cursor: pointer;
+  /* Change cursor to pointer */
+  padding: 5px;
+  /* Add some padding for clickable area */
+}
+
+
+
+.reaction-options {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  border-radius: 30px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.reaction-options.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reaction-option {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.reaction-option:hover {
+  transform: scale(1.5);
+  /* Enlarge the emoji on hover */
+}
+
+.comment-icon {
+  fill: #6e767d;
+  /* Default icon color */
+  width: 20px;
+  /* Set icon width */
+  height: 20px;
+  /* Set icon height */
+  transition: fill 0.2s;
+  /* Smooth transition for color change */
+}
+
+.comment-button:hover .comment-icon {
+  fill: #1da1f2;
+  /* Change icon color on hover */
+}
+
+.comment-icon {
+  fill: #6e767d;
+  /* Default gray icon color */
+  width: 20px;
+  height: 20px;
+  transition: fill 0.2s ease;
+}
+
+.comment-button:hover .comment-icon {
+  fill: #1da1f2;
+  /* Twitter's blue color on hover */
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  /* Position above the button */
+  left: 50%;
+  margin-left: -50px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.comment-button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.people-you-may-know {
+  width: 350px;
+  padding: 20px;
+  margin-left: 1100px;
+  margin-top: -950px;
+  /* or use any of the other methods */
+  background-color: #f5f8fa;
+  border-left: 1px solid #e1e8ed;
+}
+
+/* People You May Know section */
+.people-you-may-know h3 {
+  font-size: 16px;
+  color: #14171a;
+  margin-bottom: 16px;
+}
+
+.comments-section {
+  width: 400px;
+  margin: 50px auto;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.three-dots {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #e1e8ed;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+}
+
+.user-handle {
+  color: #657786;
+  font-size: 14px;
+}
+
+.follow-btn {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.follow-btn:hover {
+  background-color: #0d95e8;
+}
+
+/* Responsive adjustments (Optional) */
+@media (max-width: 768px) {
   .page-container {
-    display: flex;
-    justify-content: space-between; /* Aligns the left and right sections */
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .people-you-may-know {
     width: 100%;
   }
-  
-  
-  .show-more-label {
+}
+
+.page-container {
+  display: flex;
+  justify-content: space-between;
+  /* Aligns the left and right sections */
+  width: 100%;
+}
+
+
+.show-more-label {
   color: #14171a;
   cursor: pointer;
-  display: block; /* Make it a block element */
-  font-weight: bold; /* Make the text bold */
-  }
-  
-  .show-more-label:hover {
-    background-color: #0d95e8; /* Darken the blue on hover */
-    text-decoration: underline; /* Underline on hover for better indication */
-  }
+  display: block;
+  /* Make it a block element */
+  font-weight: bold;
+  /* Make the text bold */
+}
 
-  .btn{
-    background-color: #0d95e8;;
-    width: 111%; 
-    margin-top: 50px;
-    border-bottom-left-radius: 9999px;
-    border-bottom-right-radius: 9999px;
-    border-top-left-radius: 9999px;
-    border-top-right-radius: 9999px;
-    font-weight: 700;
-    padding: 15px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
+.show-more-label:hover {
+  background-color: #0d95e8;
+  /* Darken the blue on hover */
+  text-decoration: underline;
+  /* Underline on hover for better indication */
+}
 
-  .btn:hover {
-    background-color: #0d8bdf; /* Darker blue on hover */
-    transform: scale(1.05); /* Slightly scale up on hover */
+.btn {
+  background-color: #0d95e8;
+  width: 100%;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  padding: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0d8bdf;
+  /* Darker blue on hover */
+  transform: scale(1.05);
+  /* Slightly scale up on hover */
 }
 
 .user-name {
-  margin-top: 210px;
   display: flex;
-  padding: 15px; /* Padding around username */
-  color: #e1e8ed; /* Text color */
+  padding: 15px;
+  /* Padding around username */
+  color: #e1e8ed;
+  /* Text color */
   align-items: center;
+
+}
+
+.logo-container {
+  margin-bottom: 20px; /* Space below the logo */
+  display: flex;
   
 }
 
-
-
-
-  
-  
-  
-  
+.twitter-logo {
+  width: 50px; /* Adjust logo size */
+  height: auto; /* Maintain aspect ratio */
+}

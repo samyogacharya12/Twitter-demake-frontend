@@ -1,50 +1,32 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter-like Dark Dashboard</title>
-</head>
 <body>
   <div class="container-dashboard">
+
     <div class="sidebar">
-      <!-- <h2>Menu</h2> -->
+     
       <ul>
+        <div class="logo-container">
+          <img src="assets/twitter-logo.png" alt="Twitter Logo" class="twitter-logo">
+        </div>
         <li><i class="fas fa-home"></i> Home</li>
-          <li><i class="fas fa-search"></i>Explore</li>
-          <li><i class="fas fa-bell"></i>Notifications</li>
-          <li><i class="fas fa-envelope"></i>Messages</li>
-          <li><i class="fas fa-user"></i>Profile</li>
+        <li><i class="fas fa-search"></i>Explore</li>
+        <li><i class="fas fa-bell"></i>Notifications</li>
+        <li><i class="fas fa-envelope"></i>Messages</li>
+        <li><i class="fas fa-user"></i>Profile</li>
+      </ul>
+      <button class="btn btn-primary">Post</button>
 
-
-              <div>
-                <button class="btn btn-primary">Post</button>
-              </div>
-
-            <div class="user-name">
-              <img src="https://i.postimg.cc/WzRtQ5sf/profilepic.jpg" alt="User 1" class="user-avatar">
-              <div class="user-info">
-                <div class="user-details">
-                  <p>Samyog Acharya</p>
-                  <span class="txt1" style="color:#71761B;">@acharyasamyog</span>
-                </div>
-
-                </div>
-                <i class="fas fa-ellipsis-h three-dots"></i>
-
-            
+      <div class="user-name">
+        <img src="https://i.postimg.cc/WzRtQ5sf/profilepic.jpg" alt="User 1" class="user-avatar">
+        <div class="user-info">
+          <div class="user-details">
+            <p>Gaurav Khadka</p>
+            <span class="txt1" style="color:#71761B;">@khadhkagaurav</span>
           </div>
 
-        
-         
-         
-
-
-        
-     
-    
-
-      </ul>
-
-          
+        </div>
+        <i class="fas fa-ellipsis-h three-dots"></i>
+      </div>
     </div>
- </div>
+    <router-outlet></router-outlet>
+  </div>
 </body>
