@@ -1,0 +1,126 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Sarcastic Twitter</h2>
+    <ul>
+      <li><a href="#"><i class="icon-home"></i> Home</a></li>
+      <li><a href="#"><i class="icon-messages"></i> Messages</a></li>
+      <li><a href="#"><i class="icon-notifications"></i> Notifications</a></li>
+      <li><a href="profile"><i class="icon-profile"></i> Profile</a></li>
+      <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Status Post Box -->
+
+    <!-- Posts Feed -->
+    <section class="status-post">
+      <h3>Post a Status</h3>
+
+      <!-- Status Textarea -->
+      <textarea id="statusInput" placeholder="What's on your mind?" class="status-input"></textarea>
+      <div class="input-changes">
+        <!-- Emoji Picker Button -->
+        <button id="emojiButton" class="emoji-button">😊</button>
+
+        <input type="file" id="mediaUpload" class="media-upload" accept="image/*,video/*" style="display: none;">
+        <button id="mediaUploadButton" class="media-upload-button">📷/GIF</button>
+
+        <div id="mediaPreview" class="media-preview" style="display: none;">
+          <img id="mediaPreviewImg" src="" alt="Media preview" />
+          <video id="mediaPreviewVideo" controls style="display: none;"></video>
+          <button id="removeMediaButton" class="remove-media-button">❌</button>
+        </div>
+
+        <!-- Image Upload -->
+        <input type="file" id="imageUpload" class="image-upload" accept="image/*" style="display: none;">
+        <button id="imageUploadButton" class="image-upload-button">📷</button>
+
+        <!-- Selected Image Preview -->
+        <div id="imagePreview" class="image-preview" style="display: none;">
+          <img id="imagePreviewImg" src="" alt="Image preview" />
+          <button id="removeImageButton" class="remove-image-button">❌</button>
+        </div>
+
+        <!-- Post Button -->
+        <button class="post-button" id="postButton">Post</button>
+      </div>
+    </section>
+
+    <!-- Posts Feed Section -->
+    <section>
+      <h3>Recent Posts</h3>
+      <div class="user-info">
+        <div class="circle-container">
+          <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="circular-image">
+        </div>
+        <span class="username">{{ userName }}</span>
+      </div>
+
+      <div class="post">
+        <div class="box">
+          <img src="https://i.postimg.cc/DyptQ6Kt/image.jpg" alt="Example post image" class="post-image" />
+        </div>
+        <div class="reactions">
+          <div class="reaction-container">
+            <!-- Like button with hover reactions -->
+            <button (mouseover)="showReactions()" (mouseleave)="hideReactions()" class="like-button">
+              ❤️
+              <span class="tooltip">Reactions</span>
+            </button>
+
+            <!-- Comment button with icon and tooltip -->
+            <button (click)="toggleCommentPopup()" class="comment-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="comment-icon">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 3.45 1.91 6.45 4.93 8.18V22l4.07-2.18c.66.09 1.35.18 2 .18 5.52 0 10-4.48 10-10S17.52 2 12 2zm0 17c-.63 0-1.3-.09-1.94-.26l-3.06 1.64v-2.71C5.41 16.41 4 14.33 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+              </svg>
+              <span class="tooltip" >Comment</span>
+            </button>
+
+            <!-- Additional reactions on hover -->
+            <div class="reaction-options" [class.show]="showReactionOptions">
+              <button (click)="selectReaction('like')" class="reaction-option">👍</button>
+              <button (click)="selectReaction('love')" class="reaction-option">❤️</button>
+              <button (click)="selectReaction('wow')" class="reaction-option">😮</button>
+              <button (click)="selectReaction('haha')" class="reaction-option">😂</button>
+              <button (click)="selectReaction('sad')" class="reaction-option">😢</button>
+              <button (click)="selectReaction('angry')" class="reaction-option">😡</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="view-all">
+          <a (click)="openModal()">View all 214 comments</a>
+        </div>
+        <div class="comment-display">
+          <app-comment-box></app-comment-box>
+        </div>
+
+        <!-- Modal -->
+        <div *ngIf="isModalVisible" class="modal-overlay">
+          <div class="modal-content">
+            <span class="close-button" (click)="closeModal()">✖</span>
+            <!-- Embed the app-comment-box-view component here -->
+            <app-comment-box-view></app-comment-box-view>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- People You May Know Section -->
+    <div class="people-you-may-know">
+      <h3>People You May Know</h3>
+      <div class="suggestion">
+        <img src="https://i.postimg.cc/WzRtQ5sf/profilepic.jpg" alt="User 1" class="user-avatar">
+        <div class="user-info">
+          <span class="user-name">Samyog Acharya</span>
+          <span class="user-handle">@acharyasamyog</span>
+        </div>
+        <button class="follow-btn">Follow</button>
+      </div>
+      <span class="show-more-label">Show More</span>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,15 @@
+<div class="status-post-container">
+    <h2>Status Post</h2>
+    <form (ngSubmit)="submitPost()" #statusForm="ngForm">
+      <textarea [(ngModel)]="newPost" name="post" rows="3" placeholder="What's on your mind?" required></textarea>
+      <button type="submit" [disabled]="!statusForm.valid">Post</button>
+    </form>
+  
+    <div class="posts">
+      <h3>Recent Posts:</h3>
+      <div *ngFor="let post of posts" class="post">
+        <p>{{ post }}</p>
+      </div>
+    </div>
+  </div>
+  

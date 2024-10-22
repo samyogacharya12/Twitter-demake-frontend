@@ -1,0 +1,15 @@
+<div class="add-comment">
+  <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="profile-pic-input">
+  <input [(ngModel)]="commentInput" class="comment-input" placeholder="Add a comment..." (keyup.enter)="addComment()">
+  <button (click)="addComment()" [disabled]="!commentInput.trim()" class="post-button">Post</button>
+</div>
+
+<div class="comments-section" *ngIf="comments.length > 0">
+  <div class="comment" *ngFor="let comment of comments">
+      <img src="https://i.postimg.cc/pXZ6F2Bd/Elon-Musk-Royal-Society.jpg" alt="Profile Picture" class="profile-pic">
+      <div class="comment-body">
+          <strong>@username</strong>
+          <span>{{ comment }}</span>
+      </div>
+  </div>
+</div>
