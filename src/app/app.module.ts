@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {LoginServiceService} from "./login/login-service.service";
 import {FormsModule} from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegistrationComponent } from './registration/registration.component'; // Ensure it's declared
+import { RegistrationComponent } from './registration/registration.component';
+import { ProfileComponent } from './profile/profile.component'; // Ensure it's declared
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RegistrationComponent } from './registration/registration.component'; /
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

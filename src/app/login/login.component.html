@@ -1,69 +1,52 @@
 <body class="d-flex justify-content-center align-items-center">
-      <div class="login-portal">
-        <div class="header">
-          <h1 class="title">Sign in to Twitter Demake</h1>
+  <div class="login-portal d-flex flex-col justify-content-start align-items-center">
+    <form class="twitter-sign-form mt-5" #form="ngForm" (ngSubmit)="login()" novalidate>
+      <h1 class="title">Sign in to Twitter Demake</h1>
+      <div class="login">
+        <!-- <p class="line align-items-center mt-2 d-flex">
+          <span class="underscore"></span>
+          <span class="or px-2">or</span>
+          <span class="underscore"></span>
+        </p> -->
+        <br>
+        <div *ngIf="!showPassword">
+          <input class="username-btn" type="text" placeholder=" Phone, email, or username" [(ngModel)]="username"
+            name="username" required #usernameInput="ngModel">
         </div>
-        <form class="twitter-form" #form="ngForm" (ngSubmit)="login()" novalidate>
-          <div class="login">
-            <p class="line mt-2">
-              <span class="underscore"></span>
-              <span class="or">or</span>
-              <span class="underscore"></span>
-          </p><br>     
-          <div *ngIf="!showPassword">
-                <input
-                class="username-btn"
-                type="text"
-                placeholder=" Phone, email, or username"
-                [(ngModel)]="username"
-                name="username"
-                required
-                #usernameInput="ngModel">
-              
-            </div>
-  
-            <div *ngIf="showPassword">
-              <input class="username-btn" type="password" placeholder="Password" [(ngModel)]="password" name="password" required><br>
-            </div>
-  
-            <button *ngIf="!showPassword" class="login-btn" type="button" (click)="showPasswordTab()">
-              <span class="next-label">Next</span>
-            </button>
-  
-            <button *ngIf="showPassword" class="login-btn" type="submit">
-              <span class="next-label">Sign In</span>
-            </button>
-  
-            <button class="forgot-btn" type="button" (click)="sendPasswordReset()">
-              <span class="forgot-label">Forgot password?</span>
-            </button>
-          </div>
-  
-          <div class="sign-up">
-            <p class="para">Don't have an account?</p>
-            <a class="link" (click)="openSignUpPopup()">Sign up</a>
-          </div>
-        </form>
+
+        <div *ngIf="showPassword">
+          <input class="username-btn" type="password" placeholder="Password" [(ngModel)]="password" name="password"
+            required><br>
+        </div>
+
+        <button *ngIf="!showPassword" class="login-btn" type="button" (click)="showPasswordTab()">
+          <span class="next-label">Next</span>
+        </button>
+
+        <button *ngIf="showPassword" class="login-btn" type="submit">
+          <span class="next-label">Sign In</span>
+        </button>
+
+        <button class="forgot-btn" type="submit">
+          <span>Forgot password?</span>
+        </button>
       </div>
-  
-    <div class="modal" *ngIf="showSignUpModal">
-      <span class="close-button" (click)="closeSignUpPopup()">✖</span>
-      <app-registration></app-registration> 
-    </div>
-  </body>
 
-  <div class="error-modal" *ngIf="showAuthFailModal">
-    <div class="error-modal-content">
-      <h2>Authentication Failed</h2>
-      <p>Incorrect username or password. Please try again.</p>
-    </div>
+      <div class="sign-up">
+        <p class="para text-left">Don't have an account? <a class="link" (click)="openSignUpPopup()">Sign up</a></p>
+      </div>
+    </form>
   </div>
 
-  <div class="forgot-password-modal" *ngIf="showForgotPasswordModal">
-    <div class="forgot-password-content">
-      <h2>Reset Password</h2>
-      <input type="email" placeholder="Enter your email" [(ngModel)]="forgotPasswordEmail">
-      <button class="reset-btn" type="button" (click)="sendPasswordReset()">Send Reset Link</button>
-    </div>
+  <div class="modal" *ngIf="showSignUpModal">
+    <span class="close-button" (click)="closeSignUpPopup()">✖</span>
+    <app-registration></app-registration>
   </div>
-  
+</body>
+
+<div class="error-modal" *ngIf="showAuthFailModal">
+  <div class="error-modal-content">
+    <h2>Authentication Failed</h2>
+    <p>Incorrect username or password. Please try again.</p>
+  </div>
+</div>
