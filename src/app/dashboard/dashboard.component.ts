@@ -1,15 +1,24 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import { TwitterServiceService } from '../twitter-service.service';
+import { TweetTs } from '../models/tweet.ts';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+constructor(private twitterService: TwitterServiceService, private router: Router) { }
+tweets?:TweetTs[];
 role?:string | any;
 ngOnInit(): void {
   this.role=localStorage.getItem("role");
-}  userName?: string = 'John Doe';
+  this.twitterService.fetchTweets().subscribe(response=>{
+     this.tweets=response.detail;
+  });
+}  
+userName?: string = 'John Doe';
 statusList?:[];
 followers?: number = 1500;
 following?: number = 300;
@@ -63,7 +72,6 @@ recentPosts: { content: string, timestamp: string }[] = [
 toggleNotifications() {
   this.showNotifications = !this.showNotifications;
 }
-constructor() { }
 
 increaseCount(reaction: string) {
   if (reaction === 'comment') {

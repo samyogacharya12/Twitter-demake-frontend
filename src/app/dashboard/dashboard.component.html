@@ -71,24 +71,8 @@
         </div>
 
         <div class="content-wrapper mt-4">
-        <div class="content">
-          <p>Your main dashboard content here...</p>
-          <!-- Add more content to test scrolling -->
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <p>Lorem ipsum dolor sit amet...</p>
+        <div class="content" *ngFor="let tweet of tweets">
+          <p>{{tweet.content}}</p>
         </div>
       </div>
         </div>
