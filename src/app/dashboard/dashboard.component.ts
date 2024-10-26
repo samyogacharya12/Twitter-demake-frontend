@@ -112,7 +112,8 @@ export class DashboardComponent implements OnInit {
     this.twitterService.submit(formData).subscribe(
       response=>{
         if(response){
-        this.tweet.content='';
+        this.content='';
+        this.selectedFile=undefined;
         }
       }
     )
