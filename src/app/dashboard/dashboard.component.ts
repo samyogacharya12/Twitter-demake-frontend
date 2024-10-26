@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { TwitterServiceService } from '../twitter-service.service';
 import { TweetTs } from '../models/tweet.ts';
+import { fakeAsync } from '@angular/core/testing';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -78,8 +79,17 @@ export class DashboardComponent implements OnInit {
   }
 
   homePageDashboard():void{
+    console.log("home page dashboard");
     this.isHomeDashboard=true;
+    this.isFollowingDashboard=false;
   }
+
+  followingPageDashboard():void{
+    console.log("following page dashboard");
+    this.isHomeDashboard=false;
+    this.isFollowingDashboard=true;
+  }
+
 
 
   submit():void{

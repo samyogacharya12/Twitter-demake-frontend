@@ -30,12 +30,11 @@
       <div class="main-content d-flex flex-column p-0">
         <div class="custom-underline d-flex">
           <div class="main-tab-link flex-1">
-            <a class="nav-link position-relative w-25 text-center nav-link active" aria-current="page" href="#">For
+            <a class="nav-link position-relative w-25 text-center nav-link active" aria-current="page" (click)="homePageDashboard()">For
               you</a>
           </div>
           <div class="main-tab-link flex-1">
-            <a class="nav-link position-relative w-25 text-center nav-link-following" aria-current="page"
-              href="#">Following</a>
+            <a class="nav-link position-relative w-25 text-center nav-link-following" aria-current="page" (click)="followingPageDashboard()">Following</a>
           </div>
         </div>
 
@@ -63,7 +62,7 @@
 
             </div>
           </div>
-          <div class="posts-container">
+          <div class="posts-container" *ngIf="isHomeDashboard">
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
@@ -92,8 +91,35 @@
               </div>
             </div>
           </div>
-          
+          <div class="posts-container" *ngIf="isFollowingDashboard">
+            <div *ngFor="let post of tweets" class="posted">
+              <div class="d-flex gap-4 post-avatar-content">
+                <div class="bg-light avatar-placeholder">
+                  <i class="fa-solid fa-user h2"></i>
+                  <img [src]="post.user?.profile_image_url" alt="{{post.user?.username }}" class="avatar-image" />
+                </div>
 
+                
+
+                <div class="d-flex flex-column flex-1">
+                  <div class="d-flex flex-row align-items-center post-user-info1">
+                    <div class="post-user font-weight-bold text-white">{{post.user?.username}}</div>
+                    <i class="fa-solid fa-circle-check text-primary"></i>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                      <span class="text-muted"></span>
+                      <div class="circle-separator"></div>
+                      <span class="text-muted"></span>
+                    </div>
+                    
+                  </div>
+                  <div class="post-text text-white leading-normal">{{post.content}}</div>
+                  <div class="uploaded-image rounded-lg mt-2" *ngIf="post.media_url">
+                    <img [src]="post.media_url" alt="" class="post-image" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
