@@ -9,10 +9,10 @@ import { TweetTs } from '../models/tweet.ts';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isHomeDashboard?:boolean=true;
+  isFollowingDashboard?:boolean=false;
   role?: string | any;
-  ngOnInit(): void {
-    this.role = localStorage.getItem("role");
-  } userName?: string = 'John Doe';
+  userName?: string = 'John Doe';
   statusList?: [];
   followers?: number = 1500;
   following?: number = 300;
@@ -22,7 +22,9 @@ export class DashboardComponent implements OnInit {
   likeCount = 789;
   showNotifications: boolean = false;
   showComment: boolean = false;
-
+  tweets?:TweetTs[];
+  content: string = ''; 
+  tweet = { content: '', media_url: '' };
   // Sample notifications data
   notifications = [
     { message: 'Anna started following you', time: '10 minutes ago' },
@@ -62,6 +64,33 @@ export class DashboardComponent implements OnInit {
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
 
+  ngOnInit(): void {
+    this.twitterService.fetchTweets().subscribe(
+      response => {
+        this.tweets=response.detail;// Navigate to a protected route on successful login
+        // Handle successful login
+      },
+      error => {
+        console.error("error", error);
+      }
+    );
+    this.role = localStorage.getItem("role");
+  }
+
+  homePageDashboard():void{
+    this.isHomeDashboard=true;
+  }
+
+
+  submit():void{
+    console.log('data' +this.content);
+    this.tweet.content=this.content;
+    this.twitterService.submit(this.tweet).subscribe(
+      response=>{
+        
+      }
+    )
+  }
   // Function to open the modal
   openModal() {
     this.isModalVisible = true;
@@ -91,7 +120,7 @@ export class DashboardComponent implements OnInit {
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;
   }
-  constructor() { }
+  constructor(private twitterService: TwitterServiceService, private router: Router) { }
 
   increaseCount(reaction: string) {
     if (reaction === 'comment') {

@@ -3,7 +3,7 @@
     <div class="sidebar flex flex-col justify-between">
       <ul>
         <div class="logo-container">
-          <img src="assets/twitter-logo.png" alt="Twitter Logo" class="twitter-logo">
+          <img src="https://i.postimg.cc/gJNTdYpB/01.jpg" alt="Twitter Logo" class="twitter-logo">
         </div>
         <li><i class="fas fa-home"></i> Home</li>
         <li><i class="fas fa-search"></i>Explore</li>
@@ -45,49 +45,50 @@
               <div class="bg-light avatar-placeholder">
                 <i class="fa-solid fa-user h2"></i>
               </div>
-              <form class="flex-1">
-                <div class="m-0">
-                  <textarea placeholder="Share your thoughts here!!" id="status-input" rows="3" cols="80"></textarea>
-                  <div class="custom-line"></div>
-                </div>
-                <div class="status-actions py-2">
-                  <div class="icons">
-                    <button type="button" class="btn-icon"><i class="fas fa-image"></i></button>
-                    <button type="button" class="btn-icon"><i class="fas fa-smile"></i></button>
-                    <button type="button" class="btn-icon"><i class="fas fa-poll"></i></button>
-                  </div>
+           <form class="flex-1" #form="ngForm" (ngSubmit)="submit()" novalidate>
+  <div class="m-0">
+    <textarea placeholder="Share your thoughts here!!" id="status-input" rows="3" cols="80" [(ngModel)]="content" name="content"></textarea>
+    <div class="custom-line"></div>
+  </div>
+  <div class="status-actions py-2">
+    <div class="icons">
+      <button type="button" class="btn-icon"><i class="fas fa-image"></i></button>
+      <button type="button" class="btn-icon"><i class="fas fa-smile"></i></button>
+      <button type="button" class="btn-icon"><i class="fas fa-poll"></i></button>
+    </div>
 
-                  <button type="submit" class="btn-post">Post</button>
-                </div>
-              </form>
+    <button type="submit" class="btn-post">Post</button>
+  </div>
+</form>
+
             </div>
           </div>
           <div class="posts-container">
-            <div *ngFor="let post of newPosts" class="posted">
+            <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
-                  <i class="fa-solid fa-user h2" *ngIf="!post.avatar"></i>
-                  <img [src]="post.avatar" alt="{{ post.username }}'s avatar" *ngIf="post.avatar"
-                    class="avatar-image" />
+                  <i class="fa-solid fa-user h2"></i>
+                  <img [src]="post.user?.profile_image_url" alt="{{post.user?.username }}" class="avatar-image" />
                 </div>
                 <div class="d-flex flex-column flex-1">
                   <div class="d-flex flex-row align-items-center post-user-info1">
-                    <div class="post-user font-weight-bold text-white">{{ post.username }}</div>
-                    <i *ngIf="post.verified" class="fa-solid fa-circle-check text-primary"></i>
+                    <div class="post-user font-weight-bold text-white">{{post.user?.username}}</div>
+                    <i class="fa-solid fa-circle-check text-primary"></i>
                     <div class="d-flex flex-row justify-content-between align-items-center">
-                      <span class="text-muted">{{ post.handle }}</span>
+                      <span class="text-muted"></span>
                       <div class="circle-separator"></div>
-                      <span class="text-muted">{{ post.time }}</span>
+                      <span class="text-muted"></span>
                     </div>
                   </div>
-                  <div class="post-text text-white leading-normal">{{ post.content }}</div>
-                  <div class="uploaded-image rounded-lg mt-2" *ngIf="post.imageUrl">
-                    <img [src]="post.imageUrl" alt="" class="post-image">
+                  <div class="post-text text-white leading-normal">{{post.content}}</div>
+                  <div class="uploaded-image rounded-lg mt-2" *ngIf="post.media_url">
+                    <img [src]="post.media_url" alt="" class="post-image" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          
 
         </div>
 
