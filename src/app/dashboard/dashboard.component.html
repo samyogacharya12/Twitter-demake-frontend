@@ -71,7 +71,8 @@
                   <img [src]="post.user?.profile_image_url" alt="{{post.user?.username }}" class="avatar-image" />
                 </div>
 
-                
+            
+
                 <div class="d-flex flex-column flex-1">
                   <div class="d-flex flex-row align-items-center post-user-info1">
                     <div class="post-user font-weight-bold text-white">{{post.user?.username}}</div>
@@ -81,6 +82,7 @@
                       <div class="circle-separator"></div>
                       <span class="text-muted"></span>
                     </div>
+                    
                   </div>
                   <div class="post-text text-white leading-normal">{{post.content}}</div>
                   <div class="uploaded-image rounded-lg mt-2" *ngIf="post.media_url">
