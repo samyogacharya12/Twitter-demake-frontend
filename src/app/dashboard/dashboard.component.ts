@@ -10,6 +10,7 @@ import { fakeAsync } from '@angular/core/testing';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  selectedFile?: File;
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
   role?: string | any;
@@ -65,10 +66,16 @@ export class DashboardComponent implements OnInit {
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
 
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];  // Store the selected file
+  }
+
+
   ngOnInit(): void {
     this.twitterService.fetchTweets().subscribe(
       response => {
-        this.tweets=response.detail;// Navigate to a protected route on successful login
+        this.tweets=response;// Navigate to a protected route on successful login
         // Handle successful login
       },
       error => {
@@ -93,13 +100,23 @@ export class DashboardComponent implements OnInit {
 
 
   submit():void{
+    const formData = new FormData();
+    if (!this.selectedFile) {
+      console.error('No file selected');
+    }  else{
+      formData.append('media', this.selectedFile);
+    }
     console.log('data' +this.content);
     this.tweet.content=this.content;
-    this.twitterService.submit(this.tweet).subscribe(
+    formData.append('content', this.tweet.content);
+    this.twitterService.submit(formData).subscribe(
       response=>{
-        
+        if(response){
+        this.tweet.content='';
+        }
       }
     )
+    this.ngOnInit();
   }
   // Function to open the modal
   openModal() {

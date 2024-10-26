@@ -3,19 +3,24 @@ import {Observable, tap} from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
+import { HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class TwitterServiceService {
-  private apiURL = 'http://localhost:8090';  // Backend API URL
+  private apiURL = 'http://localhost:8000';  // Backend API URL
 
 
   constructor(private http: HttpClient) { }
 
-  submit(tweet: { content: string, media_url: string}): Observable<any> {
+  submit(tweet: FormData): Observable<any> {
     console.log('content'+tweet);
-    return this.http.post<any>(`${this.apiURL}/users/tweets`,tweet)
-      .pipe(
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'multipart/form-data'
+    });
+    return this.http.post<any>(`${this.apiURL}/tweets`, tweet, { headers })
+    .pipe(
         tap(response => {
           console.log('Summit User Response:', response);
         }),
@@ -30,7 +35,11 @@ export class TwitterServiceService {
 
 
   fetchTweets(): Observable<any> {
-    return this.http.get<any>(`${this.apiURL}/users/tweets`)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'application/json'
+    });
+    return this.http.get<any>(`${this.apiURL}/tweets/home`, {headers})
       .pipe(
         tap(response => {
           console.log('Fetch User Response:', response);
