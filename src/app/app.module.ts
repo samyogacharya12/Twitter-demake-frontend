@@ -10,7 +10,8 @@ import {LoginServiceService} from "./login/login-service.service";
 import {FormsModule} from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { ProfileComponent } from './profile/profile.component'; // Ensure it's declared
+import { ProfileComponent } from './profile/profile.component';
+import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal.component'; // Ensure it's declared
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProfileComponent } from './profile/profile.component'; // Ensure it's d
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditprofileModalComponent
   ],
   imports: [
     BrowserModule,
