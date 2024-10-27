@@ -12,7 +12,6 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/profile', component: ProfileComponent },
-  
   { path: '**', redirectTo: 'login' }
 ];
 @NgModule({

@@ -9,15 +9,18 @@ import { User } from '../models/user';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent{
+export class ProfileComponent {
+  user: User = new User();
   selectedFile?: File;
   imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   showUpdateModel = false;
-  constructor(private router: Router,private location:Location,private loginService: LoginServiceService ) {}
-  user: User = new User(); // Initialize user to an empty object
+  isModalVisible = false;
   isOpen: boolean = false;
+  constructor(private router: Router,private location:Location, private loginService:LoginServiceService) {
+    
+  }
+
   ngOnInit(): void {
-    console.log(" ngOnInit " +this.imagePreviewUrl);
    this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(
     response => {
       this.user=response;// Navigate to a protected route on successful login
@@ -28,43 +31,12 @@ export class ProfileComponent{
     }
   );
   }
-
-
-  onImageUpload(event: any) {
-    this.selectedFile = event.target.files[0]; 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
-    };
-    console.log("Inside image url "+this.imagePreviewUrl);
-    if(this.selectedFile){
-    reader.readAsDataURL(this.selectedFile);
-    }
-  }
    
-  updateUser():void{
-    const formData = new FormData();
-    if(this.user.full_name){
-    formData.append('full_name', this.user.full_name);
-    }
-    if(this.user.username){
-    formData.append('username', this.user?.username);
-    }
-    if(this.selectedFile){
-      formData.append('media', this.selectedFile);
-    }
-    this.loginService.updateUser(formData).subscribe(res=>{
-        this.goBack();
-    });
-  }
 
-  openModal(): void {
-    this.isOpen = true;
-  }
-
-   goBack(): void {
+  goBack(): void {
     this.isOpen=false;
   }
+
 
 
   public scrollLeft() {
@@ -75,5 +47,15 @@ export class ProfileComponent{
   public scrollRight() {
     const container = document.querySelector('.overflow-x-auto') as HTMLElement;
     container.scrollBy({ left: 250, behavior: 'smooth' }); // Adjust scroll distance as needed
+  }
+
+ 
+
+  public openModal() {
+    this.isModalVisible = true;
+  }
+
+  public closeModal() {
+    this.isModalVisible = false;
   }
 }

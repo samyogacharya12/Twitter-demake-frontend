@@ -92,8 +92,7 @@ export class LoginServiceService {
 
   updateUser(user: any): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`
     });
     return this.http.put<any>(`${this.apiURL}/users`, user, {headers})
       .pipe(

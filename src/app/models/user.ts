@@ -1,5 +1,5 @@
 export interface IUser {
-  id?: number;
+  id?: string;
   full_name?: string;
   profile_image_url?: string;
   email?: string;
@@ -8,12 +8,15 @@ export interface IUser {
   num_following?:number,
   num_followers?:number,
   verified_on?:string,
-  bio?:string
+  bio?:string,
+  location?:string,
+  website?:string,
+  tweet_count?:number
 }
 
 export class User implements IUser {
   constructor(
-    public id?: number,
+    public id?: string,
     public full_name?: string,
     public profile_image_url?: string,
     public email?:string,
@@ -22,7 +25,10 @@ export class User implements IUser {
     public num_following?:number,
     public num_followers?:number,
     public verified_on?:string,
-    public bio?:string
+    public bio?:string,
+    public location?:string,
+    public website?:string,
+    public tweet_count?:number
 
   ) {}
 }

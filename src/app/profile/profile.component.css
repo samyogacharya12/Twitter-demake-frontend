@@ -995,9 +995,10 @@ textarea::placeholder {
 }
 
 .edit-profile-btn {
+    border-color: rgb(83, 100, 113);
     background-color: rgba(0, 0, 0, 0);
     color: white;
-    padding: 5px 20px;
+    padding: 10px 20px;
     border: 1px solid rgb(83, 100, 113);
     border-radius: 20px;
     font-weight: bold;
@@ -1009,30 +1010,11 @@ textarea::placeholder {
     right: 10px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: block;
-    color: #555;
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: #007bff;
-    outline: none;
-  }
+.edit-profile-btn:hover{
+    background-color: #111111;
+   
+}
 
-  .image-preview {
-    max-width: 100%;
-    max-height: 200px;
-    margin-top: 10px;
-    border-radius: 10px;
-  }
-  
 .profile-name {
     margin-top: 70px;
     /* position: absolute;
@@ -1291,4 +1273,16 @@ aside {
     border-radius: 50%;
     width: 40px;
     height: 40px;
+}
+
+.followbtn{
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgb(239, 243, 244);
+    transition-duration: 0.2s;
+    color: black;
+    border-bottom-left-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    font-weight: bold;
 }
