@@ -1,0 +1,103 @@
+<div *ngIf="isVisible" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="">
+        <button class="close-button" (click)="closeModal()">×</button>
+        <span class="ml-4" style="font-size: 20px; font-weight: bold"
+          >Edit Profile</span
+        >
+      </div>
+      <button type="button" (click)="saveChanges()" class="save-button">
+        Save
+      </button>
+    </div>
+
+    <div class="photo-upload-container">
+      <img
+        *ngIf="photoUrl"
+        [src]="photoUrl"
+        alt="Uploaded Photo"
+        class="uploaded-photo"
+      />
+
+      <!-- Upload Icon and Tooltip -->
+      <div
+        *ngIf="!photoUrl"
+        class="icon-container"
+        (click)="triggerFileInput()"
+      >
+        <i class="fas fa-camera upload-icon"></i>
+        <span class="tooltip">Add photo</span>
+      </div>
+
+      <!-- Remove Icon and Tooltip -->
+      <div
+        *ngIf="photoUrl"
+        class="icon-container"
+        (click)="removePhoto($event)"
+      >
+        <i class="fas fa-times remove-icon"></i>
+        <span class="tooltip">Remove photo</span>
+      </div>
+
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        id="fileInput"
+        style="display: none"
+      />
+    </div>
+
+    <div class="photo-upload">
+      <div class="photo-container">
+        <img src="../../assets/gaurav1.jpeg" alt="User" class="profile-img" />
+        <div class="icon-overlay">
+          <i class="fas fa-camera upload-icon"></i>
+          <span class="tooltip">Add photo</span>
+        </div>
+      </div>
+    </div>
+
+    <form>
+      <div>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Name"
+          [(ngModel)]="profileData.name"
+        />
+      </div>
+
+      <div>
+        <textarea
+          id="bio"
+          name="bio"
+          placeholder="Bio"
+          [(ngModel)]="profileData.bio"
+        ></textarea>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          placeholder="Location"
+          [(ngModel)]="profileData.location"
+        />
+      </div>
+
+      <div>
+        <input
+          type="url"
+          id="website"
+          name="website"
+          placeholder="Website"
+          [(ngModel)]="profileData.website"
+        />
+      </div>
+    </form>
+  </div>
+</div>

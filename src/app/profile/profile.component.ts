@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+   isModalVisible = false;
 
   constructor(private router: Router,private location:Location) {
     
@@ -27,5 +28,15 @@ export class ProfileComponent {
   public scrollRight() {
     const container = document.querySelector('.overflow-x-auto') as HTMLElement;
     container.scrollBy({ left: 250, behavior: 'smooth' }); // Adjust scroll distance as needed
+  }
+
+ 
+
+  public openModal() {
+    this.isModalVisible = true;
+  }
+
+  public closeModal() {
+    this.isModalVisible = false;
   }
 }
