@@ -36,6 +36,7 @@ export class LoginServiceService {
         tap(response => {
           // Store JWT token in local storage
           localStorage.setItem('authToken', response.access_token);
+          console.log('auth token'+localStorage.getItem('authToken'));
         })
       );
   }

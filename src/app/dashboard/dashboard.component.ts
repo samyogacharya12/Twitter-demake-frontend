@@ -34,7 +34,14 @@ export class DashboardComponent implements OnInit {
   isModalVisible = false;
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
+  showReactionOptions = false;
 
+  // Selected reaction, default to like
+  selectedReaction = '👍';
+
+  openDialogueBox():void{
+    this.isOpen=true;
+  }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0]; 
@@ -148,11 +155,6 @@ export class DashboardComponent implements OnInit {
       this.likeCount++;
     }
   }
-
-  showReactionOptions = false;
-
-  // Selected reaction, default to like
-  selectedReaction = '👍';
 
   // Method to show reactions on hover
   showReactions() {

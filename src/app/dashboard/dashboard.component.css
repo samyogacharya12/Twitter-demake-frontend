@@ -8,6 +8,11 @@ body {
   scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
 }
 
+.comment-display {
+  margin-top: 16px;
+  margin-right: 1370px;
+}
+
 .container-dashboard {
   display: flex;
   height: 100vh;

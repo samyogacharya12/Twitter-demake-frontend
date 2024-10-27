@@ -55,7 +55,6 @@ export class LoginComponent {
   }
 
   login() {
-
     this.credentials.username=this.username;
     this.credentials.password=this.password;
     this.authService.login(this.credentials).subscribe(
