@@ -13,10 +13,8 @@
         <li><i class="fas fa-search"></i>Explore</li>
         <li><i class="fas fa-bell"></i>Notifications</li>
         <li><i class="fas fa-envelope"></i>Messages</li>
-        <li>
-          <a [routerLink]="['/dashboard/profile']" style="color: white"
-            ><i class="fas fa-user"></i> Profile</a
-          >
+        <li [routerLink]="['/dashboard/profile']">
+          <i class="fas fa-user"></i> Profile
         </li>
         <button class="btn btn-primary mt-4">Post</button>
       </ul>
@@ -132,6 +130,93 @@
                     *ngIf="post.imageUrl"
                   >
                     <img [src]="post.imageUrl" alt="" class="post-image" />
+                  </div>
+                  <div
+                    class="post-actions d-flex justify-content-between align-items-center mt-3"
+                  >
+                    <div class="like-button-container">
+                      <!-- Like Button -->
+                      <button
+                        (mouseenter)="showReactions = true"
+                        class="action-button like-button like-btn"
+                        [ngClass]="{ liked: post.userReacted }"
+                        (click)="likePost(post)"
+                      >
+                        <i
+                          class="fas"
+                          [ngClass]="getReactionIcon(post.reactionType)"
+                        ></i>
+                        <span>{{ post.likes }}</span>
+                      </button>
+
+                      <!-- Reactions Overlay -->
+                      <div
+                        class="reactions-overlay"
+                        *ngIf="showReactions"
+                        (mouseleave)="showReactions = false"
+                      >
+                        <img
+                          src="assets/reactions/like (1).png"
+                          alt="Like"
+                          (click)="
+                            react(post, 'like', 'assets/reactions/like (1).png')
+                          "
+                        />
+                        <img
+                          src="assets/reactions/love.png"
+                          alt="Love"
+                          (click)="
+                            react(post, 'love', 'assets/reactions/love.png')
+                          "
+                        />
+                        <img
+                          src="assets/reactions/haha.png"
+                          alt="Haha"
+                          (click)="
+                            react(post, 'haha', 'assets/reactions/haha.png')
+                          "
+                        />
+                        <img
+                          src="assets/reactions/wow.png"
+                          alt="Wow"
+                          (click)="
+                            react(post, 'wow', 'assets/reactions/wow.png')
+                          "
+                        />
+                        <img
+                          src="assets/reactions/sad.png"
+                          alt="Sad"
+                          (click)="
+                            react(post, 'sad', 'assets/reactions/sad.png')
+                          "
+                        />
+                        <img
+                          src="assets/reactions/angry.png"
+                          alt="Angry"
+                          (click)="
+                            react(post, 'angry', 'assets/reactions/angry.png')
+                          "
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Comment Button -->
+                    <button
+                      class="action-button comment-btn"
+                      (click)="commentOnPost(post)"
+                    >
+                      <i class="fas fa-comment"></i>
+                      <span>{{ post.comments }}</span>
+                    </button>
+
+                    <!-- Repost Button -->
+                    <button
+                      class="action-button repost-btn"
+                      (click)="repost(post)"
+                    >
+                      <i class="fas fa-retweet"></i>
+                      <span>{{ post.reposts }}</span>
+                    </button>
                   </div>
                 </div>
               </div>
