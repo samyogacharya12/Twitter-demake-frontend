@@ -11,6 +11,7 @@ import { LoginServiceService } from '../login/login-service.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  userId: string | null = null;
   isOpen: boolean = false;
   imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   selectedFile?: File;
@@ -68,13 +69,14 @@ export class DashboardComponent implements OnInit {
       response => {
         this.tweets=response;// Navigate to a protected route on successful login
         // Handle successful login
+        this.userId=localStorage.getItem('userId');
       },
       error => {
         console.error("error", error);
       }
     );
     this.role = localStorage.getItem("role");
-    this.loginService.me().subscribe(response=>{
+    this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
          localStorage.setItem("userId", response.id);
          console.log(' current user id '+ response.id);
     });

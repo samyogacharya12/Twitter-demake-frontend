@@ -10,8 +10,29 @@ import { HttpHeaders } from '@angular/common/http';
 export class TwitterServiceService {
   private apiURL = 'http://localhost:8000';  // Backend API URL
 
+  private serverURL = 'http://localhost:8090/users';  // Backend API URL
+
+
 
   constructor(private http: HttpClient) { }
+
+  fetchPeoples(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/json'
+    });
+    return this.http.get<any>(`${this.serverURL}/peoples`, {headers})
+      .pipe(
+        tap(response => {
+          console.log('Fetch User Response:', response);
+        }),
+        catchError(error => {
+          console.error('Error fetching user:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+
 
   submit(tweet: FormData): Observable<any> {
     console.log('content'+tweet);

@@ -61,6 +61,10 @@ export class LoginComponent {
       response => {
         this.router.navigate(['/dashboard']);  // Navigate to a protected route on successful login
         console.log('Login successful');
+        this.authService.me().subscribe(resp=>{
+          localStorage.setItem("userId", resp.id);
+
+     });
         // Handle successful login
       },
       error => {
