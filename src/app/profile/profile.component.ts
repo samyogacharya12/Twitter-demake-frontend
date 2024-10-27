@@ -10,11 +10,14 @@ import { User } from '../models/user';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent{
-
+  selectedFile?: File;
+  imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
+  showUpdateModel = false;
   constructor(private router: Router,private location:Location,private loginService: LoginServiceService ) {}
-  user?:User;
-
+  user: User = new User(); // Initialize user to an empty object
+  isOpen: boolean = false;
   ngOnInit(): void {
+    console.log(" ngOnInit " +this.imagePreviewUrl);
    this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(
     response => {
       this.user=response;// Navigate to a protected route on successful login
@@ -26,8 +29,41 @@ export class ProfileComponent{
   );
   }
 
+
+  onImageUpload(event: any) {
+    this.selectedFile = event.target.files[0]; 
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
+    };
+    console.log("Inside image url "+this.imagePreviewUrl);
+    if(this.selectedFile){
+    reader.readAsDataURL(this.selectedFile);
+    }
+  }
+   
+  updateUser():void{
+    const formData = new FormData();
+    if(this.user.full_name){
+    formData.append('full_name', this.user.full_name);
+    }
+    if(this.user.username){
+    formData.append('username', this.user?.username);
+    }
+    if(this.selectedFile){
+      formData.append('media', this.selectedFile);
+    }
+    this.loginService.updateUser(formData).subscribe(res=>{
+        this.goBack();
+    });
+  }
+
+  openModal(): void {
+    this.isOpen = true;
+  }
+
    goBack(): void {
-    this.location.back();  // This will navigate to the previous page
+    this.isOpen=false;
   }
 
 

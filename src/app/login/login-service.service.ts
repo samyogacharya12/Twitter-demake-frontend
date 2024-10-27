@@ -89,6 +89,25 @@ export class LoginServiceService {
   }
 
 
+  updateUser(user: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.http.put<any>(`${this.apiURL}/users`, user, {headers})
+      .pipe(
+        tap(response => {
+          console.log('Fetch Update User Response:', response);
+        }),
+        catchError(error => {
+          console.error('Error fetching user:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+
+
 
   logout() {
     localStorage.removeItem('authToken');

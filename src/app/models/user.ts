@@ -7,7 +7,8 @@ export interface IUser {
   retweet_count?:string,
   num_following?:number,
   num_followers?:number,
-  verified_on?:string
+  verified_on?:string,
+  bio?:string
 }
 
 export class User implements IUser {
@@ -20,7 +21,8 @@ export class User implements IUser {
     public retweet_count?:string,
     public num_following?:number,
     public num_followers?:number,
-    public verified_on?:string
+    public verified_on?:string,
+    public bio?:string
 
   ) {}
 }

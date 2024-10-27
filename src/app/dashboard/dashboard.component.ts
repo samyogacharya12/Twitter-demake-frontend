@@ -11,6 +11,7 @@ import { LoginServiceService } from '../login/login-service.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isOpen: boolean = false;
   imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   selectedFile?: File;
   isHomeDashboard?:boolean=true;
