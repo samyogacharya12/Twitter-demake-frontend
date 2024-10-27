@@ -1,15 +1,29 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
+
+interface Post {
+  id: number;
+  userReacted: boolean;
+  likes: number;
+  comments: number;
+  reposts: number;
+  selectedReactionIcon?: string | null;
+  reactionType?: string;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  showReactions = false;
+  selectedReactionIcon: string | null = null;
   role?: string | any;
   ngOnInit(): void {
-    this.role = localStorage.getItem("role");
-  } userName?: string = 'John Doe';
+    this.role = localStorage.getItem('role');
+  }
+  userName?: string = 'John Doe';
   statusList?: [];
   followers?: number = 1500;
   following?: number = 300;
@@ -25,7 +39,7 @@ export class DashboardComponent implements OnInit {
     { message: 'Anna started following you', time: '10 minutes ago' },
     { message: 'Mark liked your post', time: '2 hours ago' },
     { message: 'You have a new message from Sarah', time: '1 day ago' },
-    { message: 'David commented on your photo', time: '3 days ago' }
+    { message: 'David commented on your photo', time: '3 days ago' },
   ];
 
   // sample posts data
@@ -35,10 +49,16 @@ export class DashboardComponent implements OnInit {
       username: 'Elon Musk',
       handle: '@elondude',
       time: '13h',
-      content: 'Subscribe to unlock new features and if eligible, receive a share of revenue.',
+      content:
+        'Subscribe to unlock new features and if eligible, receive a share of revenue.',
       avatar: 'https://example.com/avatar1.jpg',
       imageUrl: 'https://loremflickr.com/800/800',
-      verified: true
+      likes: 0,
+      comments: 0,
+      reposts: 0,
+      userReacted: false,
+      verified: true,
+      reactionType: '',
     },
     {
       id: 2,
@@ -48,8 +68,13 @@ export class DashboardComponent implements OnInit {
       content: 'This is a great day to learn Angular!',
       avatar: 'https://example.com/avatar2.jpg',
       imageUrl: 'https://loremflickr.com/1920/1920',
-      verified: false
-    }
+      likes: 0,
+      comments: 0,
+      reposts: 0,
+      userReacted: false,
+      verified: false,
+      reactionType: '',
+    },
     // Add more posts as needed
   ];
 
@@ -79,16 +104,16 @@ export class DashboardComponent implements OnInit {
 
   newPost?: string = '';
 
-  recentPosts: { content: string, timestamp: string }[] = [
+  recentPosts: { content: string; timestamp: string }[] = [
     { content: 'Had a great day at the beach!', timestamp: '2 hours ago' },
     { content: 'Loving the new Angular features.', timestamp: '1 day ago' },
-    { content: 'Just finished a 5K run!', timestamp: '3 days ago' }
+    { content: 'Just finished a 5K run!', timestamp: '3 days ago' },
   ];
 
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;
   }
-  constructor() { }
+  constructor() {}
 
   increaseCount(reaction: string) {
     if (reaction === 'comment') {
@@ -101,33 +126,63 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  showReactionOptions = false;
-
-  // Selected reaction, default to like
-  selectedReaction = '👍';
-
-  // Method to show reactions on hover
-  showReactions() {
-    this.showReactionOptions = true;
-  }
-
-
-
-
   toggleCommentPopup() {
     this.showComment = !this.showComment;
   }
 
-  // Method to hide reactions when not hovering
-  hideReactions() {
-    this.showReactionOptions = false;
+  commentOnPost(post: Post) {
+    post.comments++;
+    // Optional: Open a comment input or modal if needed
   }
 
-  // Method to select a reaction
-  selectReaction(reaction: string) {
-    this.selectedReaction = reaction;
-    this.hideReactions();  // Hide the options after selecting
+  repost(post: Post) {
+    post.reposts++;
   }
 
+  // Function to toggle like state for a post
+  public likePost(post: Post) {
+    if (post.userReacted) {
+      post.likes -= 1; // Remove like
+      post.selectedReactionIcon = null; // Clear selected reaction icon
+      post.reactionType = ''; // Reset reaction type
+    } else {
+      post.likes += 1; // Add like
+      post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
+      post.reactionType = 'like'; // Set reaction type to like
+    }
+    post.userReacted = !post.userReacted; // Toggle like state
+  }
 
+  // Function to handle reactions
+  public react(post: Post, reaction: string, iconPath: string) {
+    post.selectedReactionIcon = iconPath; // Set the selected reaction icon
+    post.reactionType = reaction; // Update the reaction type
+
+    if (!post.userReacted) {
+      this.likePost(post); // Increment like count if not already liked
+    } else {
+      // (if the user clicks the same reaction again, you might want to reset it)
+    }
+
+    this.showReactions = false;
+  }
+
+  getReactionIcon(reactionType: string | undefined): string {
+    switch (reactionType) {
+      case 'like':
+        return 'fa-thumbs-up';
+      case 'love':
+        return 'fa-heart'; // Change this to your desired icon for 'love'
+      case 'haha':
+        return 'fa-laugh';
+      case 'wow':
+        return 'fa-surprise';
+      case 'sad':
+        return 'fa-sad-tear';
+      case 'angry':
+        return 'fa-angry';
+      default:
+        return 'fa-heart';
+    }
+  }
 }
