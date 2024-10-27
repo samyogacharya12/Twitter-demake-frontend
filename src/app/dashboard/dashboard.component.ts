@@ -4,12 +4,14 @@ import {Router} from "@angular/router";
 import { TwitterServiceService } from '../twitter-service.service';
 import { TweetTs } from '../models/tweet.ts';
 import { fakeAsync } from '@angular/core/testing';
+import { LoginServiceService } from '../login/login-service.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   selectedFile?: File;
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
@@ -27,50 +29,31 @@ export class DashboardComponent implements OnInit {
   tweets?:TweetTs[];
   content: string = ''; 
   tweet = { content: '', media_url: '' };
-  // Sample notifications data
-  notifications = [
-    { message: 'Anna started following you', time: '10 minutes ago' },
-    { message: 'Mark liked your post', time: '2 hours ago' },
-    { message: 'You have a new message from Sarah', time: '1 day ago' },
-    { message: 'David commented on your photo', time: '3 days ago' }
-  ];
-
-  // sample posts data
-  newPosts = [
-    {
-      id: 1,
-      username: 'Elon Musk',
-      handle: '@elondude',
-      time: '13h',
-      content: 'Subscribe to unlock new features and if eligible, receive a share of revenue.',
-      avatar: 'https://example.com/avatar1.jpg',
-      imageUrl: 'https://loremflickr.com/800/800',
-      verified: true
-    },
-    {
-      id: 2,
-      username: 'Jane Doe',
-      handle: '@janedoe',
-      time: '5h',
-      content: 'This is a great day to learn Angular!',
-      avatar: 'https://example.com/avatar2.jpg',
-      imageUrl: 'https://loremflickr.com/1920/1920',
-      verified: false
-    }
-    // Add more posts as needed
-  ];
-
   isVisible = false;
-
   isModalVisible = false;
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
 
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];  // Store the selected file
+    this.selectedFile = event.target.files[0]; 
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
+    };
+    if(this.selectedFile){
+    reader.readAsDataURL(this.selectedFile);
+    }
   }
 
+  removeImage() {
+    this.selectedFile = undefined;
+    this.imagePreviewUrl = null; // Reset the image preview
+    const fileInput: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = ''; // Reset the file input
+    }
+  }
 
   ngOnInit(): void {
     this.twitterService.fetchTweets().subscribe(
@@ -83,6 +66,10 @@ export class DashboardComponent implements OnInit {
       }
     );
     this.role = localStorage.getItem("role");
+    this.loginService.me().subscribe(response=>{
+         localStorage.setItem("userId", response.id);
+         console.log(' current user id '+ response.id);
+    });
   }
 
   homePageDashboard():void{
@@ -148,7 +135,7 @@ export class DashboardComponent implements OnInit {
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;
   }
-  constructor(private twitterService: TwitterServiceService, private router: Router) { }
+  constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService ,private router: Router) { }
 
   increaseCount(reaction: string) {
     if (reaction === 'comment') {

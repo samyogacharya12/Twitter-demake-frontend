@@ -23,14 +23,14 @@
       <div class="flex flex-row justify-between">
         <div class="user-name">
           <img
-            src="../../assets/gaurav1.jpeg"
+            [src]="user?.profile_image_url"
             alt="User 1"
             class="user-avatar"
           />
           <div class="user-info flex justify-between">
             <div class="user-details">
-              <p>Gaurav Khadka</p>
-              <span class="txt1" style="color: #71761b">@khadhkagaurav</span>
+              <p>{{user?.full_name}}</p>
+              <span class="txt1" style="color: #71761b">{{user?.username}}</span>
             </div>
           </div>
           <i class="fas fa-ellipsis-h three-dots"></i>
@@ -61,7 +61,7 @@
       <div class="box-content p-4 ...">
         <div class="d-flex justify-content-between">
           <img
-            src="../../assets/gaurav1.jpeg"
+            src="{{user?.profile_image_url}}"
             alt="User 1"
             class="profile-img"
           />
@@ -71,7 +71,7 @@
 
       <div class="d-flex flex-column p-3">
         <div class="profile-name">
-          Gaurav Khadka
+          {{user?.full_name}}          
           <button class="verified">
             <span class="verified-icon">
               <svg
@@ -87,17 +87,17 @@
             ></span>
             Get verified
           </button>
-          <p class="profile-details">@khadhkagaurav</p>
+          <p class="profile-details">{{user?.username}}</p>
           <span class="calendar mt-2"
-            ><i class="fas fa-calendar-alt mr-1"></i> Joined October 2024</span
+            ><i class="fas fa-calendar-alt mr-1"></i> {{user?.verified_on | date: 'MMMM yyyy'}}</span
           >
           <div class="calendar mt-2">
             <a class="link" href=""
-              ><span class="text-white">0</span>
+              ><span class="text-white">{{user?.num_following}}</span>
               <span class="ml-1">Following</span></a
             >
             <a class="link" href=""
-              ><span class="text-white ml-2">4</span>
+              ><span class="text-white ml-2">{{user?.num_followers}}</span>
               <span class="ml-1">Followers</span></a
             >
           </div>

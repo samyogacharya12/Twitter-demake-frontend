@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import {Observable, tap} from "rxjs";
 import { IUser, User } from '../models/user';
 import { HttpResponse } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -39,13 +40,15 @@ export class LoginServiceService {
       );
   }
 
-  fetchUser(user: IUser): Observable<any> {
-    return this.http.post<any>(`${this.apiURL}/users/fetch`, user)
+  me(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'application/json'
+    });
+    return this.http.get<any>(`${this.apiURL}/users/me`, {headers})
       .pipe(
         tap(response => {
-          localStorage.setItem("role", response.detail.roles);
-          console.log("role" ,localStorage.getItem("role"));
-          console.log('Fetch User Response:', response);
+          console.log('Fetch Current User:', response);
         }),
         catchError(error => {
           console.error('Error fetching user:', error);
@@ -54,6 +57,23 @@ export class LoginServiceService {
       );
   }
 
+
+  findByUserId(userId:string | null):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'application/json'
+    });
+    return this.http.get<any>(`${this.apiURL}/users/${userId}`, {headers})
+    .pipe(
+      tap(response => {
+        console.log('Fetch Current User:', response);
+      }),
+      catchError(error => {
+        console.error('Error fetching user:', error);
+        return throwError(error);
+      })
+    );
+  }
 
   registerUser(user: any): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/users`, user)

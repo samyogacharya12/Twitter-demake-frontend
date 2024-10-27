@@ -5,6 +5,9 @@ export interface IUser {
   email?: string;
   username?: string;
   retweet_count?:string,
+  num_following?:number,
+  num_followers?:number,
+  verified_on?:string
 }
 
 export class User implements IUser {
@@ -14,6 +17,10 @@ export class User implements IUser {
     public profile_image_url?: string,
     public email?:string,
     public username?: string,
-    public retweet_count?:string
+    public retweet_count?:string,
+    public num_following?:number,
+    public num_followers?:number,
+    public verified_on?:string
+
   ) {}
 }
