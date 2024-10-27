@@ -4,6 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,12 +57,16 @@ export class TwitterServiceService {
 
 
 
-  fetchTweets(): Observable<any> {
+  fetchTweets(requestType?:any): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
       'Accept': 'application/json'
     });
-    return this.http.get<any>(`${this.apiURL}/tweets/home`, {headers})
+    let params = new HttpParams();
+    if (requestType) {
+      params = params.append('tab', requestType);  // Assuming 'userId' is a parameter in the API
+    }
+    return this.http.get<any>(`${this.apiURL}/tweets/home`, {headers, params})
       .pipe(
         tap(response => {
           console.log('Fetch User Response:', response);

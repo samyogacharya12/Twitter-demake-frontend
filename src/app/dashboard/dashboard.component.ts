@@ -67,10 +67,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.twitterService.fetchTweets().subscribe(
       response => {
-        this.tweets=response;// Navigate to a protected route on successful login
-        // Handle successful login
-        this.userId=localStorage.getItem('userId');
-      },
+        this.tweets=response;
+              },
       error => {
         console.error("error", error);
       }
@@ -86,12 +84,30 @@ export class DashboardComponent implements OnInit {
     console.log("home page dashboard");
     this.isHomeDashboard=true;
     this.isFollowingDashboard=false;
+    this.tweets=[];
+    this.twitterService.fetchTweets().subscribe(
+      response => {
+        this.tweets=response;
+              },
+      error => {
+        console.error("error", error);
+      }
+    );
   }
 
   followingPageDashboard():void{
     console.log("following page dashboard");
     this.isHomeDashboard=false;
     this.isFollowingDashboard=true;
+    this.tweets=[];
+    this.twitterService.fetchTweets('following').subscribe(
+      response => {
+        this.tweets=response;
+              },
+      error => {
+        console.error("error", error);
+      }
+    );
   }
 
 

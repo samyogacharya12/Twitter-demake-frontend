@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { People } from '../models/people';
 import { TwitterServiceService } from '../twitter-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { FollowService } from '../follow-service.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -22,8 +23,18 @@ export class ProfileComponent implements OnInit {
   isModalVisible = false;
   isOpen: boolean = false;
   constructor(private route: ActivatedRoute,
-    private router: Router,private location:Location, private loginService:LoginServiceService, private twitterServuce:TwitterServiceService) {
+    private router: Router,private location:Location, 
+    private loginService:LoginServiceService, 
+    private twitterServuce:TwitterServiceService,
+    private followService:FollowService) {
     
+  }
+
+  follow(userId:any):void{
+    console.log(' follow ' +userId);
+    this.followService.follow(userId).subscribe(resp=>{
+          console.log('follow is done'+resp);
+    });
   }
 
   ngOnInit(): void {
