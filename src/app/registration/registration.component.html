@@ -6,9 +6,12 @@
   <div class="registration">
   <form class="twitter-form" (ngSubmit)="onSubmit()" #userForm="ngForm">
       <input class="username-btn" type="text" placeholder="UserName" [(ngModel)]="user.username" (keydown)="onSelectUsername($event)" name="name" required><br><br><br>
+      <input class="username-btn" type="text" placeholder="fullName" [(ngModel)]="user.fullName" (keydown)="onSelectUsername($event)" name="name" required><br><br><br>
       <input class="email-input" type="text" placeholder="Email" [(ngModel)]="user.email" (keydown)="validateEmail($event)" name="email" required><br>
     <input class="username-btn" type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required><br>
 
+
+    
     <div class="form-group dob-group">
       <select id="dob-month" [(ngModel)]="user.dobMonth" name="dobMonth" required>
         <option value="" disabled selected>Month</option>
