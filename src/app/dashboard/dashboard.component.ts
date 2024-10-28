@@ -5,7 +5,7 @@ import { LoginServiceService } from '../login/login-service.service';
 import {Router} from "@angular/router";
 import { TweetTs } from '../models/tweet.ts';
 
-interface Post {
+interface  Post {
   id: number;
   userReacted: boolean;
   likes: number;
@@ -145,6 +145,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
+
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0]; 
     const reader = new FileReader();
@@ -193,12 +194,12 @@ export class DashboardComponent implements OnInit {
   }
 
   // Function to toggle like state for a post
-  public likePost(post: Post) {
-    if (post.userReacted) {
+  public likePost(post: TweetTs) {
+    if (post.userReacted && post.likes) {
       post.likes -= 1; // Remove like
       post.selectedReactionIcon = null; // Clear selected reaction icon
       post.reactionType = ''; // Reset reaction type
-    } else {
+    } else if(post.likes) {
       post.likes += 1; // Add like
       post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
       post.reactionType = 'like'; // Set reaction type to like
@@ -207,7 +208,7 @@ export class DashboardComponent implements OnInit {
   }
 
   // Function to handle reactions
-  public react(post: Post, reaction: string, iconPath: string) {
+  public react(post: TweetTs, reaction: string, iconPath: string) {
     post.selectedReactionIcon = iconPath; // Set the selected reaction icon
     post.reactionType = reaction; // Update the reaction type
 
@@ -218,25 +219,6 @@ export class DashboardComponent implements OnInit {
     }
 
     this.showReactions = false;
-  }
-
-  getReactionIcon(reactionType: string | undefined): string {
-    switch (reactionType) {
-      case 'like':
-        return 'fa-thumbs-up';
-      case 'love':
-        return 'fa-heart'; // Change this to your desired icon for 'love'
-      case 'haha':
-        return 'fa-laugh';
-      case 'wow':
-        return 'fa-surprise';
-      case 'sad':
-        return 'fa-sad-tear';
-      case 'angry':
-        return 'fa-angry';
-      default:
-        return 'fa-heart';
-    }
   }
 
   homePageDashboard():void{
@@ -269,7 +251,24 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-
+  getReactionIcon(reactionType: string | undefined): string {
+    switch (reactionType) {
+      case 'like':
+        return 'fa-thumbs-up';
+      case 'love':
+        return 'fa-heart'; // Change this to your desired icon for 'love'
+      case 'haha':
+        return 'fa-laugh';
+      case 'wow':
+        return 'fa-surprise';
+      case 'sad':
+        return 'fa-sad-tear';
+      case 'angry':
+        return 'fa-angry';
+      default:
+        return 'fa-heart';
+    }
+  }
 
   submit():void{
     const formData = new FormData();

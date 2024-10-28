@@ -102,58 +102,35 @@ body {
   font-weight: bold;
 }
 
-.close-button-comment {
-  position: absolute;
-  top: -8px;
-  right: 5px;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: black; /* Black color for the close button */
-  font-weight: bold;
-}
-
-.close-button:hover {
-  color: darkred; /* Optional: Change color on hover */
-}
-
-
-.comment-input::placeholder {
-  color: #999;
-}
-
+/* Other styling for the dashboard (add-comment, comments-section, etc.) */
 .add-comment {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  padding: 5px;
-  background-color: #f0f0f0;
-  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.profile-pic-input {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 .comment-input {
-  flex-grow: 1;
-  font-size: 12px; /* Smaller font size */
-  padding: 5px; /* Reduce padding */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 70%; /* Adjust input width */
-  margin-right: 10px;
+  width: 80%;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 20px;
 }
 
 .post-button {
-  font-size: 12px; /* Smaller font size */
-  padding: 5px 10px; /* Reduce padding */
-  background-color: #007bff;
+  background-color: #0095f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 10px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
-.post-button:disabled {
-  background-color: #ccc; /* Change color for disabled state */
+.comments-section {
+  margin-top: 20px;
 }
 
 .comment {
@@ -1049,29 +1026,6 @@ aside {
   color: none;
 }
 
-.close-button {
-  position: absolute;
-  top: 40px;
-  right: 4px;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #333; /* Close button color */
-  font-weight: bold;
-}
-
-.close-button:hover {
-  color: red; /* Change color on hover */
-}
-
-
-.post-image {
-  max-width: 100%;
-  max-height: 200px;
-  margin-top: 5px;
-  border-radius: 10px;
-}
 .comment-btn:hover {
   color: #1d9bf0; /* Blue for comment button hover */
 }

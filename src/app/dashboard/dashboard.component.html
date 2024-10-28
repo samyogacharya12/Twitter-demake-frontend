@@ -141,10 +141,12 @@
                       <button
                         (mouseenter)="showReactions = true"
                         class="action-button like-button like-btn"
+                        (click)="likePost(post)"
                       >
-                        <i
-                          class="fas"
-                        ></i>
+                      <i
+                      class="fas"
+                      [ngClass]="getReactionIcon(post.reactionType)"
+                    ></i>
                         <span>{{ post.like_count }}</span>
                       </button>
 
@@ -157,26 +159,44 @@
                         <img
                           src="assets/reactions/like (1).png"
                           alt="Like"
+                          (click)="
+                          react(post, 'like', 'assets/reactions/like (1).png')
+                        "
                         />
                         <img
                           src="assets/reactions/love.png"
                           alt="Love"
+                          (click)="
+                          react(post, 'love', 'assets/reactions/like (1).png')
+                        "
                         />
                         <img
                           src="assets/reactions/haha.png"
                           alt="Haha"
+                          (click)="
+                          react(post, 'haha', 'assets/reactions/like (1).png')
+                        "
                         />
                         <img
                           src="assets/reactions/wow.png"
                           alt="Wow"
+                          (click)="
+                          react(post, 'wow', 'assets/reactions/like (1).png')
+                        "
                         />
                         <img
                           src="assets/reactions/sad.png"
                           alt="Sad"
+                          (click)="
+                          react(post, 'sad', 'assets/reactions/like (1).png')
+                        "
                         />
                         <img
                           src="assets/reactions/angry.png"
                           alt="Angry"
+                          (click)="
+                          react(post, 'angry', 'assets/reactions/like (1).png')
+                        "
                         />
                       </div>
                     </div>
@@ -204,7 +224,7 @@
                       class="action-button repost-btn"
                     >
                       <i class="fas fa-retweet"></i>
-                      <span>{{ post.content }}</span>
+                      <span></span>
                     </button>
                   </div>
                 </div>
@@ -238,7 +258,6 @@
                     </div>
                   </div>
                   <div class="post-text text-white leading-normal">
-                    {{ post.content }}
                   </div>
                   <div
                     class="uploaded-image rounded-lg mt-2"
@@ -252,11 +271,11 @@
                     <div class="like-button-container">
                       <!-- Like Button -->
                       <button
-                        (mouseenter)="showReactions = true"
                         class="action-button like-button like-btn"
+
                       >
                         <i
-                          class="fas"
+                          class="fas fa-heart"
                         ></i>
                         <span>{{ post.like_count }}</span>
                       </button>
@@ -299,7 +318,7 @@
                       class="action-button comment-btn"
                     >
                       <i class="fas fa-comment"></i>
-                      <span>{{ post.content }}</span>
+                      <span></span>
                     </button>
 
                     <!-- Repost Button -->
@@ -307,7 +326,7 @@
                       class="action-button repost-btn"
                     >
                       <i class="fas fa-retweet"></i>
-                      <span>{{ post.content }}</span>
+                      <span></span>
                     </button>
                   </div>
                 </div>
