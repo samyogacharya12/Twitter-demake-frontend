@@ -1,68 +1,36 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import {Router} from "@angular/router";
 import { TwitterServiceService } from '../twitter-service.service';
-import { TweetTs } from '../models/tweet.ts';
-import { fakeAsync } from '@angular/core/testing';
 import { LoginServiceService } from '../login/login-service.service';
+import {Router} from "@angular/router";
+import { TweetTs } from '../models/tweet.ts';
+
+interface Post {
+  id: number;
+  userReacted: boolean;
+  likes: number;
+  comments: number;
+  reposts: number;
+  selectedReactionIcon?: string | null;
+  reactionType?: string;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   userId: string | null = null;
-  isOpen: boolean = false;
-  imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
-  selectedFile?: File;
-  isHomeDashboard?:boolean=true;
-  isFollowingDashboard?:boolean=false;
-  role?: string | any;
-  userName?: string = 'John Doe';
-  statusList?: [];
-  followers?: number = 1500;
-  following?: number = 300;
-  posts?: number = 45;
-  commentCount = 123;
-  retweetCount = 456;
-  likeCount = 789;
-  showNotifications: boolean = false;
-  showComment: boolean = false;
+  tweet = { content: '', media_url: '' };
   tweets?:TweetTs[];
   content: string = ''; 
-  tweet = { content: '', media_url: '' };
-  isVisible = false;
-  isModalVisible = false;
-  commentInput = '';
-  comments = ['Great post!', 'Love this!'];
-  showReactionOptions = false;
-
-  // Selected reaction, default to like
-  selectedReaction = '👍';
-
-  openDialogueBox():void{
-    this.isOpen=true;
-  }
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0]; 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
-    };
-    if(this.selectedFile){
-    reader.readAsDataURL(this.selectedFile);
-    }
-  }
-
-  removeImage() {
-    this.selectedFile = undefined;
-    this.imagePreviewUrl = null; // Reset the image preview
-    const fileInput: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = ''; // Reset the file input
-    }
-  }
+  showReactions = false;
+  selectedReactionIcon: string | null = null;
+  role?: string | any;
+  isHomeDashboard?:boolean=true;
+  isFollowingDashboard?:boolean=false;
+  constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService ,private router: Router) { }
 
   ngOnInit(): void {
     this.twitterService.fetchTweets().subscribe(
@@ -77,7 +45,188 @@ export class DashboardComponent implements OnInit {
     this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
          localStorage.setItem("userId", response.id);
          console.log(' current user id '+ response.id);
-    });
+    });  }
+  userName?: string = 'John Doe';
+  statusList?: [];
+  followers?: number = 1500;
+  following?: number = 300;
+  posts?: number = 45;
+  commentCount = 123;
+  retweetCount = 456;
+  likeCount = 789;
+  showNotifications: boolean = false;
+  showComment: boolean = false;
+  imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
+  selectedFile?: File;
+  // Sample notifications data
+  notifications = [
+    { message: 'Anna started following you', time: '10 minutes ago' },
+    { message: 'Mark liked your post', time: '2 hours ago' },
+    { message: 'You have a new message from Sarah', time: '1 day ago' },
+    { message: 'David commented on your photo', time: '3 days ago' },
+  ];
+
+  // sample posts data
+  newPosts = [
+    {
+      id: 1,
+      username: 'Elon Musk',
+      handle: '@elondude',
+      time: '13h',
+      content:
+        'Subscribe to unlock new features and if eligible, receive a share of revenue.',
+      avatar: 'https://example.com/avatar1.jpg',
+      imageUrl: 'https://loremflickr.com/800/800',
+      likes: 0,
+      comments: 0,
+      reposts: 0,
+      userReacted: false,
+      verified: true,
+      reactionType: '',
+    },
+    {
+      id: 2,
+      username: 'Jane Doe',
+      handle: '@janedoe',
+      time: '5h',
+      content: 'This is a great day to learn Angular!',
+      avatar: 'https://example.com/avatar2.jpg',
+      imageUrl: 'https://loremflickr.com/1920/1920',
+      likes: 0,
+      comments: 0,
+      reposts: 0,
+      userReacted: false,
+      verified: false,
+      reactionType: '',
+    },
+    // Add more posts as needed
+  ];
+
+  isVisible = false;
+
+  isModalVisible = false;
+  commentInput = '';
+  comments = ['Great post!', 'Love this!'];
+
+  // Function to open the modal
+  openModal() {
+    this.isModalVisible = true;
+  }
+
+  // Function to close the modal
+  closeModal() {
+    this.isModalVisible = false;
+  }
+
+  // Function to add a comment
+  addComment() {
+    if (this.commentInput.trim()) {
+      this.comments.push(this.commentInput);
+      this.commentInput = '';
+    }
+  }
+  removeImage() {
+    this.selectedFile = undefined;
+    this.imagePreviewUrl = null; // Reset the image preview
+    const fileInput: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = ''; // Reset the file input
+    }
+  }
+
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0]; 
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
+    };
+    if(this.selectedFile){
+    reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+
+  newPost?: string = '';
+
+  recentPosts: { content: string; timestamp: string }[] = [
+    { content: 'Had a great day at the beach!', timestamp: '2 hours ago' },
+    { content: 'Loving the new Angular features.', timestamp: '1 day ago' },
+    { content: 'Just finished a 5K run!', timestamp: '3 days ago' },
+  ];
+
+  toggleNotifications() {
+    this.showNotifications = !this.showNotifications;
+  }
+  increaseCount(reaction: string) {
+    if (reaction === 'comment') {
+      this.commentCount++;
+      this.showComment = true;
+    } else if (reaction === 'retweet') {
+      this.retweetCount++;
+    } else if (reaction === 'like') {
+      this.likeCount++;
+    }
+  }
+
+  toggleCommentPopup() {
+    this.showComment = !this.showComment;
+  }
+
+  commentOnPost(post: Post) {
+    post.comments++;
+    // Optional: Open a comment input or modal if needed
+  }
+
+  repost(post: Post) {
+    post.reposts++;
+  }
+
+  // Function to toggle like state for a post
+  public likePost(post: Post) {
+    if (post.userReacted) {
+      post.likes -= 1; // Remove like
+      post.selectedReactionIcon = null; // Clear selected reaction icon
+      post.reactionType = ''; // Reset reaction type
+    } else {
+      post.likes += 1; // Add like
+      post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
+      post.reactionType = 'like'; // Set reaction type to like
+    }
+    post.userReacted = !post.userReacted; // Toggle like state
+  }
+
+  // Function to handle reactions
+  public react(post: Post, reaction: string, iconPath: string) {
+    post.selectedReactionIcon = iconPath; // Set the selected reaction icon
+    post.reactionType = reaction; // Update the reaction type
+
+    if (!post.userReacted) {
+      this.likePost(post); // Increment like count if not already liked
+    } else {
+      // (if the user clicks the same reaction again, you might want to reset it)
+    }
+
+    this.showReactions = false;
+  }
+
+  getReactionIcon(reactionType: string | undefined): string {
+    switch (reactionType) {
+      case 'like':
+        return 'fa-thumbs-up';
+      case 'love':
+        return 'fa-heart'; // Change this to your desired icon for 'love'
+      case 'haha':
+        return 'fa-laugh';
+      case 'wow':
+        return 'fa-surprise';
+      case 'sad':
+        return 'fa-sad-tear';
+      case 'angry':
+        return 'fa-angry';
+      default:
+        return 'fa-heart';
+    }
   }
 
   homePageDashboard():void{
@@ -127,75 +276,11 @@ export class DashboardComponent implements OnInit {
         if(response){
         this.content='';
         this.selectedFile=undefined;
+        this.removeImage();
         }
       }
     )
     this.ngOnInit();
   }
-  // Function to open the modal
-  openModal() {
-    this.isModalVisible = true;
-  }
-
-  // Function to close the modal
-  closeModal() {
-    this.isModalVisible = false;
-  }
-
-  // Function to add a comment
-  addComment() {
-    if (this.commentInput.trim()) {
-      this.comments.push(this.commentInput);
-      this.commentInput = '';
-    }
-  }
-
-  newPost?: string = '';
-
-  recentPosts: { content: string, timestamp: string }[] = [
-    { content: 'Had a great day at the beach!', timestamp: '2 hours ago' },
-    { content: 'Loving the new Angular features.', timestamp: '1 day ago' },
-    { content: 'Just finished a 5K run!', timestamp: '3 days ago' }
-  ];
-
-  toggleNotifications() {
-    this.showNotifications = !this.showNotifications;
-  }
-  constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService ,private router: Router) { }
-
-  increaseCount(reaction: string) {
-    if (reaction === 'comment') {
-      this.commentCount++;
-      this.showComment = true;
-    } else if (reaction === 'retweet') {
-      this.retweetCount++;
-    } else if (reaction === 'like') {
-      this.likeCount++;
-    }
-  }
-
-  // Method to show reactions on hover
-  showReactions() {
-    this.showReactionOptions = true;
-  }
-
-
-
-
-  toggleCommentPopup() {
-    this.showComment = !this.showComment;
-  }
-
-  // Method to hide reactions when not hovering
-  hideReactions() {
-    this.showReactionOptions = false;
-  }
-
-  // Method to select a reaction
-  selectReaction(reaction: string) {
-    this.selectedReaction = reaction;
-    this.hideReactions();  // Hide the options after selecting
-  }
-
 
 }
