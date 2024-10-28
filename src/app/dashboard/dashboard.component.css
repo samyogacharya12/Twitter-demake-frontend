@@ -276,7 +276,7 @@ i[class^="icon-"]:hover::before {
 
 .post-image {
   align-items: left;
-  width: 1400px;
+  width: 900px;
   /* Set the image width */
   height: 500px;
   /* Maintain aspect ratio */
