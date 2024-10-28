@@ -282,4 +282,64 @@
       </aside>
     </div>
   </div>
+
+  <div class="comment-modal" *ngIf="showCommentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close-btnmodal" (click)="toggleCommentModal()">×</button>
+        <button class="drafts-btn">Drafts</button>
+      </div>
+      <div
+        class="d-flex flex-row align-items-center post-user-info1 mt-4 gap-2"
+      >
+        <img
+          src="../../assets/gaurav1.jpeg"
+          alt="User 1"
+          class="profile-icon"
+        />
+        <!-- <div class="vertical-line"></div> -->
+
+        <div class="post-user font-weight-bold text-white">
+          gaurav
+          <i class="fa-solid fa-circle-check text-primary"></i>
+        </div>
+        <div></div>
+
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <span class="text-muted">@ExcelEasy ·</span>
+          <div class="circle-separator"></div>
+          <span class="text-muted">Jul 28</span>
+        </div>
+      </div>
+      <div class="d-flex align-items-start text-white leading-normal txt">
+        Charts in #Excel https://excel-easy.com/data-analysis/charts.html
+      </div>
+      <div class="modal-input-container">
+        <img
+          src="../../assets/gaurav1.jpeg"
+          alt="User 1"
+          class="profile-icon"
+        />
+
+        <textarea rows="3" placeholder="Write your comment here..."></textarea>
+      </div>
+      <div class="footer">
+        <div class="footer-icons">
+          <button class="icon-btn">
+            <i class="fas fa-image"></i>
+            <!-- Gallery Icon -->
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-video"></i>
+            <!-- Video Icon -->
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-smile"></i>
+            <!-- Emoji Icon -->
+          </button>
+        </div>
+        <button class="post-btn">Post</button>
+      </div>
+    </div>
+  </div>
 </body>

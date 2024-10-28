@@ -19,6 +19,8 @@ interface Post {
 export class DashboardComponent implements OnInit {
   showReactions = false;
   selectedReactionIcon: string | null = null;
+  showCommentModal = false;
+
   role?: string | any;
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
@@ -130,11 +132,6 @@ export class DashboardComponent implements OnInit {
     this.showComment = !this.showComment;
   }
 
-  commentOnPost(post: Post) {
-    post.comments++;
-    // Optional: Open a comment input or modal if needed
-  }
-
   repost(post: Post) {
     post.reposts++;
   }
@@ -184,5 +181,14 @@ export class DashboardComponent implements OnInit {
       default:
         return 'fa-heart';
     }
+  }
+
+  toggleCommentModal() {
+    this.showCommentModal = !this.showCommentModal;
+  }
+
+  // Call this method when the comment button is clicked
+  commentOnPost(post: Post) {
+    this.toggleCommentModal();
   }
 }
