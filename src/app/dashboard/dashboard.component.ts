@@ -21,6 +21,7 @@ interface  Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  showCommentModal = false;
   isOpen=false;
   userId: string | any = null;
   tweet = { content: '', media_url: '' };
@@ -32,8 +33,11 @@ export class DashboardComponent implements OnInit {
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
   constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService ,private router: Router) { }
-
+  commentUserName?:string;
+  commentProfileUrl?:string;
+  commentMediaUrl?:string;
   ngOnInit(): void {
+    this.comments=[];
     this.twitterService.fetchTweets().subscribe(
       response => {
         this.tweets=response;
@@ -47,7 +51,25 @@ export class DashboardComponent implements OnInit {
     this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
          localStorage.setItem("userId", response.id);
          console.log(' current user id '+ response.id);
-    });  }
+    });  
+    this.parentId=localStorage.getItem('parentTweetId');
+    this.userId=localStorage.getItem('userId');
+    
+    this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
+          this.commentUserName=response.user.username;
+          this.commentProfileUrl=response.user.profileUrl;
+          this.commentMediaUrl=response.media_url;
+          response.reply_ids.forEach((reply: any) => {
+           this.twitterService.fetchTweetById(reply).subscribe(res=>{
+             console.log('res'+res.content);
+             this.comments?.push(res.content);
+           })
+          });
+    });
+  }
+
+
+
   userName?: string = 'John Doe';
   statusList?: [];
   followers?: number = 1500;
@@ -115,7 +137,8 @@ export class DashboardComponent implements OnInit {
     console.log('parent tweet value' +parentTweetId);
     localStorage.setItem('parentTweetId', parentTweetId);
     this.parentId=parentTweetId;
-    this.isOpen=true;
+    this.ngOnInit();
+    this.toggleCommentModal();
   }
 
   // Function to close the modal
@@ -125,13 +148,15 @@ export class DashboardComponent implements OnInit {
 
   // Function to add a comment
   addComment() {
+    console.log('sending data');
     const formdata=new FormData();
     formdata.append('parent_tweet_id', this.parentId);
     formdata.append('content',this.commentInput);
     formdata.append('user_id', this.userId);
     this.twitterService.submit(formdata).subscribe(resp=>{
       console.log('comment is saved');
-      this.isOpen=false;
+      this.showCommentModal=false;
+      this.commentInput='';
     });
     const trimmedComment = this.commentInput.trim();
   }
@@ -181,7 +206,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleCommentPopup() {
-    this.showComment = !this.showComment;
+    this.showCommentModal = !this.showCommentModal;
   }
 
   commentOnPost(post: Post) {
@@ -290,6 +315,10 @@ export class DashboardComponent implements OnInit {
       }
     )
     this.ngOnInit();
+  }
+
+  toggleCommentModal() {
+    this.showCommentModal = !this.showCommentModal;
   }
 
 }

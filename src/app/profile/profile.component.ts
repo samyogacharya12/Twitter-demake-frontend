@@ -29,14 +29,6 @@ export class ProfileComponent implements OnInit {
     private followService:FollowService) {
     
   }
-
-  follow(userId:any):void{
-    console.log(' follow ' +userId);
-    this.followService.follow(userId).subscribe(resp=>{
-          console.log('follow is done'+resp);
-    });
-  }
-
   ngOnInit(): void {
     console.log('ngOnInit is called'); 
     this.userId = this.route.snapshot.paramMap.get('id');
@@ -61,6 +53,13 @@ export class ProfileComponent implements OnInit {
   this.twitterServuce.fetchPeoples().subscribe(res=>{
        this.peoples=res.detail;
   }); 
+  }
+
+  follow(userId:any):void{
+    console.log(' follow ' +userId);
+    this.followService.follow(userId).subscribe(resp=>{
+          console.log('follow is done'+resp);
+    });
   }
 
   goBack(): void {

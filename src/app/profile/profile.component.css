@@ -65,7 +65,7 @@ body {
   cursor: pointer;
 }
 
-/* Modal Overlay (background behind the modal) */
+/* Modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;

@@ -20,7 +20,8 @@ export class CommentBoxComponent {
   profileUrl?:string;
   mediaUrl?:string;
   isOpen=true;
-  
+  showCommentModal = false;
+
 
   constructor(private twitterService: TwitterServiceService, private router: Router,private location: Location) { }
 
@@ -41,6 +42,10 @@ export class CommentBoxComponent {
      });
   }
 
+  toggleCommentModal() {
+    this.showCommentModal = !this.showCommentModal;
+  }
+  
   navigateDashboard():void{
     this.showCommentPopup=false;
   }

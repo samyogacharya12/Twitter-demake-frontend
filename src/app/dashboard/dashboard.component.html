@@ -208,16 +208,7 @@
                       >
                       <i class="fas fa-comment"></i>
                     </button>
-                    <div class="modal-overlay" *ngIf="isOpen" (click)="closeModal()">
-                      <div class="modal-content" (click)="$event.stopPropagation()">
-                        <button (click)="closeModal()" class="close-button-comment">&times;</button>
-                      <app-comment-box></app-comment-box>
-                      <div class="add-comment">
-                        <input [(ngModel)]="commentInput" class="comment-input" placeholder="Add a comment..." (keyup.enter)="addComment()">
-                        <button (click)="addComment()" [disabled]="!commentInput.trim()" class="comment-button">Comment</button>
-                      </div>
-                    </div>
-                    </div>
+
 
                     <!-- Repost Button -->
                     <button
@@ -316,6 +307,7 @@
                     <!-- Comment Button -->
                     <button
                       class="action-button comment-btn"
+                      (click)="toggleCommentPopup()"
                     >
                       <i class="fas fa-comment"></i>
                       <span></span>
@@ -393,4 +385,71 @@
       </aside>
     </div>
   </div>
+  <div class="comment-modal" *ngIf="showCommentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close-btnmodal" (click)="toggleCommentModal()">×</button>
+        <button class="drafts-btn">Drafts</button>
+      </div>
+      <div *ngFor="let comment of comments">
+      <div class="d-flex gap-4 post-avatar-content mt-3">
+        <div class="bg-light avatar-placeholder">
+          <i class="fa-solid fa-user h2"></i>
+        </div>
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-row align-items-center post-user-info1 gap-2">
+            <div class="post-user font-weight-bold text-white">
+             <span> {{this.commentUserName}} </span>
+              <i class="fa-solid fa-circle-check text-primary"></i>
+            </div>
+            <div></div>
+
+            <div
+              class="d-flex flex-row justify-content-between align-items-center"
+            >
+              <span class="text-muted">{{this.commentUserName}} ·</span>
+              <div class="circle-separator"></div>
+              <span class="text-muted">Jul 28</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-start text-white leading-normal txt">
+            <span>{{comment}}</span>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-input-container">
+        <img
+          src="../../assets/gaurav1.jpeg"
+          alt="User 1"
+          class="profile-icon"
+        />
+
+        <textarea rows="3" placeholder="Write your comment here..." [(ngModel)]="commentInput"></textarea>
+      </div>
+      <div class="footer">
+        <div class="footer-icons">
+          <button class="icon-btn">
+            <i class="fas fa-image"></i>
+            <!-- Gallery Icon -->
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-video"></i>
+            <!-- Video Icon -->
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-smile"></i>
+            <!-- Emoji Icon -->
+          </button>
+          <button type="button" class="btn-icon">
+            <i class="fas fa-poll"></i>
+          </button>
+        </div>
+        <button class="post-btn" (click)="addComment()">Post</button>
+      </div>
+    </div>
+  </div>
+
+  
 </body>
