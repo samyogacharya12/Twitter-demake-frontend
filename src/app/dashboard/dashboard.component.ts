@@ -21,7 +21,8 @@ interface Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  userId: string | null = null;
+  isOpen=false;
+  userId: string | any = null;
   tweet = { content: '', media_url: '' };
   tweets?:TweetTs[];
   content: string = ''; 
@@ -41,6 +42,7 @@ export class DashboardComponent implements OnInit {
         console.error("error", error);
       }
     );
+    this.userId=localStorage.getItem('userId');
     this.role = localStorage.getItem("role");
     this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
          localStorage.setItem("userId", response.id);
@@ -58,6 +60,7 @@ export class DashboardComponent implements OnInit {
   showComment: boolean = false;
   imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   selectedFile?: File;
+  parentId?:any;
   // Sample notifications data
   notifications = [
     { message: 'Anna started following you', time: '10 minutes ago' },
@@ -108,22 +111,29 @@ export class DashboardComponent implements OnInit {
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
 
-  // Function to open the modal
-  openModal() {
-    this.isModalVisible = true;
+  openDialogueBox(parentTweetId?:any):void{
+    console.log('parent tweet value' +parentTweetId);
+    localStorage.setItem('parentTweetId', parentTweetId);
+    this.parentId=parentTweetId;
+    this.isOpen=true;
   }
 
   // Function to close the modal
   closeModal() {
-    this.isModalVisible = false;
+    this.isOpen = false;
   }
 
   // Function to add a comment
   addComment() {
-    if (this.commentInput.trim()) {
-      this.comments.push(this.commentInput);
-      this.commentInput = '';
-    }
+    const formdata=new FormData();
+    formdata.append('parent_tweet_id', this.parentId);
+    formdata.append('content',this.commentInput);
+    formdata.append('user_id', this.userId);
+    this.twitterService.submit(formdata).subscribe(resp=>{
+      console.log('comment is saved');
+      this.isOpen=false;
+    });
+    const trimmedComment = this.commentInput.trim();
   }
   removeImage() {
     this.selectedFile = undefined;

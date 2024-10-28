@@ -54,7 +54,22 @@ export class TwitterServiceService {
       );
   }
 
-
+  fetchTweetById(tweet_id?:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'application/json'
+    });
+    return this.http.get<any>(`${this.apiURL}/tweets/${tweet_id}`, {headers})
+      .pipe(
+        tap(response => {
+          console.log('Fetch User Response:', response);
+        }),
+        catchError(error => {
+          console.error('Error fetching user:', error);
+          return throwError(error);
+        })
+      );
+  }
 
 
   fetchTweets(requestType?:any): Observable<any> {

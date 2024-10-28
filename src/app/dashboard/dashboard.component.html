@@ -184,10 +184,20 @@
                     <!-- Comment Button -->
                     <button
                       class="action-button comment-btn"
-                    >
+                      (click)="openDialogueBox(post.id)" 
+                      >
                       <i class="fas fa-comment"></i>
-                      <span>{{ post.content }}</span>
                     </button>
+                    <div class="modal-overlay" *ngIf="isOpen" (click)="closeModal()">
+                      <div class="modal-content" (click)="$event.stopPropagation()">
+                        <button (click)="closeModal()" class="close-button-comment">&times;</button>
+                      <app-comment-box></app-comment-box>
+                      <div class="add-comment">
+                        <input [(ngModel)]="commentInput" class="comment-input" placeholder="Add a comment..." (keyup.enter)="addComment()">
+                        <button (click)="addComment()" [disabled]="!commentInput.trim()" class="comment-button">Comment</button>
+                      </div>
+                    </div>
+                    </div>
 
                     <!-- Repost Button -->
                     <button

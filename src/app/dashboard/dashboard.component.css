@@ -102,35 +102,58 @@ body {
   font-weight: bold;
 }
 
-/* Other styling for the dashboard (add-comment, comments-section, etc.) */
-.add-comment {
-  margin-top: 20px;
+.close-button-comment {
+  position: absolute;
+  top: -8px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black; /* Black color for the close button */
+  font-weight: bold;
 }
 
-.profile-pic-input {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+.close-button:hover {
+  color: darkred; /* Optional: Change color on hover */
+}
+
+
+.comment-input::placeholder {
+  color: #999;
+}
+
+.add-comment {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
 }
 
 .comment-input {
-  width: 80%;
-  padding: 10px;
-  margin-left: 10px;
-  border-radius: 20px;
+  flex-grow: 1;
+  font-size: 12px; /* Smaller font size */
+  padding: 5px; /* Reduce padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 70%; /* Adjust input width */
+  margin-right: 10px;
 }
 
 .post-button {
-  background-color: #0095f6;
+  font-size: 12px; /* Smaller font size */
+  padding: 5px 10px; /* Reduce padding */
+  background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 20px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.comments-section {
-  margin-top: 20px;
+.post-button:disabled {
+  background-color: #ccc; /* Change color for disabled state */
 }
 
 .comment {
@@ -1024,6 +1047,22 @@ aside {
 
 .like-btn:hover {
   color: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 40px;
+  right: 4px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333; /* Close button color */
+  font-weight: bold;
+}
+
+.close-button:hover {
+  color: red; /* Change color on hover */
 }
 
 
