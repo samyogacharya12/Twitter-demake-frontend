@@ -27,8 +27,8 @@
           <span class="next-label">Sign In</span>
         </button>
 
-        <button class="forgot-btn" type="submit">
-          <span>Forgot password?</span>
+        <button class="forgot-btn" (click)="openForgotPasswordPopup()">
+          <span>Forgot password</span>
         </button>
       </div>
 
@@ -41,6 +41,22 @@
   <div class="modal" *ngIf="showSignUpModal">
     <span class="close-button" (click)="closeSignUpPopup()">✖</span>
     <app-registration></app-registration>
+  </div>
+
+  <div class="modal" *ngIf="showForgotPasswordModal">
+    <div class="d-flex justify-content-center align-items-center">
+    <div class="login-portal d-flex flex-col justify-content-start align-items-center">
+    <span class="close-button" (click)="closeForgotPasswordPopup()">✖</span>
+    <form class="twitter-sign-form mt-5">
+      <h2 class="title">Reset Password</h2>
+      <br>
+      <h4 class="title"> Enter your email address to reset your password.  </h4>
+      <input type="text" class="username-btn" placeholder="Email" [(ngModel)]="resetIdentifier" name="resetIdentifier" required>
+      <br>
+      <button type="submit" class="login-btn">Submit</button>
+    </form>
+  </div>
+  </div>
   </div>
 </body>
 

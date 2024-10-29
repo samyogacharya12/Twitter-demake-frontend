@@ -268,15 +268,25 @@ i[class^="icon-"]:hover::before {
 
 .post-image-container {
   width: 100%;
-  margin-top: 15px;
+  margin-top: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   /* Rounded corners like Twitter images */
 }
 
+.post-image-status {
+  align-items: left;
+  width: 600px;
+  /* Set the image width */
+  height: 300px;
+  /* Maintain aspect ratio */
+  object-fit: cover;
+  /* Cover the container without distortion */
+}
+
 .post-image {
   align-items: left;
-  width: 2000px;
+  width: 1400px;
   /* Set the image width */
   height: 500px;
   /* Maintain aspect ratio */

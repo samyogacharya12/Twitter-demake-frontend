@@ -5,7 +5,8 @@ import { LoginServiceService } from '../login/login-service.service';
 import {Router} from "@angular/router";
 import { TweetTs } from '../models/tweet.ts';
 import { IUser, User } from '../models/user';
-
+import { People } from '../models/people';
+import { FollowService } from '../follow-service.service';
 interface  Post {
   id: number;
   userReacted: boolean;
@@ -22,6 +23,7 @@ interface  Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  peoples?:People[];
   showCommentModal = false;
   isOpen=false;
   userId: string | any = null;
@@ -34,7 +36,9 @@ export class DashboardComponent implements OnInit {
   role?: string | any;
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
-  constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService ,private router: Router) { }
+  constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService,
+    private followService: FollowService,
+    private router: Router) { }
   commentUserName?:string;
   commentProfileUrl?:string;
   commentMediaUrl?:string;
@@ -67,6 +71,9 @@ export class DashboardComponent implements OnInit {
            })
           });
     });
+    this.twitterService.fetchPeoples().subscribe(res=>{
+      this.peoples=res.detail;
+ }); 
   }
 
 
@@ -134,6 +141,15 @@ export class DashboardComponent implements OnInit {
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
    
+
+
+  navigateWithParams(id:any) {
+    console.log('id'+id);
+    // Using `navigate` with route parameters and query parameters
+    this.router.navigate(['/dashboard/profile', id]); 
+    this.ngOnInit();   
+  }
+
   profilePageRoute(userId?:any):void{
     console.log('user id'+userId);
     console.log('user profile');
@@ -148,6 +164,15 @@ export class DashboardComponent implements OnInit {
     this.parentId=parentTweetId;
     this.ngOnInit();
     this.toggleCommentModal();
+  }
+
+  follow(userId:any):void{
+    console.log('following person');
+    console.log(' follow ' +userId);
+    this.followService.follow(userId).subscribe(resp=>{
+          console.log('follow is done'+resp);
+          this.ngOnInit();   
+    });
   }
 
   // Function to close the modal

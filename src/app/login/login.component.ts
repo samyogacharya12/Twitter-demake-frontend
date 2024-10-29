@@ -19,6 +19,17 @@ export class LoginComponent {
   showAuthFailModal: boolean = false;
   showForgotPasswordModal: boolean = false;
   forgotPasswordEmail: string = '';
+  resetIdentifier = '';
+
+  // Show the Forgot Password Modal
+  openForgotPasswordPopup() {
+    this.showForgotPasswordModal = true;
+  }
+
+  closeForgotPasswordPopup() {
+    this.showForgotPasswordModal = false;
+    this.resetIdentifier = ''; // Clear input on close
+  }
 
 
   ngOnInit(): void {
@@ -57,6 +68,7 @@ export class LoginComponent {
   login() {
     this.credentials.username=this.username;
     this.credentials.password=this.password;
+    if(this.credentials.username && this.credentials.password){
     this.authService.login(this.credentials).subscribe(
       response => {
         this.router.navigate(['/dashboard']);  // Navigate to a protected route on successful login
@@ -79,6 +91,7 @@ export class LoginComponent {
         this.showAuthFailModal = true;
       }
     );
+  }
   }
 
   closeAuthFailModal() {

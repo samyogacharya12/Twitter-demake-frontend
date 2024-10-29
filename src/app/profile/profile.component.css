@@ -12,6 +12,7 @@ a.flex.items-center:hover .user-avatar-follow {
 
 .user-avatar-follow {
   cursor: pointer;
+
   transition: transform 0.2s ease-in-out; /* Ensures smooth scaling on hover */
 }
 

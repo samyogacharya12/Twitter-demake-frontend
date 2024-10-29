@@ -20,11 +20,10 @@ export class TwitterServiceService {
 
   fetchPeoples(): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
       'Accept': 'application/json'
     });
   
-    return this.http.get<any>(`${this.apiURL}/follow/suggestions`, {headers})
+    return this.http.get<any>(`${this.serverURL}/peoples`, {headers})
       .pipe(
         tap(response => {
           console.log('Fetch Suggestion Users:', response);
