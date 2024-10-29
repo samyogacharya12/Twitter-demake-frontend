@@ -44,7 +44,8 @@ export class RegistrationComponent {
     dobYear: '',
     password: '',
     email: '',
-    birth_date: ''
+    birth_date: '',
+    full_name:''
   };
 
   showSignUpModal = false;
@@ -66,6 +67,7 @@ export class RegistrationComponent {
   onSubmit() {
     const formattedDate = this.formatDate(this.user.dobYear, this.user.dobMonth, this.user.dobDay);
     const userData = {
+      full_name:this.user.full_name,
       username: this.user.username,
       phone: this.user.phone,
       password: this.user.password,
@@ -91,6 +93,7 @@ export class RegistrationComponent {
 
   resetFormData() {
     this.user = {
+      full_name:'',
       username: '',
       phone: '',
       dobMonth: '',
