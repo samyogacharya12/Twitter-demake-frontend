@@ -276,9 +276,9 @@ i[class^="icon-"]:hover::before {
 
 .post-image-status {
   align-items: left;
-  width: 600px;
+  width: 900px;
   /* Set the image width */
-  height: 300px;
+  height: 500px;
   /* Maintain aspect ratio */
   object-fit: cover;
   /* Cover the container without distortion */
@@ -707,12 +707,7 @@ i[class^="icon-"]:hover::before {
   margin-bottom: 16px;
 }
 
-.user-avatar-container {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Makes it circular */
-  overflow: hidden; /* Ensures the image stays within the circular frame */
-}
+
 
 .user-avatar {
   width: 100%; /* Ensures the image fills the container */
