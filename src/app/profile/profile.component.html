@@ -20,7 +20,7 @@
         <div class="user-name">
           <img
             alt="User 1"
-            [src]="this.profileImageUrl"
+            [src]="user.profile_image_url"
             class="user-avatar"
           />
           <div class="user-info flex justify-between">
@@ -57,7 +57,7 @@
         <div class="d-flex">
           <img
             alt="User 1"
-            [src]="profileImageUrl"
+            [src]="this.user.profile_image_url"
             class="profile-img"
           />
           <button *ngIf="this.showProfile" class="edit-profile-btn" (click)="openModal()">
@@ -251,10 +251,9 @@
         <div class="user-name ml-3" *ngFor="let people of peoples">
           <div class="flex items-center w-full">
             <!-- Wrap both image and name with routerLink -->
-            <a [routerLink]="['/dashboard/profile', people.user_id]" class="flex items-center">
+            <a (click)="navigateWithParams(people.id)" class="flex items-center">
               <img
-                [src]="profileImageUrl"
-                alt="{{people.full_name}}"
+                [src]="people.profile_image_url"
                 class="user-avatar-follow mr-2"
               />
               <div class="flex flex-col">
@@ -280,7 +279,7 @@
             </a>
           </div>
           
-          <button class="followbtn text-sm px-4 ml-auto" (click)="follow(people.user_id)">Follow</button>
+          <button class="followbtn text-sm px-4 ml-auto" (click)="follow(people.id)">Follow</button>
           <!-- <div class="flex items-center w-full mt-4">
               <img
                 src="../../assets/bill-gates.png"

@@ -33,8 +33,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     console.log('ngOnInit is called'); 
     this.userId = this.route.snapshot.paramMap.get('id');
-    console.log('user id'+ this.userId);
-    console.log('server user id'+ localStorage.getItem('userId'));
     if(this.userId===localStorage.getItem('userId')){
       this.showProfile=true;
       console.log(this.showProfile);
@@ -45,21 +43,30 @@ export class ProfileComponent implements OnInit {
     response => {
       this.user=response;// Navigate to a protected route on successful login
       // Handle successful login
-      console.log('response for user'+this.user.profile_image_url);
+      console.log('response for user'+this.user.full_name);
     },
     error => {
       console.error("error", error);
     }
   );
   this.twitterServuce.fetchPeoples().subscribe(res=>{
-       this.peoples=res.detail;
+       this.peoples=res;
   }); 
   }
 
+  navigateWithParams(id:any) {
+    console.log('id'+id);
+    // Using `navigate` with route parameters and query parameters
+    this.router.navigate(['/dashboard/profile', id]); 
+    this.ngOnInit();   
+  }
+
   follow(userId:any):void{
+    console.log('following person');
     console.log(' follow ' +userId);
     this.followService.follow(userId).subscribe(resp=>{
           console.log('follow is done'+resp);
+          this.ngOnInit();   
     });
   }
 

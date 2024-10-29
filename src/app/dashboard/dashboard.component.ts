@@ -4,6 +4,7 @@ import { TwitterServiceService } from '../twitter-service.service';
 import { LoginServiceService } from '../login/login-service.service';
 import {Router} from "@angular/router";
 import { TweetTs } from '../models/tweet.ts';
+import { IUser, User } from '../models/user';
 
 interface  Post {
   id: number;
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
   userId: string | any = null;
   tweet = { content: '', media_url: '' };
   tweets?:TweetTs[];
+  user:User=new User();
   content: string = ''; 
   showReactions = false;
   selectedReactionIcon: string | null = null;
@@ -48,6 +50,12 @@ export class DashboardComponent implements OnInit {
     );
     this.userId=localStorage.getItem('userId');
     this.role = localStorage.getItem("role");
+    this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
+         this.user=response;
+         localStorage.setItem("userId", response.id);
+         localStorage.setItem('profile_image_url', response.profile_image_url);
+         console.log(' current user id '+ response.id);
+    });  
     this.parentId=localStorage.getItem('parentTweetId');
     this.userId=localStorage.getItem('userId');
     

@@ -17,19 +17,18 @@
           <a [routerLink]="['/dashboard/profile', userId]" style="color: white"
             ><i class="fas fa-user"></i> Profile</a>
         </li>        <button class="btn btn-primary mt-4">Post</button>
-        <button class="btn btn-primary mt-4">Post</button>
       </ul>
       <div class="flex flex-row justify-between">
         <div class="user-name">
           <img
-            src="../../assets/gaurav1.jpeg"
+            [src]="this.user.profile_image_url"
             alt="User 1"
             class="user-avatar"
           />
           <div class="user-info flex justify-between">
             <div class="user-details">
-              <p>Gaurav Khadka</p>
-              <span class="txt1" style="color: #71761b">@khadhkagaurav</span>
+              <p>{{this.user.full_name}}</p>
+              <span class="txt1" style="color: #71761b">{{this.user.username}}</span>
             </div>
           </div>
           <i class="fas fa-ellipsis-h three-dots"></i>
