@@ -23,6 +23,7 @@ interface  Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  showReactions: { [postId: number]: boolean } = {}; // Object to track reactions per post
   peoples?:People[];
   showCommentModal = false;
   isOpen=false;
@@ -31,7 +32,6 @@ export class DashboardComponent implements OnInit {
   tweets?:TweetTs[];
   user:User=new User();
   content: string = ''; 
-  showReactions = false;
   selectedReactionIcon: string | null = null;
   role?: string | any;
   isHomeDashboard?:boolean=true;
@@ -42,6 +42,14 @@ export class DashboardComponent implements OnInit {
   commentUserName?:string;
   commentProfileUrl?:string;
   commentMediaUrl?:string;
+  reactions = [
+    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
+    { type: 'love', iconPath: 'assets/reactions/love.png' },
+    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
+    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
+    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
+    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
+  ];
   ngOnInit(): void {
     this.comments=[];
     this.twitterService.fetchTweets().subscribe(
@@ -277,7 +285,11 @@ export class DashboardComponent implements OnInit {
       // (if the user clicks the same reaction again, you might want to reset it)
     }
 
-    this.showReactions = false;
+    this.showReactions[post.id] = false;
+  }
+
+  toggleReactions(postId: number, state: boolean) {
+    this.showReactions[postId] = state;
   }
 
   homePageDashboard():void{

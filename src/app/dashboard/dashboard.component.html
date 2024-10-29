@@ -60,7 +60,6 @@
         <div class="d-flex flex-column scrollable-content">
           <div class="container-thoughts mt-4">
             <div class="d-flex align-items-start px-4">
-                <i class="fa-solid fa-user h2"></i>
                   <img
                   [src]="this.user.profile_image_url"
                   alt="User 1"
@@ -104,13 +103,13 @@
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
-                  <a (click)="profilePageRoute(post.user?.id)">
+                   <a (click)="profilePageRoute(post.user?.id)">
                   <img
                   (click)="profilePageRoute(post.user?.id)"
                   [src]="post.user?.profile_image_url"
                   alt="User 1"
-                  class="post-image"
-                />      
+                  class="user-avatar"
+                  />      
                 </a>  
                 </div>
                 <div class="d-flex flex-column flex-1">
@@ -146,8 +145,8 @@
                     <div class="like-button-container">
                       <!-- Like Button -->
                       <button
-                        (mouseenter)="showReactions = true"
-                        class="action-button like-button like-btn"
+                      (mouseenter)="toggleReactions(post.id, true)"
+                      class="action-button like-button like-btn"
                         (click)="likePost(post)"
                       >
                       <i
@@ -160,8 +159,8 @@
                       <!-- Reactions Overlay -->
                       <div
                         class="reactions-overlay"
-                        *ngIf="showReactions"
-                        (mouseleave)="showReactions = false"
+                        *ngIf="showReactions[post.id]"
+                        (mouseleave)="toggleReactions(post.id, false)"
                       >
                         <img
                           src="assets/reactions/like (1).png"
@@ -233,9 +232,15 @@
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
-                  <i class="fa-solid fa-user h2"></i>
-                  <img [src]="post.media_url" alt="" class="post-image" />
-
+                  <i class="fa-solid fa-user h2"></i>                 
+                   <a (click)="profilePageRoute(post.user?.id)">
+                  <img
+                  (click)="profilePageRoute(post.user?.id)"
+                  [src]="post.user?.profile_image_url"
+                  alt="User 1"
+                  class="avatar-image"
+                  />      
+                </a>  
                 </div>
                 <div class="d-flex flex-column flex-1">
                   <div
@@ -264,52 +269,42 @@
                     <img [src]="post.media_url" alt="" class="post-image" />
                   </div>
                   <div
-                    class="post-actions d-flex justify-content-between align-items-center mt-3"
-                  >
-                    <div class="like-button-container">
-                      <!-- Like Button -->
-                      <button
-                        class="action-button like-button like-btn"
+                  class="post-actions d-flex justify-content-between align-items-center mt-3"
+                >
+                  <div class="like-button-container">
+                    <!-- Like Button -->
+                    <button
+                      (mouseenter)="toggleReactions(post.id, true)"
+                      class="action-button like-button like-btn"
+                      [ngClass]="{ liked: post.userReacted }"
+                      (click)="likePost(post)"
+                    >
+                      <i
+                        class="fas"
+                        [ngClass]="getReactionIcon(post.reactionType)"
+                      ></i>
+                      <span>{{ post.likes }}</span>
+                    </button>
 
-                      >
-                        <i
-                          class="fas fa-heart"
-                        ></i>
-                        <span>{{ post.like_count }}</span>
-                      </button>
-
-                      <!-- Reactions Overlay -->
+                    <!-- Reactions Overlay -->
+                    <div
+                      class="reactions-overlay"
+                      *ngIf="showReactions[post.id]"
+                      (mouseleave)="toggleReactions(post.id, false)"
+                    >
                       <div
-                        class="reactions-overlay"
-                        *ngIf="showReactions"
-                        (mouseleave)="showReactions = false"
+                        *ngFor="let reaction of reactions"
+                        (click)="
+                          react(post, reaction.type, reaction.iconPath)
+                        "
                       >
                         <img
-                          src="assets/reactions/like (1).png"
-                          alt="Like"
-                        />
-                        <img
-                          src="assets/reactions/love.png"
-                          alt="Love"
-                        />
-                        <img
-                          src="assets/reactions/haha.png"
-                          alt="Haha"
-                        />
-                        <img
-                          src="assets/reactions/wow.png"
-                          alt="Wow"
-                        />
-                        <img
-                          src="assets/reactions/sad.png"
-                          alt="Sad"
-                        />
-                        <img
-                          src="assets/reactions/angry.png"
-                          alt="Angry"
+                          [src]="reaction.iconPath"
+                          [alt]="reaction.type"
                         />
                       </div>
                     </div>
+                  </div>
 
                     <!-- Comment Button -->
                     <button
