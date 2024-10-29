@@ -20,7 +20,7 @@
         <div class="user-name">
           <img
             alt="User 1"
-            [src]="user.profile_image_url"
+            [src]="this.profileImageUrl"
             class="user-avatar"
           />
           <div class="user-info flex justify-between">
@@ -57,7 +57,7 @@
         <div class="d-flex">
           <img
             alt="User 1"
-            [src]="this.user.profile_image_url"
+            [src]="profileImageUrl"
             class="profile-img"
           />
           <button *ngIf="this.showProfile" class="edit-profile-btn" (click)="openModal()">
@@ -253,7 +253,7 @@
             <!-- Wrap both image and name with routerLink -->
             <a [routerLink]="['/dashboard/profile', people.user_id]" class="flex items-center">
               <img
-                [src]="people.profile_image_url"
+                [src]="profileImageUrl"
                 alt="{{people.full_name}}"
                 class="user-avatar-follow mr-2"
               />

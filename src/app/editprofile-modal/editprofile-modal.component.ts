@@ -40,6 +40,7 @@ export class EditprofileModalComponent {
     } else {
       this.resetBodyBackground();
     }
+    this.ngOnInit();
   }
 
   updateUser():void{
@@ -72,7 +73,8 @@ export class EditprofileModalComponent {
         this.loginService.updateUser(formData).subscribe(
           response => {
             console.log('User updated successfully', response);
-            this.ngOnInit();
+            this.ngOnChanges();
+            location.reload();
             // Handle successful update, e.g., display success message or close modal
           },
           error => {

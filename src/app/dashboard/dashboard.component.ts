@@ -48,10 +48,6 @@ export class DashboardComponent implements OnInit {
     );
     this.userId=localStorage.getItem('userId');
     this.role = localStorage.getItem("role");
-    this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
-         localStorage.setItem("userId", response.id);
-         console.log(' current user id '+ response.id);
-    });  
     this.parentId=localStorage.getItem('parentTweetId');
     this.userId=localStorage.getItem('userId');
     
