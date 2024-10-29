@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
           });
     });
     this.twitterService.fetchPeoples().subscribe(res=>{
-      this.peoples=res.detail;
+      this.peoples=res;
  }); 
   }
 
