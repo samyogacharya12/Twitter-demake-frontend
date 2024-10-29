@@ -60,9 +60,12 @@
         <div class="d-flex flex-column scrollable-content">
           <div class="container-thoughts mt-4">
             <div class="d-flex align-items-start px-4">
-              <div class="bg-light avatar-placeholder">
                 <i class="fa-solid fa-user h2"></i>
-              </div>
+                  <img
+                  [src]="this.user.profile_image_url"
+                  alt="User 1"
+                  class="profile-icon"
+                />
               <form class="flex-1" #form="ngForm" (ngSubmit)="submit()" novalidate>
                 <div class="m-0">
                   <textarea placeholder="Share your thoughts here!!" id="status-input" rows="3" cols="80" [(ngModel)]="content" 
@@ -101,7 +104,6 @@
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
-                  <i class="fa-solid fa-user h2"></i>
                   <a (click)="profilePageRoute(post.user?.id)">
                   <img
                   (click)="profilePageRoute(post.user?.id)"

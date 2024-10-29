@@ -286,7 +286,7 @@ i[class^="icon-"]:hover::before {
 
 .post-image {
   align-items: left;
-  width: 1400px;
+  width: 4000px;
   /* Set the image width */
   height: 500px;
   /* Maintain aspect ratio */
@@ -1141,7 +1141,7 @@ aside {
 .profile-icon {
   width: 40px; /* Adjust the size as needed */
   height: 40px;
-  border-radius: 50%; /* Makes it circular */
+  border-radius: 70%; /* Makes it circular */
   margin-right: 10px;
   object-fit: cover;
 }
