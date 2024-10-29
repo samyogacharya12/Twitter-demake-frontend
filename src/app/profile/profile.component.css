@@ -1,3 +1,14 @@
+a.flex.items-center:hover {
+  color: #007BFF; /* Change text color */
+  text-decoration: underline; /* Optional underline effect */
+}
+
+a.flex.items-center:hover .user-avatar-follow {
+  transform: scale(1.1); /* Slightly enlarge the image on hover */
+  transition: transform 0.2s ease-in-out;
+}
+
+
 body {
   display: block;
   margin: 0;
