@@ -17,7 +17,7 @@ interface Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  showReactions = false;
+  showReactions: { [postId: number]: boolean } = {}; // Object to track reactions per post
   selectedReactionIcon: string | null = null;
   showCommentModal = false;
 
@@ -161,7 +161,7 @@ export class DashboardComponent implements OnInit {
       // (if the user clicks the same reaction again, you might want to reset it)
     }
 
-    this.showReactions = false;
+    this.showReactions[post.id] = false;
   }
 
   getReactionIcon(reactionType: string | undefined): string {
@@ -191,4 +191,18 @@ export class DashboardComponent implements OnInit {
   commentOnPost(post: Post) {
     this.toggleCommentModal();
   }
+
+  toggleReactions(postId: number, state: boolean) {
+    this.showReactions[postId] = state;
+  }
+
+  // Define reactions array
+  reactions = [
+    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
+    { type: 'love', iconPath: 'assets/reactions/love.png' },
+    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
+    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
+    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
+    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
+  ];
 }

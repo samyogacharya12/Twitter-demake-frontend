@@ -1229,3 +1229,8 @@ aside {
   background-color: #ccc; /* Line color */
   margin-top: 4px; /* Space between the image and the line */
 }
+
+.like-button:hover + .reactions-overlay,
+.like-button-container:hover .reactions-overlay {
+  display: flex; /* or block, depending on layout */
+}

@@ -137,7 +137,7 @@
                     <div class="like-button-container">
                       <!-- Like Button -->
                       <button
-                        (mouseenter)="showReactions = true"
+                        (mouseenter)="toggleReactions(post.id, true)"
                         class="action-button like-button like-btn"
                         [ngClass]="{ liked: post.userReacted }"
                         (click)="likePost(post)"
@@ -152,51 +152,20 @@
                       <!-- Reactions Overlay -->
                       <div
                         class="reactions-overlay"
-                        *ngIf="showReactions"
-                        (mouseleave)="showReactions = false"
+                        *ngIf="showReactions[post.id]"
+                        (mouseleave)="toggleReactions(post.id, false)"
                       >
-                        <img
-                          src="assets/reactions/like (1).png"
-                          alt="Like"
+                        <div
+                          *ngFor="let reaction of reactions"
                           (click)="
-                            react(post, 'like', 'assets/reactions/like (1).png')
+                            react(post, reaction.type, reaction.iconPath)
                           "
-                        />
-                        <img
-                          src="assets/reactions/love.png"
-                          alt="Love"
-                          (click)="
-                            react(post, 'love', 'assets/reactions/love.png')
-                          "
-                        />
-                        <img
-                          src="assets/reactions/haha.png"
-                          alt="Haha"
-                          (click)="
-                            react(post, 'haha', 'assets/reactions/haha.png')
-                          "
-                        />
-                        <img
-                          src="assets/reactions/wow.png"
-                          alt="Wow"
-                          (click)="
-                            react(post, 'wow', 'assets/reactions/wow.png')
-                          "
-                        />
-                        <img
-                          src="assets/reactions/sad.png"
-                          alt="Sad"
-                          (click)="
-                            react(post, 'sad', 'assets/reactions/sad.png')
-                          "
-                        />
-                        <img
-                          src="assets/reactions/angry.png"
-                          alt="Angry"
-                          (click)="
-                            react(post, 'angry', 'assets/reactions/angry.png')
-                          "
-                        />
+                        >
+                          <img
+                            [src]="reaction.iconPath"
+                            [alt]="reaction.type"
+                          />
+                        </div>
                       </div>
                     </div>
 
