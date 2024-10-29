@@ -268,7 +268,7 @@ i[class^="icon-"]:hover::before {
 
 .post-image-container {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   /* Rounded corners like Twitter images */
@@ -276,7 +276,7 @@ i[class^="icon-"]:hover::before {
 
 .post-image {
   align-items: left;
-  width: 900px;
+  width: 2000px;
   /* Set the image width */
   height: 500px;
   /* Maintain aspect ratio */

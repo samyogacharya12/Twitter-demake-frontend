@@ -21,10 +21,10 @@
       <div class="flex flex-row justify-between">
         <div class="user-name">
           <img
-            [src]="this.user.profile_image_url"
-            alt="User 1"
-            class="user-avatar"
-          />
+          [src]="this.user.profile_image_url"
+          alt="User 1"
+          class="profile-icon"
+        />
           <div class="user-info flex justify-between">
             <div class="user-details">
               <p>{{this.user.full_name}}</p>
@@ -76,7 +76,7 @@
               <button type="button" class="btn-remove" (click)="removeImage()">
                 <i class="fas fa-times"></i> <!-- X icon -->
               </button>
-                <img [src]="this.imagePreviewUrl" alt="" class="post-image" />
+                <img [src]="this.imagePreviewUrl" alt=""  class="post-image" />
               </div>
                 <div class="status-actions py-2">
                   <div class="icons">
@@ -102,15 +102,21 @@
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
                   <i class="fa-solid fa-user h2"></i>
-                  <img [src]="post.media_url" alt="" class="post-image" />
-
+                  <a (click)="profilePageRoute(post.user?.id)">
+                  <img
+                  (click)="profilePageRoute(post.user?.id)"
+                  [src]="post.user?.profile_image_url"
+                  alt="User 1"
+                  class="post-image"
+                />      
+                </a>  
                 </div>
                 <div class="d-flex flex-column flex-1">
                   <div
                     class="d-flex flex-row align-items-center post-user-info1"
                   >
                     <div class="post-user font-weight-bold text-white">
-                      {{ post.user?.username }}
+                    <span (click)="profilePageRoute(post.user?.id)"> {{ post.user?.username }} </span>
                     </div>
                     <i
                       class="fa-solid fa-circle-check text-primary"
@@ -392,9 +398,11 @@
       </div>
       <div *ngFor="let comment of comments">
       <div class="d-flex gap-4 post-avatar-content mt-3">
-        <div class="bg-light avatar-placeholder">
-          <i class="fa-solid fa-user h2"></i>
-        </div>
+        <img
+        [src]="this.commentProfileUrl"
+        alt="User 1"
+        class="profile-icon"
+      />
         <div class="d-flex flex-column flex-1">
           <div class="d-flex flex-row align-items-center post-user-info1 gap-2">
             <div class="post-user font-weight-bold text-white">
@@ -408,7 +416,7 @@
             >
               <span class="text-muted">{{this.commentUserName}} ·</span>
               <div class="circle-separator"></div>
-              <span class="text-muted">Jul 28</span>
+              <span class="text-muted"></span>
             </div>
           </div>
           <div class="d-flex align-items-start text-white leading-normal txt">
@@ -420,7 +428,7 @@
 
       <div class="modal-input-container">
         <img
-          src="../../assets/gaurav1.jpeg"
+          [src]="this.user.profile_image_url"
           alt="User 1"
           class="profile-icon"
         />

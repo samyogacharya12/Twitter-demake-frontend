@@ -49,19 +49,16 @@ export class DashboardComponent implements OnInit {
       }
     );
     this.userId=localStorage.getItem('userId');
+    this.loginService.findByUserId(this.userId).subscribe(res=>{
+      this.user=res;
+    });
     this.role = localStorage.getItem("role");
-    this.loginService.findByUserId(localStorage.getItem('userId')).subscribe(response=>{
-         this.user=response;
-         localStorage.setItem("userId", response.id);
-         localStorage.setItem('profile_image_url', response.profile_image_url);
-         console.log(' current user id '+ response.id);
-    });  
     this.parentId=localStorage.getItem('parentTweetId');
     this.userId=localStorage.getItem('userId');
     
     this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
           this.commentUserName=response.user.username;
-          this.commentProfileUrl=response.user.profileUrl;
+          this.commentProfileUrl=response.user.profile_image_url;
           this.commentMediaUrl=response.media_url;
           response.reply_ids.forEach((reply: any) => {
            this.twitterService.fetchTweetById(reply).subscribe(res=>{
@@ -136,6 +133,14 @@ export class DashboardComponent implements OnInit {
   isModalVisible = false;
   commentInput = '';
   comments = ['Great post!', 'Love this!'];
+   
+  profilePageRoute(userId?:any):void{
+    console.log('user id'+userId);
+    console.log('user profile');
+    this.router.navigate(['/dashboard/profile', userId]); 
+  }
+
+
 
   openDialogueBox(parentTweetId?:any):void{
     console.log('parent tweet value' +parentTweetId);

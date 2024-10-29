@@ -27,22 +27,15 @@ export class EditprofileModalComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   ngOnInit(): void {
-    this.loginService.me().subscribe(response=>{
-      this.userDto=response;
- });
-  }
-
-  
-
-  ngOnChanges() {
     if (this.isVisible) {
       this.setBodyBackground();
     } else {
       this.resetBodyBackground();
     }
-    this.ngOnInit();
+    this.loginService.me().subscribe(response=>{
+      this.userDto=response;
+ });
   }
-
   updateUser():void{
     const formData = new FormData();
     if(this.userDto.id){
@@ -73,7 +66,6 @@ export class EditprofileModalComponent {
         this.loginService.updateUser(formData).subscribe(
           response => {
             console.log('User updated successfully', response);
-            this.ngOnChanges();
             location.reload();
             // Handle successful update, e.g., display success message or close modal
           },

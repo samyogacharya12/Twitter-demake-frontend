@@ -62,7 +62,9 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);  // Navigate to a protected route on successful login
         console.log('Login successful');
         this.authService.me().subscribe(resp=>{
+          console.log('user id from the api'+resp.id);
           localStorage.setItem("userId", resp.id);
+          console.log('user id from the api'+localStorage.getItem('userId'));
           localStorage.setItem("profile_image_url", resp.profile_image_url);
 
      });
