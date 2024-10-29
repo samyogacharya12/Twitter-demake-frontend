@@ -101,7 +101,7 @@
           </div>
           <div class="posts-container" *ngIf="homePageDashboard">
             <div *ngFor="let post of tweets" class="posted">
-              <div class="d-flex gap-4 post-avatar-content">
+              <div class="d-flex gap-4 post-avatar-content" *ngIf="post.content">
                 <div class="bg-light avatar-placeholder">
                    <a (click)="profilePageRoute(post.user?.id)">
                   <img
