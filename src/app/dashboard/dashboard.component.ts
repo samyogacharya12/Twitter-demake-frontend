@@ -311,10 +311,10 @@ export class DashboardComponent implements OnInit {
         this.content='';
         this.selectedFile=undefined;
         this.removeImage();
+        this.ngOnInit();
         }
       }
     )
-    this.ngOnInit();
   }
 
   toggleCommentModal() {

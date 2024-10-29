@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   showUpdateModel = false;
   isModalVisible = false;
   isOpen: boolean = false;
+  profileImageUrl:any;
   constructor(private route: ActivatedRoute,
     private router: Router,private location:Location, 
     private loginService:LoginServiceService, 
@@ -44,7 +45,7 @@ export class ProfileComponent implements OnInit {
     response => {
       this.user=response;// Navigate to a protected route on successful login
       // Handle successful login
-      console.log('response for user'+this.user);
+      console.log('response for user'+this.user.profile_image_url);
     },
     error => {
       console.error("error", error);

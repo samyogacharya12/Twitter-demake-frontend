@@ -63,6 +63,7 @@ export class LoginComponent {
         console.log('Login successful');
         this.authService.me().subscribe(resp=>{
           localStorage.setItem("userId", resp.id);
+          localStorage.setItem("profile_image_url", resp.profile_image_url);
 
      });
         // Handle successful login

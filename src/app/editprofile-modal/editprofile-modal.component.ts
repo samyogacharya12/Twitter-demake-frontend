@@ -48,11 +48,15 @@ export class EditprofileModalComponent {
       formData.append('id', this.userDto?.id);
       }
 
+      if(this.selectedFile){
+        formData.append('media', this.selectedFile);
+      }
+
     if(this.userDto.full_name){
     formData.append('full_name', this.userDto.full_name);
     }
     if(this.selectedFile){
-      formData.append('media', this.selectedFile);
+      formData.append('profile_image', this.selectedFile);
     }
     if(this.userDto.location){
     formData.append('location', this.userDto?.location);
@@ -68,6 +72,7 @@ export class EditprofileModalComponent {
         this.loginService.updateUser(formData).subscribe(
           response => {
             console.log('User updated successfully', response);
+            this.ngOnInit();
             // Handle successful update, e.g., display success message or close modal
           },
           error => {
@@ -133,6 +138,7 @@ export class EditprofileModalComponent {
   onImageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0]; // Store the selected file
       const reader = new FileReader();
       reader.onload = (e) => {
         this.profileImageUrl = e.target?.result; // Assign the image source

@@ -20,6 +20,7 @@
         <div class="user-name">
           <img
             alt="User 1"
+            [src]="user.profile_image_url"
             class="user-avatar"
           />
           <div class="user-info flex justify-between">
@@ -56,6 +57,7 @@
         <div class="d-flex">
           <img
             alt="User 1"
+            [src]="this.user.profile_image_url"
             class="profile-img"
           />
           <button *ngIf="this.showProfile" class="edit-profile-btn" (click)="openModal()">
