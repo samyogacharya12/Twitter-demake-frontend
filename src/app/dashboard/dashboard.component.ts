@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
     this.twitterService.fetchTweets().subscribe(
       response => {
         this.tweets=response;
+        
               },
       error => {
         console.error("error", error);
@@ -81,7 +82,9 @@ export class DashboardComponent implements OnInit {
     });
     this.twitterService.fetchPeoples().subscribe(res=>{
       this.peoples=res;
- }); 
+ });
+    console.log('following page dashboard'+ this.isFollowingDashboard);
+    console.log(' current tweets ' +this.tweets?.length); 
   }
 
 
