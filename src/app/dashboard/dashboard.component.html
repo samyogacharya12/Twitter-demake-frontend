@@ -99,7 +99,7 @@
               </form>
             </div>
           </div>
-          <div class="posts-container" *ngIf="homePageDashboard">
+          <div class="posts-container" *ngIf="isHomeDashboard">
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content" *ngIf="post.content">
                 <div class="bg-light avatar-placeholder">
@@ -229,7 +229,6 @@
             </div>
           </div>
           <div class="posts-container" *ngIf="isFollowingDashboard">
-            <h1> This is following page dashboard</h1>
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
