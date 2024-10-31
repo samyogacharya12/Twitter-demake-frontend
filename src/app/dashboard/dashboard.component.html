@@ -396,14 +396,14 @@
       <div *ngFor="let comment of comments">
       <div class="d-flex gap-4 post-avatar-content mt-3">
         <img
-        [src]="this.commentProfileUrl"
+        [src]="comment.profileUrl"
         alt="User 1"
         class="profile-icon"
       />
         <div class="d-flex flex-column flex-1">
           <div class="d-flex flex-row align-items-center post-user-info1 gap-2">
             <div class="post-user font-weight-bold text-white">
-             <span> {{this.commentUserName}} </span>
+             <span> {{comment.username}} </span>
               <i class="fa-solid fa-circle-check text-primary"></i>
             </div>
             <div></div>
@@ -411,13 +411,13 @@
             <div
               class="d-flex flex-row justify-content-between align-items-center"
             >
-              <span class="text-muted">{{this.commentUserName}} ·</span>
+              <span class="text-muted">{{comment.username}} ·</span>
               <div class="circle-separator"></div>
               <span class="text-muted"></span>
             </div>
           </div>
           <div class="d-flex align-items-start text-white leading-normal txt">
-            <span>{{comment}}</span>
+            <span>{{comment.comment}}</span>
           </div>
           </div>
         </div>

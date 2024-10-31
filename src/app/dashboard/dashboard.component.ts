@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import { TweetTs } from '../models/tweet.ts';
 import { IUser, User } from '../models/user';
 import { People } from '../models/people';
+import { Comments } from '../models/comments';
 import { FollowService } from '../follow-service.service';
 interface  Post {
   id: number;
@@ -42,53 +43,8 @@ export class DashboardComponent implements OnInit {
   commentUserName?:string;
   commentProfileUrl?:string;
   commentMediaUrl?:string;
-  reactions = [
-    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
-    { type: 'love', iconPath: 'assets/reactions/love.png' },
-    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
-    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
-    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
-    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
-  ];
-  ngOnInit(): void {
-    this.comments=[];
-    this.twitterService.fetchTweets().subscribe(
-      response => {
-        this.tweets=response;
-        
-              },
-      error => {
-        console.error("error", error);
-      }
-    );
-    this.userId=localStorage.getItem('userId');
-    this.loginService.findByUserId(this.userId).subscribe(res=>{
-      this.user=res;
-    });
-    this.role = localStorage.getItem("role");
-    this.parentId=localStorage.getItem('parentTweetId');
-    this.userId=localStorage.getItem('userId');
-    
-    this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
-          this.commentUserName=response.user.username;
-          this.commentProfileUrl=response.user.profile_image_url;
-          this.commentMediaUrl=response.media_url;
-          response.reply_ids.forEach((reply: any) => {
-           this.twitterService.fetchTweetById(reply).subscribe(res=>{
-             console.log('res'+res.content);
-             this.comments?.push(res.content);
-           })
-          });
-    });
-    this.twitterService.fetchPeoples().subscribe(res=>{
-      this.peoples=res;
- });
-    console.log('following page dashboard'+ this.isFollowingDashboard);
-    console.log(' current tweets ' +this.tweets?.length); 
-  }
-
-
-
+  comments:Comments[]=[];
+  comment: Comments = new Comments();
   userName?: string = 'John Doe';
   statusList?: [];
   followers?: number = 1500;
@@ -150,9 +106,51 @@ export class DashboardComponent implements OnInit {
 
   isModalVisible = false;
   commentInput = '';
-  comments = ['Great post!', 'Love this!'];
-   
 
+  reactions = [
+    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
+    { type: 'love', iconPath: 'assets/reactions/love.png' },
+    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
+    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
+    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
+    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
+  ];
+  ngOnInit(): void {
+    this.comments=[];
+    this.twitterService.fetchTweets().subscribe(
+      response => {
+        this.tweets=response;
+        
+              },
+      error => {
+        console.error("error", error);
+      }
+    );
+    this.userId=localStorage.getItem('userId');
+    this.loginService.findByUserId(this.userId).subscribe(res=>{
+      this.user=res;
+    });
+    this.role = localStorage.getItem("role");
+    this.parentId=localStorage.getItem('parentTweetId');    
+    this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
+          response.reply_ids.forEach((reply: any) => {
+           this.twitterService.fetchTweetById(reply).subscribe(res=>{
+            this.comment=new Comments();
+            this.comment.username=res.user.username;
+            this.comment.profileUrl=res.user.profile_image_url;
+            this.comment.comment=res.content;
+            this.comment.mediaUrl=res.media_url;
+            this.comments?.push(this.comment);
+
+           })
+          });   
+    });
+    this.twitterService.fetchPeoples().subscribe(res=>{
+      this.peoples=res;
+ });
+    console.log('following page dashboard'+ this.isFollowingDashboard);
+    console.log(' current tweets ' +this.tweets?.length); 
+  }
 
   navigateWithParams(id:any) {
     console.log('id'+id);
@@ -197,6 +195,7 @@ export class DashboardComponent implements OnInit {
     const formdata=new FormData();
     formdata.append('parent_tweet_id', this.parentId);
     formdata.append('content',this.commentInput);
+    console.log('user id ' +this.userId);
     formdata.append('user_id', this.userId);
     this.twitterService.submit(formdata).subscribe(resp=>{
       console.log('comment is saved');
