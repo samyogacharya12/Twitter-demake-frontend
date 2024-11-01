@@ -15,6 +15,7 @@ import { FollowService } from '../follow-service.service';
 export class ProfileComponent implements OnInit {
   userId: string | null = null;
   showProfile=false;
+  isAdminPage=false;
   user: User = new User();
   peoples?:People[];
   selectedFile?: File;
@@ -35,15 +36,17 @@ export class ProfileComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('id');
     if(this.userId===localStorage.getItem('userId')){
       this.showProfile=true;
+      this.isAdminPage=true;
       console.log(this.showProfile);
     } else{
       this.showProfile=false;
+      this.isAdminPage=false;
     }
    this.loginService.findByUserId(this.userId).subscribe(
     response => {
       this.user=response;// Navigate to a protected route on successful login
       // Handle successful login
-      console.log('response for user'+this.user.full_name);
+      console.log('response for user'+this.user.is_followed);
     },
     error => {
       console.error("error", error);
@@ -55,17 +58,19 @@ export class ProfileComponent implements OnInit {
   }
 
   navigateWithParams(id:any) {
-    console.log('id'+id);
     // Using `navigate` with route parameters and query parameters
     this.router.navigate(['/dashboard/profile', id]); 
     this.ngOnInit();   
   }
 
   follow(userId:any):void{
-    console.log('following person');
-    console.log(' follow ' +userId);
     this.followService.follow(userId).subscribe(resp=>{
-          console.log('follow is done'+resp);
+          this.ngOnInit();   
+    });
+  }
+
+  unFollow(userId:any):void{
+    this.followService.delete(userId).subscribe(resp=>{
           this.ngOnInit();   
     });
   }
@@ -75,9 +80,6 @@ export class ProfileComponent implements OnInit {
   }
 
   
-
-
-
   public scrollLeft() {
     const container = document.querySelector('.overflow-x-auto') as HTMLElement;
     container.scrollBy({ left: -250, behavior: 'smooth' }); // Adjust scroll distance as needed
