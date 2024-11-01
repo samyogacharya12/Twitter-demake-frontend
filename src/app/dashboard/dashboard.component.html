@@ -18,22 +18,25 @@
             ><i class="fas fa-user"></i> Profile</a>
         </li>        <button class="btn btn-primary mt-4">Post</button>
       </ul>
-      <div class="flex flex-row justify-between">
+      <div class="flex flex-row justify-between" style="position: relative;">
         <div class="user-name">
-          <img
-          [src]="this.user.profile_image_url"
-          alt="User 1"
-          class="profile-icon"
-        />
+          <img [src]="this.user.profile_image_url" alt="User 1" class="profile-icon" />
           <div class="user-info flex justify-between">
             <div class="user-details">
-              <p>{{this.user.full_name}}</p>
-              <span class="txt1" style="color: #71761b">{{this.user.username}}</span>
+              <p>{{ this.user.full_name }}</p>
+              <span class="txt1" style="color: #71761b">{{ this.user.username }}</span>
             </div>
           </div>
-          <i class="fas fa-ellipsis-h three-dots"></i>
+          <i class="fas fa-ellipsis-h three-dots" (click)="toggleDropdown()"></i>
+      
+          <!-- Dropdown Menu for Logout -->
+          <div *ngIf="dropdownOpen" class="dropdown-menu">
+            <button class="dropdown-item logout-button" (click)="logout()">Logout</button>
+          </div>
         </div>
       </div>
+      
+      
     </div>
 
     <div class="flex flex-row gap-8">

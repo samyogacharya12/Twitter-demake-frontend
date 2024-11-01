@@ -9,11 +9,12 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {path: 'registration', component: RegistrationComponent},
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'dashboard/profile/:id', component: ProfileComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard/profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

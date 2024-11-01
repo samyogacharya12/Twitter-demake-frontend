@@ -71,16 +71,9 @@ export class LoginComponent {
     if(this.credentials.username && this.credentials.password){
     this.authService.login(this.credentials).subscribe(
       response => {
+        // Handle successful login
         this.router.navigate(['/dashboard']);  // Navigate to a protected route on successful login
         console.log('Login successful');
-        this.authService.me().subscribe(resp=>{
-          console.log('user id from the api'+resp.id);
-          localStorage.setItem("userId", resp.id);
-          console.log('user id from the api'+localStorage.getItem('userId'));
-          localStorage.setItem("profile_image_url", resp.profile_image_url);
-
-     });
-        // Handle successful login
       },
       error => {
         setTimeout(() => {

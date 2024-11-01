@@ -37,7 +37,9 @@ export class DashboardComponent implements OnInit {
   role?: string | any;
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
-  constructor(private twitterService: TwitterServiceService,private loginService: LoginServiceService,
+  constructor(
+    private authService: LoginServiceService,
+    private twitterService: TwitterServiceService,private loginService: LoginServiceService,
     private followService: FollowService,
     private router: Router) { }
   commentUserName?:string;
@@ -107,6 +109,9 @@ export class DashboardComponent implements OnInit {
   isModalVisible = false;
   commentInput = '';
 
+  dropdownOpen = false;
+
+
   reactions = [
     { type: 'like', iconPath: 'assets/reactions/like (1).png' },
     { type: 'love', iconPath: 'assets/reactions/love.png' },
@@ -116,6 +121,12 @@ export class DashboardComponent implements OnInit {
     { type: 'angry', iconPath: 'assets/reactions/angry.png' },
   ];
   ngOnInit(): void {
+    this.authService.me().subscribe(resp=>{
+      localStorage.setItem("userId", resp.id);
+      this.userId=localStorage.getItem('userId');
+      localStorage.setItem("profile_image_url", resp.profile_image_url);
+
+ });
     this.comments=[];
     this.twitterService.fetchTweets().subscribe(
       response => {
@@ -126,7 +137,6 @@ export class DashboardComponent implements OnInit {
         console.error("error", error);
       }
     );
-    this.userId=localStorage.getItem('userId');
     this.loginService.findByUserId(this.userId).subscribe(res=>{
       this.user=res;
     });
@@ -152,13 +162,26 @@ export class DashboardComponent implements OnInit {
     console.log(' current tweets ' +this.tweets?.length); 
   }
 
-  navigateWithParams(id:any) {
-    console.log('id'+id);
-    // Using `navigate` with route parameters and query parameters
-    this.router.navigate(['/dashboard/profile', id]); 
-    this.ngOnInit();   
-  }
 
+toggleDropdown() {
+  console.log('method is called');
+  this.dropdownOpen = !this.dropdownOpen;
+}
+
+logout() {
+  localStorage.removeItem('userId');
+  localStorage.removeItem('profile_image_url');
+  localStorage.removeItem('authToken'); 
+  this.router.navigate(['/login']);
+  console.log("User logged out");
+}
+
+navigateWithParams(id:any) {
+  console.log('id'+id);
+  // Using `navigate` with route parameters and query parameters
+  this.router.navigate(['/dashboard/profile', id]); 
+  this.ngOnInit();   
+}
   profilePageRoute(userId?:any):void{
     console.log('user id'+userId);
     console.log('user profile');
