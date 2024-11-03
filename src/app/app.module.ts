@@ -12,7 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CommentBoxComponent } from './comment-box/comment-box.component'; // Ensure it's declared
-import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal.component'; // Ensure it's declared
+import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal.component';
 
 
 @NgModule({
@@ -24,7 +24,6 @@ import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal
     ProfileComponent,
     CommentBoxComponent,
     EditprofileModalComponent
-
   ],
   imports: [
     BrowserModule,

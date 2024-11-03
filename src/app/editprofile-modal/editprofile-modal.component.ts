@@ -16,6 +16,7 @@ import { User } from '../models/user';
 })
 export class EditprofileModalComponent {
   selectedFile?: File;
+  headerFile?:File;
   constructor(private loginService: LoginServiceService) { }
   userDto:User=new User();
   @Input() isVisible = false; // Visibility control input
@@ -24,6 +25,7 @@ export class EditprofileModalComponent {
   public photoUrl: string | ArrayBuffer | null | undefined = null;
   public profileImageUrl: string | ArrayBuffer | null | undefined = null;
   showExistingImage=true;
+  showCoverImage=true;
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   ngOnInit(): void {
@@ -52,6 +54,11 @@ export class EditprofileModalComponent {
     if(this.selectedFile){
       formData.append('profile_image', this.selectedFile);
     }
+
+    if(this.headerFile){
+      formData.append('header_image', this.headerFile);
+    }
+
     if(this.userDto.location){
     formData.append('location', this.userDto?.location);
     }
@@ -66,7 +73,6 @@ export class EditprofileModalComponent {
         this.loginService.updateUser(formData).subscribe(
           response => {
             console.log('User updated successfully', response);
-            location.reload();
             // Handle successful update, e.g., display success message or close modal
           },
           error => {
@@ -123,23 +129,24 @@ export class EditprofileModalComponent {
       this.selectedFile = input.files[0]; // Store the selected file
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.photoUrl = e.target?.result; // Assign the image source
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  onImageSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      this.selectedFile = input.files[0]; // Store the selected file
-      const reader = new FileReader();
-      reader.onload = (e) => {
         this.profileImageUrl = e.target?.result; // Assign the image source
       };
       reader.readAsDataURL(input.files[0]);
     }
     this.showExistingImage=false;
+  }
+
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.headerFile = input.files[0]; // Store the selected file
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.photoUrl = e.target?.result; // Assign the image source
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+    this.showCoverImage=false;
   }
 
   // Method to remove the photo

@@ -8,6 +8,7 @@ import { IUser, User } from '../models/user';
 import { People } from '../models/people';
 import { Comments } from '../models/comments';
 import { FollowService } from '../follow-service.service';
+import { ViewChild, ElementRef } from '@angular/core';
 interface  Post {
   id: number;
   userReacted: boolean;
@@ -60,6 +61,7 @@ export class DashboardComponent implements OnInit {
   imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   selectedFile?: File;
   parentId?:any;
+
   // Sample notifications data
   notifications = [
     { message: 'Anna started following you', time: '10 minutes ago' },

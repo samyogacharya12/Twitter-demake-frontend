@@ -4,8 +4,7 @@ export class People {
     full_name: string;
     user_name: string;
     bio?: string; // optional property
-    profile_image_url?:string
-  
+    profile_image_url?:string;  
     constructor(id:string,user_id: string, full_name: string, user_name: string, bio?: string,profile_image_url?:string) {
       this.id=id;
       this.user_id = user_id;

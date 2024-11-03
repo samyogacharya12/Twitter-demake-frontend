@@ -12,7 +12,8 @@ export interface IUser {
   location?:string,
   website?:string,
   tweet_count?:number,
-  is_followed?:boolean
+  is_followed?:boolean,
+  header_image_url?:string
 }
 
 export class User implements IUser {
@@ -30,6 +31,9 @@ export class User implements IUser {
     public location?:string,
     public website?:string,
     public tweet_count?:number,
-    public is_followed?:boolean
-  ) {}
+    public is_followed?:boolean,
+    public header_image_url?:string
+  ) {
+  
+  }
 }

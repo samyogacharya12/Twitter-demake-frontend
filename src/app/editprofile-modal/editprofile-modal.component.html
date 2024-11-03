@@ -13,8 +13,9 @@
     </div>
 
     <div class="photo-upload-container">
+      <img *ngIf="showCoverImage" [src]="userDto.header_image_url" alt="User" class="profile-img" />
       <img
-        *ngIf="photoUrl"
+        *ngIf="!showCoverImage"
         [src]="photoUrl"
         alt="Uploaded Photo"
         class="uploaded-photo"
@@ -43,7 +44,7 @@
       <input
         type="file"
         accept="image/*"
-        (change)="onFileSelected($event)"
+        (change)="onImageSelected($event)"
         id="fileInput"
         style="display: none"
       />
@@ -62,7 +63,7 @@
       <input
       type="file"
       accept="image/*"
-      (change)="onImageSelected($event)"
+      (change)="onFileSelected($event)"
       id="profileInput"
       style="display: none"
     />

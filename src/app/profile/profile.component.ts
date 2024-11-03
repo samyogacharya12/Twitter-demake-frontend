@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit {
       this.user=response;// Navigate to a protected route on successful login
       // Handle successful login
       console.log('response for user'+this.user.is_followed);
+      console.log('response for user cover image'+this.user.header_image_url);
     },
     error => {
       console.error("error", error);
