@@ -1,3 +1,71 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f8fa;
+}
+
+.following-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  transition: box-shadow 0.2s;
+}
+
+.profile-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.following-profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-size: 16px;
+  color: #14171a;
+}
+
+.follow-btn {
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #1da1f2;
+  background-color: #ffffff;
+  border: 1px solid #1da1f2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.follow-btn:hover {
+  background-color: #1da1f2;
+  color: #ffffff;
+}
+
 a.flex.items-center:hover {
   cursor: pointer;
   color: #007BFF !important; /* Change text color */
@@ -14,6 +82,10 @@ a.flex.items-center:hover .user-avatar-follow {
   cursor: pointer;
 
   transition: transform 0.2s ease-in-out; /* Ensures smooth scaling on hover */
+}
+
+.followbtn {
+  margin-left: 15px; /* Adjust this value for desired spacing */
 }
 
 

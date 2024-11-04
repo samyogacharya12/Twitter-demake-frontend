@@ -13,9 +13,11 @@ import { FollowService } from '../follow-service.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  showFollowingDashboard=false;
   userId: string | null = null;
   showProfile=false;
   isAdminPage=false;
+  userProfiles?:User[];
   user: User = new User();
   peoples?:People[];
   selectedFile?: File;
@@ -32,7 +34,6 @@ export class ProfileComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    console.log('ngOnInit is called'); 
     this.userId = this.route.snapshot.paramMap.get('id');
     if(this.userId===localStorage.getItem('userId')){
       this.showProfile=true;
@@ -56,6 +57,15 @@ export class ProfileComponent implements OnInit {
   this.twitterServuce.fetchPeoples().subscribe(res=>{
        this.peoples=res;
   }); 
+  this.followService.fetchFollowers(this.userId).subscribe(res=>{
+   this.userProfiles=res;
+  });
+
+  }
+
+
+  displayFollowing():void{
+    this.showFollowingDashboard=true;
   }
 
   navigateWithParams(id:any) {
