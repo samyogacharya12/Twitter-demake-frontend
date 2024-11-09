@@ -20,7 +20,6 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 402px;
   align-items: flex-end;
   z-index: 3;
   height: 100vh;

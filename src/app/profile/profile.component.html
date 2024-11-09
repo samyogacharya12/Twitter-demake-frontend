@@ -17,7 +17,10 @@
         <button class="btn btn-primary mt-4">Post</button>
       </ul>
       <div class="flex flex-row justify-between">
-        <div class="user-name">
+        <div
+          class="user-name"
+          [ngClass]="{ 'hover-effect': !isCardBoxVisible }"
+        >
           <img
             src="../../assets/gaurav1.jpeg"
             alt="User 1"
@@ -29,7 +32,17 @@
               <span class="txt1" style="color: #71761b">@khadhkagaurav</span>
             </div>
           </div>
-          <i class="fas fa-ellipsis-h three-dots"></i>
+          <i
+            class="fas fa-ellipsis-h three-dots ml-4"
+            (click)="toggleCard($event)"
+          ></i>
+          <!-- Card box that appears on click -->
+          <div class="card-box" *ngIf="isCardBoxVisible" #cardBox>
+            <p (click)="onOptionClick($event)" class="option-item">
+              Add an existing account
+            </p>
+            <p (click)="onOptionClick($event)" class="option-item">Log out</p>
+          </div>
         </div>
       </div>
     </div>
