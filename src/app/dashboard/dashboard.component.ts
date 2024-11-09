@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 interface Post {
@@ -20,11 +20,16 @@ export class DashboardComponent implements OnInit {
   showReactions: { [postId: number]: boolean } = {}; // Object to track reactions per post
   selectedReactionIcon: string | null = null;
   showCommentModal = false;
-
+  isCardBoxVisible = false;
   role?: string | any;
+  @ViewChild('cardBox') cardBox: ElementRef | undefined;
+
+  constructor() {}
+
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
   }
+
   userName?: string = 'John Doe';
   statusList?: [];
   followers?: number = 1500;
@@ -115,7 +120,6 @@ export class DashboardComponent implements OnInit {
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;
   }
-  constructor() {}
 
   increaseCount(reaction: string) {
     if (reaction === 'comment') {
@@ -205,4 +209,22 @@ export class DashboardComponent implements OnInit {
     { type: 'sad', iconPath: 'assets/reactions/sad.png' },
     { type: 'angry', iconPath: 'assets/reactions/angry.png' },
   ];
+
+  toggleCard(event: Event) {
+    event.stopPropagation(); // Prevent click propagation to document
+    this.isCardBoxVisible = !this.isCardBoxVisible;
+  }
+
+  // Close the card box if clicked outside of it
+  @HostListener('document:click', ['$event'])
+  closeCardBox(event: MouseEvent) {
+    if (this.cardBox && !this.cardBox.nativeElement.contains(event.target)) {
+      this.isCardBoxVisible = false; // Close card box if clicked outside
+    }
+  }
+
+  onOptionClick(event: MouseEvent) {
+    event.stopPropagation(); // Prevent click from closing the card-box
+    console.log('Option clicked:', event.target); // You can handle option selection here
+  }
 }
