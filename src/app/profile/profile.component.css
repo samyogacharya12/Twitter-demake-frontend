@@ -23,6 +23,7 @@ body {
   align-items: flex-end;
   z-index: 3;
   height: 100vh;
+  width: 30%;
   border-right: 1px solid;
   padding: 20px;
   box-sizing: border-box;
@@ -1275,4 +1276,11 @@ aside {
 .card-box p:hover {
   background-color: #111111;
   color: #fff;
+}
+
+/* Profile Image Styling */
+.profile-image {
+  width: 40px; /* Small profile image */
+  height: 40px;
+  border-radius: 50%;
 }

@@ -6,6 +6,7 @@ body {
   width: 100%;
   background-color: rgb(0, 0, 0);
   scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
+  overflow-x: hidden;
 }
 
 .container-dashboard {
@@ -13,6 +14,7 @@ body {
   height: 100vh;
   flex-direction: row;
   width: 100%;
+  margin: 0 auto; /* Centers the container */
 }
 
 /* Sidebar style */
@@ -77,10 +79,6 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-}
-
-.scrollable-content {
-  flex: 1;
 }
 
 .modal-content {
@@ -260,11 +258,10 @@ i[class^="icon-"]:hover::before {
   font-size: 16px;
 }
 
-.box {
-  background-color: white;
-  flex: 1;
-  /* The box will match the image's size */
-}
+/* .box {
+    background-color: white;
+    flex: 1;
+} */
 
 .post-image-container {
   width: 100%;
@@ -351,11 +348,8 @@ i[class^="icon-"]:hover::before {
 
 .username {
   margin-left: 10px;
-  /* Adds space between profile image and username */
   font-size: 15px;
-  /* You can adjust the font size to match the style */
   font-weight: 300;
-  /* Optional: Make the username bold */
 }
 
 .circle-container {
@@ -381,11 +375,6 @@ i[class^="icon-"]:hover::before {
   /* Ensures the image fills the container */
   object-fit: cover;
   /* Ensures the image covers the entire circle without distortion */
-}
-
-.username {
-  color: #657786;
-  font-size: 14px;
 }
 
 .timestamp {
@@ -709,13 +698,20 @@ i[class^="icon-"]:hover::before {
   flex-direction: column;
 }
 
-/* .three-dots {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #e1e8ed;
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
+.name {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* 
+.three-dots {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #e1e8ed;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
 } */
 
 .user-handle {
@@ -828,80 +824,23 @@ i[class^="icon-"]:hover::before {
 /* Main content next to sidebar */
 .main-content {
   flex: 1;
-  padding: 20px;
   box-sizing: border-box;
   border-right: 1px solid;
+  overflow: hidden;
+}
+
+.item-spacing {
+  padding-left: 70px;
+}
+
+.content-wrapper {
+  margin-top: 10px;
+  max-height: 400px;
   overflow-y: auto;
-}
-
-.custom-underline {
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-}
-
-.custom-underline .main-tab-link:hover {
-  background-color: #141414;
-  cursor: pointer;
-}
-
-.custom-underline .main-tab-link {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.nav-link {
-  padding: 16px 0;
-  color: #868686;
-}
-
-.nav-link.active {
-  color: #ececec;
-  font-weight: 700;
-}
-
-.nav-link.active::after {
-  content: "";
-  height: 5px;
-  left: 0;
-  right: 0;
-  position: absolute;
-  bottom: 0;
-  background-color: rgb(29, 155, 240);
-  border-radius: 50px;
-}
-
-.posts-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.posted {
-  padding: 16px;
-  border-bottom: 1px solid;
-}
-
-.posts-container .posted:hover {
-  background-color: #060606;
-  cursor: pointer;
-}
-
-.post-avatar-content {
-  gap: 12px;
-}
-
-.posted .post-user-info1 {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.posted img {
-  width: 100%;
-  object-fit: contain;
 }
 
 textarea {
@@ -934,26 +873,11 @@ textarea::placeholder {
 }
 
 .container-thoughts {
-  border-bottom: 1px solid;
-}
-
-.avatar-placeholder {
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 400px;
-  position: relative;
-  overflow: hidden;
-}
-
-.avatar-placeholder i {
-  position: absolute;
-  bottom: -8px;
+  border-bottom: 2px solid;
 }
 
 .custom-line {
+  margin-left: 80px;
   width: 100%;
   height: 1px;
   background-color: #272727;
@@ -964,11 +888,13 @@ textarea::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 10px;
 }
 
 .icons {
   display: flex;
   gap: 10px;
+  margin-left: 4rem;
 }
 
 .btn-icon {
@@ -983,11 +909,168 @@ textarea::placeholder {
   background-color: #1da1f2;
   color: white;
   border: none;
-  padding: 6px 20px;
+  padding: 10px 20px;
   border-radius: 9999px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.post {
+  font-size: 14px;
+  font-weight: none;
+  color: #555;
+}
+
+.box {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+
+  position: relative;
+  margin-bottom: 328px;
+}
+
+.box-content {
+  background-color: rgb(51, 54, 57);
+  height: 30%;
+  position: relative;
+}
+
+.profile-img {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid black;
+  position: absolute;
+  bottom: -60px;
+  left: 15px;
+}
+
+.edit-profile-btn {
+  border-color: rgb(83, 100, 113);
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid rgb(83, 100, 113);
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  bottom: -56px;
+  right: 10px;
+}
+
+.edit-profile-btn:hover {
+  background-color: #111111;
+}
+
+.profile-name {
+  margin-top: 70px;
+  /* position: absolute;
+    bottom: -100px; */
+  color: #e7e9ea;
+  font-weight: bold;
+  font-size: 20px;
+  text-overflow: unset;
+}
+
+.verified {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 0px 15px 3px;
+  border: 1px solid rgb(83, 100, 113);
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-left: 10px;
+}
+
+.verified-icon {
+  margin-left: 5px;
+  margin-right: 3px;
+}
+
+.verified-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.profile-details {
+  color: #555;
+  font-size: 14px;
+}
+
+.cal {
+  color: #555;
+  font-size: 14px;
+}
+
+.calendar {
+  color: #555;
+  font-size: 12px;
+}
+
+.following {
+  color: #555;
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 12px;
+}
+
+.link {
+  color: #555;
+}
+.link:hover {
+  text-decoration-line: underline;
+}
+
+.custom-underline {
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.custom-underline .main-tab-link:hover {
+  background-color: #141414;
+  cursor: pointer;
+}
+
+.custom-underline .main-tab-link {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-link {
+  display: inline-flex;
+  padding: 16px;
+  color: #868686;
+}
+
+.nav-link.active {
+  color: #ececec;
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: "";
+  height: 5px;
+  left: 15px;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(29, 155, 240);
+  border-radius: 50px;
 }
 
 aside {
@@ -1003,247 +1086,163 @@ aside {
 
 aside {
   flex: 0 0 370px;
+
   article {
     color: white;
     border: 1px solid rgb(87, 87, 87);
     padding: 12px;
     border-radius: 16px;
     max-width: 340px;
+
     h3 {
     }
   }
 }
-
-.post-actions {
-  padding: 0 26px;
-  color: #6e767d; /* Light gray color for icons */
+.txt-size {
+  font-size: 20px;
 }
 
-.action-button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.action-button:hover {
-  color: none; /* Light blue on hover */
-}
-
-.like-btn:hover {
-  color: none;
-}
-
-.comment-btn:hover {
-  color: #1d9bf0; /* Blue for comment button hover */
-}
-
-.repost-btn:hover {
-  color: #17bf63; /* Green for repost button hover */
-}
-
-.action-button i {
-  font-size: 18px; /* Icon size */
-}
-
-.action-button span {
-  font-size: 14px; /* Text size */
-}
-
-.like-button-container {
-  position: relative;
-  display: inline-block;
-}
-
-.reactions-overlay {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  display: flex;
-  gap: 8px;
-  background-color: #4f5255;
-  padding: 5px;
-  border-radius: 20px;
-  box-shadow: 0px 4px 8px rgba(225, 150, 150, 0.1);
-  z-index: 10;
-}
-
-.reactions-overlay img {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  transition: transform 0.1s;
-}
-
-.reactions-overlay img:hover {
-  transform: scale(1.2);
-}
-
-.liked {
-  color: rgb(237, 61, 172);
-  transition: color 0.2s;
-}
-
-.comment-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  background-color: rgb(62, 65, 68, 0.5);
-  backface-visibility: hidden;
-  z-index: 1000;
-  padding-top: 40px;
-}
-
-.modal-content {
-  background-color: rgb(0, 0, 0);
-  padding: 20px;
-  border-radius: 8px;
-  width: 600px;
-  max-width: 90%;
-  text-align: center;
-  position: relative;
-}
-
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: white;
-}
-
-.btn-submit {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #1da1f2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.modal-input-container {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 26px;
-}
-
-.profile-icon {
-  width: 40px; /* Adjust the size as needed */
-  height: 40px;
-  border-radius: 50%; /* Makes it circular */
-  margin-right: 10px;
-  object-fit: cover;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 0px;
-  border-bottom: none;
-}
-
-.drafts-btn {
-  background: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: background-color 0.3s, border-radius 0.3s;
-}
-
-.close-btnmodal {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.close-btnmodal {
-  color: #fff; /* Optional: Customize color for close button */
-}
-
-.drafts-btn {
-  color: rgb(29, 155, 240); /* Optional: Customize color for drafts button */
-}
-
-.drafts-btn:hover {
-  border-color: rgba(0, 0, 0, 0);
-  background-color: rgba(29, 155, 240, 0.1);
-  border-radius: 20px; /* This makes the button rounded on hover */
-}
-
-.btn-submit {
-  width: 100%;
-  margin-top: 15px;
+.box-border {
   background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.footer {
+.box-1 {
+  width: 30%;
+  height: 100%;
+}
+
+.img1 {
+  background-image: url(https://ton.twimg.com/onboarding/persistent_nux/follow_2x.png);
+  background-size: cover;
+  /* Ensures the image covers the entire area */
+  background-position: center;
+  /* Center the background image */
+  height: 100%;
+  /* Takes full height of the card */
+  width: 100%;
+  border-radius: 25px;
+  /* Takes full width of the card */
+}
+
+.card {
+  background-color: black;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  /* Centers content horizontally */
   align-items: center;
-  padding-top: 10px;
-  margin-top: 10px;
-}
-
-.footer-icons {
-  display: flex;
-  gap: 10px;
-}
-
-.icon-btn {
-  background: none;
+  /* Centers content vertically */
+  height: 125px;
+  /* Set the height of the card */
+  width: 250px;
   border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: rgb(29, 155, 240);
+  /* Set the width of the card */
+  margin: 0;
+  /* Remove any margin */
+  /* Apply border-radius */
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  /* Hide overflow to maintain border radius */
 }
 
-.post-btn {
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.arrow-button {
   background-color: #1da1f2;
-  color: white;
+  /* Twitter blue */
   border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
+  /* No border */
+  border-radius: 50%;
+  /* Make it a circle */
+  width: 40px;
+  /* Adjust width */
+  height: 40px;
+  /* Adjust height */
+  display: flex;
+  /* Use flexbox */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
   cursor: pointer;
+  /* Pointer cursor on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Optional shadow */
+}
+
+.learn-more {
+  margin-top: 5px;
+  /* Space between the button and text */
+  color: white;
+  /* Text color */
+  text-align: center;
+  /* Center the text */
+  font-size: 14px;
+  /* Font size for text */
+  white-space: nowrap;
+}
+
+.card-text {
+  text-align: center;
+  /* Center align the text */
+  color: white;
+  /* Text color */
+  margin-top: 4px;
+  /* Space between the image and the text */
+  font-size: 14px;
+  /* Adjust font size as needed */
+}
+
+.small-green-btn {
+  display: flex;
+  background-color: #28a745;
+  color: white;
+  padding: 0px 16px;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  z-index: 10;
+  font-size: 14px;
+}
+
+.border-top {
+  top: 15px;
+  border-top: 1px solid !important;
+}
+
+.user-avatar-follow {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.followbtn {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgb(239, 243, 244);
+  transition-duration: 0.2s;
+  color: black;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
   font-weight: bold;
 }
 
-.profile-container {
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center the image and line */
-}
-
-.vertical-line {
-  width: 2px; /* Line width */
-  height: 30px; /* Adjust the height as needed */
-  background-color: #ccc; /* Line color */
-  margin-top: 4px; /* Space between the image and the line */
-}
-
-.like-button:hover + .reactions-overlay,
-.like-button-container:hover .reactions-overlay {
-  display: flex; /* or block, depending on layout */
+.routerLink-color {
+  color: white;
 }
 
 .card-box {
@@ -1279,4 +1278,41 @@ aside {
   width: 40px; /* Small profile image */
   height: 40px;
   border-radius: 50%;
+}
+
+/* User Details Styling */
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.userfollowingname {
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+}
+
+.secondary-username {
+  font-size: 0.85rem;
+  color: #6c757d; /* Muted color */
+}
+
+/* Medium Button Styling */
+.medium-button {
+  border-color: rgb(83, 100, 113);
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid rgb(83, 100, 113);
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.user-content {
+  color: #ebe4e4;
+  margin-left: 68px;
 }

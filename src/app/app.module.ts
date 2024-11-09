@@ -11,7 +11,8 @@ import {FormsModule} from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
-import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal.component'; // Ensure it's declared
+import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal.component';
+import { FollowingFollowersComponent } from './following-followers/following-followers.component'; // Ensure it's declared
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal
     DashboardComponent,
     RegistrationComponent,
     ProfileComponent,
-    EditprofileModalComponent
+    EditprofileModalComponent,
+    FollowingFollowersComponent
   ],
   imports: [
     BrowserModule,
