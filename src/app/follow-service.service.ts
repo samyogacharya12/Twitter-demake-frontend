@@ -14,7 +14,32 @@ export class FollowService {
 
   constructor(private http: HttpClient) {}  // Inject HttpClient here
 
+
   fetchFollowers(userId?:any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'application/json'
+    });
+      let params = new HttpParams();
+    if (userId) {
+      params = params.append('user_id', userId);  // Assuming 'userId' is a parameter in the API
+    }
+    return this.http.get<any>(
+      `${this.apiURL}/follow/followers`, 
+      { headers,params} // Pass headers as options, not body
+    ).pipe(
+      tap(response => {
+        console.log('Fetch Follow for followers:', response);
+      }),
+      catchError(error => {
+        console.error('Error while fetching user:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+  fetchFollowing(userId?:any):Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
       'Accept': 'application/json'
@@ -28,7 +53,7 @@ export class FollowService {
       { headers,params} // Pass headers as options, not body
     ).pipe(
       tap(response => {
-        console.log('Fetch Follow for followers:', response);
+        console.log('Fetch Follow for following:', response);
       }),
       catchError(error => {
         console.error('Error while fetching user:', error);

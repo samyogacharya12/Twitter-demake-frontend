@@ -80,6 +80,7 @@
           </div>
           <div class="main-tab-link flex-1">
             <a
+            (click)="isFollowersTab()"
               class="nav-link position-relative w-75 text-center nav-link ml-5"
               aria-current="page"
               href="#"
@@ -88,29 +89,33 @@
           </div>
           <div class="main-tab-link flex-1">
             <a
+              (click)="isFollowingTab()"
               class="nav-link position-relative w-75 text-center nav-link-following ml-5"
               aria-current="page"
-              href="#"
+                
               >Following</a
             >
           </div>
         </div>
   
+        <div *ngIf="isFollowing">
         <div
+         *ngFor="let user of users"
           class="user-profile d-flex align-items-center justify-content-between mt-3"
         >
           <div class="d-flex align-items-center ml-3">
             <img
-              src="../../assets/gaurav1.jpeg"
+              [src]="user.profile_image_url"
               alt="User Profile"
               class="profile-image"
             />
             <div class="user-details ml-3">
-              <p class="userfollowingname m-0">Gaurav Khadka</p>
-              <p class="secondary-username text-muted m-0">@khadhkagaurav</p>
+              <p class="userfollowingname m-0">{{user.full_name}}</p>
+              <p class="secondary-username text-muted m-0">{{user.username}}</p>
             </div>
           </div>
           <button class="medium-button mr-3">Follow</button>
+        </div>
         </div>
         <p class="user-content mt-2">
           OpenAI’s mission is to ensure that artificial general intelligence
