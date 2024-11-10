@@ -1,94 +1,3 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f8fa;
-}
-
-.following-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.profile-card {
-  background-color: #ffffff;
-  border: 1px solid #e1e8ed;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  transition: box-shadow 0.2s;
-}
-
-.profile-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.following-profile-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.profile-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.profile-name {
-  font-size: 16px;
-  color: #14171a;
-}
-
-.follow-btn {
-  margin-top: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-  color: #1da1f2;
-  background-color: #ffffff;
-  border: 1px solid #1da1f2;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.follow-btn:hover {
-  background-color: #1da1f2;
-  color: #ffffff;
-}
-
-a.flex.items-center:hover {
-  cursor: pointer;
-  color: #007BFF !important; /* Change text color */
-  text-decoration: underline; /* Optional underline effect */
-}
-
-/* Targeting the image within the hovered link */
-a.flex.items-center:hover .user-avatar-follow {
-  cursor: pointer;
-  transform: scale(1.1); /* Slightly enlarge the image on hover */
-}
-
-.user-avatar-follow {
-  cursor: pointer;
-
-  transition: transform 0.2s ease-in-out; /* Ensures smooth scaling on hover */
-}
-
-.followbtn {
-  margin-left: 15px; /* Adjust this value for desired spacing */
-}
-
-
 body {
   display: block;
   margin: 0;
@@ -111,10 +20,10 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 402px;
   align-items: flex-end;
   z-index: 3;
   height: 100vh;
+  width: 30%;
   border-right: 1px solid;
   padding: 20px;
   box-sizing: border-box;
@@ -886,12 +795,23 @@ i[class^="icon-"]:hover::before {
 }
 
 .user-name {
+  position: relative;
   display: flex;
   padding: 15px;
   /* Padding around username */
   color: #e1e8ed;
   /* Text color */
   align-items: center;
+  transition: background-color 0.3s;
+}
+
+.user-name.hover-effect:hover {
+  background-color: #111111;
+  /* Twitter blue background on hover */
+  color: white;
+  /* White text on hover */
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 .logo-container {
@@ -1328,4 +1248,39 @@ aside {
 
 .routerLink-color {
   color: white;
+}
+
+.card-box {
+  position: absolute;
+  bottom: 80px; /* Position the card box above the three dots */
+  right: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid black;
+  z-index: 1000;
+  width: 280px; /* Adjust width as needed */
+  border-radius: 16px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  cursor: pointer;
+}
+
+.card-box p {
+  padding: 15px; /* Initial padding */
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background color and padding */
+}
+
+.card-box p:hover {
+  background-color: #111111;
+  color: #fff;
+}
+
+/* Profile Image Styling */
+.profile-image {
+  width: 40px; /* Small profile image */
+  height: 40px;
+  border-radius: 50%;
 }

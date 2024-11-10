@@ -73,6 +73,7 @@ export class EditprofileModalComponent {
         this.loginService.updateUser(formData).subscribe(
           response => {
             console.log('User updated successfully', response);
+            location.reload();
             // Handle successful update, e.g., display success message or close modal
           },
           error => {

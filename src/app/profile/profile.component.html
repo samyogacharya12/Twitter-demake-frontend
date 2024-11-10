@@ -1,5 +1,4 @@
 <body>
-  <diV *ngIf="!showFollowingDashboard">
   <div class="container-dashboard flex flex-row">
     <div class="sidebar flex flex-col justify-between">
       <ul>
@@ -18,18 +17,33 @@
         <button class="btn btn-primary mt-4">Post</button>
       </ul>
       <div class="flex flex-row justify-between">
+        <div
+          class="user-name"
+          [ngClass]="{ 'hover-effect': !isCardBoxVisible }"
+        >
           <img
+            [src]="this.user.profile_image_url"
             alt="User 1"
-            src="assets/twitter-logo.png"
-            class="user-avatar"
+            class="profile-image"
           />
-          <div class="user-info flex justify-between">
+          <div class="user-info flex justify-between ml-3">
             <div class="user-details">
               <p>{{user.full_name}}</p>
               <span class="txt1" style="color: #71761b">{{user.username}}</span>
             </div>
           </div>
-          <i class="fas fa-ellipsis-h three-dots"></i>
+          <i
+            class="fas fa-ellipsis-h three-dots ml-4"
+            (click)="toggleCard($event)"
+          ></i>
+          <!-- Card box that appears on click -->
+          <div class="card-box" *ngIf="isCardBoxVisible" #cardBox>
+            <p (click)="onOptionClick($event)" class="option-item">
+              Add an existing account
+            </p>
+            <p (click)="logout()" class="option-item">Log out</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -98,17 +112,18 @@
             Follow
           </button>
           <p class="profile-details">{{user.username}}</p>
+          <p class="profile-details">{{user.bio}}</p>
           <span class="calendar mt-2"
             ><i class="fas fa-calendar-alt mr-1"></i> {{user.verified_on | date: 'MMMM yyyy'}}</span
           >
           <div class="calendar mt-2">
-            <a class="link" (click)="displayFollowing()"
+            <a class="link"
               ><span class="text-white">{{user.num_following}}</span>
-              <span class="ml-1">Following</span></a
+              <span class="ml-1" (click)="navigateFollowDetail('Following')">Following</span></a
             >
             <a class="link" href=""
               ><span class="text-white ml-2">{{user.num_followers}}</span>
-              <span class="ml-1">Followers</span></a
+              <span class="ml-1" (click)="navigateFollowDetail('Followers')">Followers</span></a
             >
           </div>
         </div>
@@ -346,19 +361,4 @@
       </div>
     </aside>
   </div>
-</diV>
-<div *ngIf="showFollowingDashboard">
-  <div class="following-grid">
-    <!-- Profile Card -->
-    <div class="profile-card">
-      <div *ngFor="let userProfile of userProfiles">
-        <img [src]="this.userProfile.profile_image_url" alt="Profile Image" class="following-profile-img">
-        <div class="profile-info">
-            <h3 class="profile-name">{{userProfile.full_name}}</h3>
-            <button class="follow-btn">Following</button>
-        </div>
-        </div>
-    </div>
-</div>
-</div>
 </body>

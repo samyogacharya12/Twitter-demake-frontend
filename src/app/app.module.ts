@@ -13,6 +13,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CommentBoxComponent } from './comment-box/comment-box.component'; // Ensure it's declared
 import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal.component';
+import { FollowingFollowersComponent } from './following-followers/following-followers.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { EditprofileModalComponent } from './editprofile-modal/editprofile-modal
     RegistrationComponent,
     ProfileComponent,
     CommentBoxComponent,
-    EditprofileModalComponent
+    EditprofileModalComponent,
+    FollowingFollowersComponent
   ],
   imports: [
     BrowserModule,

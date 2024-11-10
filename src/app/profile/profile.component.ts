@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LoginServiceService } from '../login/login-service.service';
@@ -10,14 +11,12 @@ import { FollowService } from '../follow-service.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
-  showFollowingDashboard=false;
+export class ProfileComponent {
   userId: string | null = null;
-  showProfile=false;
   isAdminPage=false;
-  userProfiles?:User[];
+  showProfile=false;
   user: User = new User();
   peoples?:People[];
   selectedFile?: File;
@@ -26,29 +25,31 @@ export class ProfileComponent implements OnInit {
   isModalVisible = false;
   isOpen: boolean = false;
   profileImageUrl:any;
+  isCardBoxVisible = false;
+  @ViewChild('cardBox') cardBox: ElementRef | undefined;
+
   constructor(private route: ActivatedRoute,
     private router: Router,private location:Location, 
     private loginService:LoginServiceService, 
     private twitterServuce:TwitterServiceService,
     private followService:FollowService) {
-    
   }
+
+
+
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
     if(this.userId===localStorage.getItem('userId')){
       this.showProfile=true;
-      this.isAdminPage=true;
       console.log(this.showProfile);
     } else{
       this.showProfile=false;
-      this.isAdminPage=false;
     }
    this.loginService.findByUserId(this.userId).subscribe(
     response => {
       this.user=response;// Navigate to a protected route on successful login
       // Handle successful login
-      console.log('response for user'+this.user.is_followed);
-      console.log('response for user cover image'+this.user.header_image_url);
+      console.log('response for user'+this.user.full_name);
     },
     error => {
       console.error("error", error);
@@ -57,27 +58,19 @@ export class ProfileComponent implements OnInit {
   this.twitterServuce.fetchPeoples().subscribe(res=>{
        this.peoples=res;
   }); 
-  this.followService.fetchFollowers(this.userId).subscribe(res=>{
-   this.userProfiles=res;
-  });
-
-  }
-
-
-  displayFollowing():void{
-    this.showFollowingDashboard=true;
   }
 
   navigateWithParams(id:any) {
+    console.log('id'+id);
     // Using `navigate` with route parameters and query parameters
     this.router.navigate(['/dashboard/profile', id]); 
     this.ngOnInit();   
   }
 
-  follow(userId:any):void{
-    this.followService.follow(userId).subscribe(resp=>{
-          this.ngOnInit();   
-    });
+  navigateFollowDetail(followingType:any):void{
+    console.log('this is follow detail navigation page');
+    localStorage.setItem('followingType', followingType);
+    this.router.navigate(['/follow-detail', this.userId]); 
   }
 
   unFollow(userId:any):void{
@@ -86,11 +79,19 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  goBack(): void {
-    this.isOpen=false;
+  follow(userId:any):void{
+    console.log('following person');
+    console.log(' follow ' +userId);
+    this.followService.follow(userId).subscribe(resp=>{
+          console.log('follow is done'+resp);
+          this.ngOnInit();   
+    });
   }
 
-  
+  goBack(): void {
+    this.location.back(); // This will navigate to the previous page
+  }
+
   public scrollLeft() {
     const container = document.querySelector('.overflow-x-auto') as HTMLElement;
     container.scrollBy({ left: -250, behavior: 'smooth' }); // Adjust scroll distance as needed
@@ -101,13 +102,37 @@ export class ProfileComponent implements OnInit {
     container.scrollBy({ left: 250, behavior: 'smooth' }); // Adjust scroll distance as needed
   }
 
- 
-
   public openModal() {
     this.isModalVisible = true;
   }
 
   public closeModal() {
     this.isModalVisible = false;
+  }
+
+  toggleCard(event: Event) {
+    event.stopPropagation(); // Prevent click propagation to document
+    this.isCardBoxVisible = !this.isCardBoxVisible;
+  }
+
+  // Close the card box if clicked outside of it
+  @HostListener('document:click', ['$event'])
+  closeCardBox(event: MouseEvent) {
+    if (this.cardBox && !this.cardBox.nativeElement.contains(event.target)) {
+      this.isCardBoxVisible = false; // Close card box if clicked outside
+    }
+  }
+  logout() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('profile_image_url');
+    localStorage.removeItem('authToken'); 
+    this.router.navigate(['/login']);
+    console.log("User logged out");
+  }
+
+  onOptionClick(event: MouseEvent) {
+    event.stopPropagation(); // Prevent click from closing the card-box
+    console.log('Option clicked:', event.target); // You can handle option selection here
+
   }
 }
