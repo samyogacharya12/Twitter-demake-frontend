@@ -67,23 +67,45 @@
         </div>
       </div>
 
-      <div class="box-content p-4 ...">
-        <div class="d-flex">
+      <div class="box-content ..." (click)="triggerImageUpload()">
+        <img
+          *ngIf="profileImageUrl"
+          [src]="profileImageUrl"
+          alt="Uploaded Image"
+          class="uploaded-img"
+        />
+        <!-- Remove Icon - Display only if an image is uploaded -->
+        <span
+          *ngIf="profileImageUrl"
+          class="remove-icon"
+          (click)="removeImage($event)"
+          >&#10005;</span
+        >
+        <!-- Hidden File Input for Image Upload -->
+        <input
+          type="file"
+          id="upload-photo"
+          class="upload-input"
+          (change)="onImageUpload($event)"
+        />
+      </div>
+
+      <div class="position-relative">
+        <div class="d-flex position-absolute">
           <img
             src="../../assets/gaurav1.jpeg"
             alt="User 1"
             class="profile-img"
           />
-          <button class="edit-profile-btn" (click)="openModal()">
-            Edit Profile
-          </button>
-
-          <app-editprofile-modal
-            [isVisible]="isModalVisible"
-            (close)="closeModal()"
-          >
-          </app-editprofile-modal>
         </div>
+        <button class="edit-profile-btn" (click)="openModal()">
+          Edit Profile
+        </button>
+        <app-editprofile-modal
+          [isVisible]="isModalVisible"
+          (close)="closeModal()"
+        >
+        </app-editprofile-modal>
       </div>
 
       <div class="d-flex flex-column p-3">

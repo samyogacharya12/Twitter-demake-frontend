@@ -11,6 +11,7 @@ export class ProfileComponent {
   isModalVisible = false;
   isCardBoxVisible = false;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
+  profileImageUrl: string = '';
 
   constructor(private router: Router, private location: Location) {}
 
@@ -52,5 +53,29 @@ export class ProfileComponent {
   onOptionClick(event: MouseEvent) {
     event.stopPropagation(); // Prevent click from closing the card-box
     console.log('Option clicked:', event.target); // You can handle option selection here
+  }
+
+  onImageUpload(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profileImageUrl = reader.result as string; // Display the new image
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  triggerImageUpload() {
+    const fileInput = document.getElementById(
+      'upload-photo'
+    ) as HTMLInputElement;
+    fileInput.click();
+  }
+
+  removeImage(event: Event) {
+    event.stopPropagation(); // Prevents triggering image upload on box-content click
+    this.profileImageUrl = ''; // Clear the uploaded image
   }
 }
