@@ -16,27 +16,34 @@
         <li>
           <a [routerLink]="['/dashboard/profile', userId]" style="color: white"
             ><i class="fas fa-user"></i> Profile</a>
-        </li>        <button class="btn btn-primary mt-4">Post</button>
+        </li>  
+        <button class="btn btn-primary mt-4">Post</button>
       </ul>
-      <div class="flex flex-row justify-between" style="position: relative;">
-        <div class="user-name">
-          <img [src]="this.user.profile_image_url" alt="User 1" class="profile-icon" />
-          <div class="user-info flex justify-between">
+      <div class="flex flex-row justify-between">
+        <div
+          class="user-name"
+          [ngClass]="{ 'hover-effect': !isCardBoxVisible }"
+        >
+        <img [src]="this.user.profile_image_url" alt="User 1" class="profile-icon" />
+          <div class="user-info flex justify-between ml-3">
             <div class="user-details">
               <p>{{ this.user.full_name }}</p>
               <span class="txt1" style="color: #71761b">{{ this.user.username }}</span>
             </div>
           </div>
-          <i class="fas fa-ellipsis-h three-dots" (click)="toggleDropdown()"></i>
-      
-          <!-- Dropdown Menu for Logout -->
-          <div *ngIf="dropdownOpen" class="dropdown-menu">
-            <button class="dropdown-item logout-button" (click)="logout()">Logout</button>
+          <i
+            class="fas fa-ellipsis-h three-dots ml-4"
+            (click)="toggleCard($event)"
+          ></i>
+          <!-- Card box that appears on click -->
+          <div class="card-box" *ngIf="isCardBoxVisible" #cardBox>
+            <p (click)="onOptionClick($event)" class="option-item">
+              Add an existing account
+            </p>
+            <p (click)="onOptionClick($event)" class="option-item">Log out</p>
           </div>
         </div>
       </div>
-      
-      
     </div>
 
     <div class="flex flex-row gap-8">
@@ -44,19 +51,35 @@
         <div class="custom-underline d-flex">
           <div class="main-tab-link flex-1">
             <a
+              *ngIf="isHomeDashboard"
               class="nav-link position-relative w-25 text-center nav-link active"
               aria-current="page"
               (click)="homePageDashboard()"
               >For you</a
             >
+            <a
+            *ngIf="!isHomeDashboard"
+            class="nav-link position-relative w-25 text-center nav-link-following"
+            aria-current="page"
+            (click)="homePageDashboard()"
+            >For you</a
+          >
           </div>
           <div class="main-tab-link flex-1">
             <a
+              *ngIf="!isFollowingDashboard"
               class="nav-link position-relative w-25 text-center nav-link-following"
               aria-current="page"
               (click)="followingPageDashboard()"
               >Following</a
             >
+            <a
+            *ngIf="isFollowingDashboard"
+            class="nav-link position-relative w-25 text-center nav-link active"
+            aria-current="page"
+            (click)="followingPageDashboard()"
+            >Following</a
+          >
           </div>
         </div>
 
@@ -109,7 +132,7 @@
                    <a (click)="profilePageRoute(post.user?.id)">
                   <img
                   (click)="profilePageRoute(post.user?.id)"
-                  [src]="post.user?.profile_image_url"
+                  [src]="this.user.profile_image_url"
                   alt="User 1"
                   class="user-avatar"
                   />      
@@ -140,27 +163,24 @@
                     class="uploaded-image rounded-lg mt-2"
                     *ngIf="post.media_url"
                   >
-                  <!-- <iframe width="700" height="400" src="https://go.screenpal.com/watch/cZXee4nc4Jo" 
-                  title="YouTube video player" frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-          </iframe> -->
-                     <img [src]="post.media_url" alt="" class="post-image" /> 
-                  </div>
+                  <img [src]="post.media_url" alt="" class="post-image" /> 
+                </div>
                   <div
-                    class="post-actions d-flex justify-content-betweegitn align-items-center mt-3"
+                    class="post-actions d-flex justify-content-between align-items-center mt-3"
                   >
                     <div class="like-button-container">
                       <!-- Like Button -->
                       <button
-                      (mouseenter)="toggleReactions(post.id, true)"
-                      class="action-button like-button like-btn"
+                        (mouseenter)="toggleReactions(post.id, true)"
+                        class="action-button like-button like-btn"
+                        [ngClass]="{ liked: post.userReacted }"
                         (click)="likePost(post)"
                       >
-                      <i
-                      class="fas"
-                      [ngClass]="getReactionIcon(post.reactionType)"
-                    ></i>
-                        <span>{{ post.like_count }}</span>
+                        <i
+                          class="fas"
+                          [ngClass]="getReactionIcon(post.reactionType)"
+                        ></i>
+                        <span>{{ post.likes }}</span>
                       </button>
 
                       <!-- Reactions Overlay -->
@@ -169,66 +189,35 @@
                         *ngIf="showReactions[post.id]"
                         (mouseleave)="toggleReactions(post.id, false)"
                       >
-                        <img
-                          src="assets/reactions/like (1).png"
-                          alt="Like"
+                        <div
+                          *ngFor="let reaction of reactions"
                           (click)="
-                          react(post, 'like', 'assets/reactions/like (1).png')
-                        "
-                        />
-                        <img
-                          src="assets/reactions/love.png"
-                          alt="Love"
-                          (click)="
-                          react(post, 'love', 'assets/reactions/like (1).png')
-                        "
-                        />
-                        <img
-                          src="assets/reactions/haha.png"
-                          alt="Haha"
-                          (click)="
-                          react(post, 'haha', 'assets/reactions/like (1).png')
-                        "
-                        />
-                        <img
-                          src="assets/reactions/wow.png"
-                          alt="Wow"
-                          (click)="
-                          react(post, 'wow', 'assets/reactions/like (1).png')
-                        "
-                        />
-                        <img
-                          src="assets/reactions/sad.png"
-                          alt="Sad"
-                          (click)="
-                          react(post, 'sad', 'assets/reactions/like (1).png')
-                        "
-                        />
-                        <img
-                          src="assets/reactions/angry.png"
-                          alt="Angry"
-                          (click)="
-                          react(post, 'angry', 'assets/reactions/like (1).png')
-                        "
-                        />
+                            react(post, reaction.type, reaction.iconPath)
+                          "
+                        >
+                          <img
+                            [src]="reaction.iconPath"
+                            [alt]="reaction.type"
+                          />
+                        </div>
                       </div>
                     </div>
 
                     <!-- Comment Button -->
                     <button
+                    (click)="openDialogueBox(post.id)" 
                       class="action-button comment-btn"
-                      (click)="openDialogueBox(post.id)" 
-                      >
+                    >
                       <i class="fas fa-comment"></i>
+                      <span>{{ post.comments }}</span>
                     </button>
-
 
                     <!-- Repost Button -->
                     <button
                       class="action-button repost-btn"
                     >
                       <i class="fas fa-retweet"></i>
-                      <span></span>
+                      <span>{{ post.reposts }}</span>
                     </button>
                   </div>
                 </div>
@@ -239,15 +228,14 @@
             <div *ngFor="let post of tweets" class="posted">
               <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
-                  <i class="fa-solid fa-user h2"></i>                 
-                   <a (click)="profilePageRoute(post.user?.id)">
-                  <img
-                  (click)="profilePageRoute(post.user?.id)"
-                  [src]="post.user?.profile_image_url"
-                  alt="User 1"
-                  class="avatar-image"
-                  />      
-                </a>  
+                  <a (click)="profilePageRoute(post.user?.id)">
+                    <img
+                    (click)="profilePageRoute(post.user?.id)"
+                    [src]="this.user.profile_image_url"
+                    alt="User 1"
+                    class="user-avatar"
+                    />      
+                  </a>    
                 </div>
                 <div class="d-flex flex-column flex-1">
                   <div
@@ -316,7 +304,7 @@
                     <!-- Comment Button -->
                     <button
                       class="action-button comment-btn"
-                      (click)="toggleCommentPopup()"
+                      (click)="openDialogueBox(post.id)" 
                     >
                       <i class="fas fa-comment"></i>
                       <span></span>
@@ -394,6 +382,7 @@
       </aside>
     </div>
   </div>
+
   <div class="comment-modal" *ngIf="showCommentModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -461,6 +450,4 @@
       </div>
     </div>
   </div>
-
-  
 </body>

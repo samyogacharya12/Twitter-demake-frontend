@@ -1,14 +1,15 @@
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { TwitterServiceService } from '../twitter-service.service';
 import { LoginServiceService } from '../login/login-service.service';
+import { FollowService } from '../follow-service.service';
 import {Router} from "@angular/router";
 import { TweetTs } from '../models/tweet.ts';
-import { IUser, User } from '../models/user';
 import { People } from '../models/people';
+import { IUser, User } from '../models/user';
 import { Comments } from '../models/comments';
-import { FollowService } from '../follow-service.service';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-interface  Post {
+
+interface Post {
   id: number;
   userReacted: boolean;
   likes: number;
@@ -24,31 +25,26 @@ interface  Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  showReactions: { [postId: number]: boolean } = {}; // Object to track reactions per post
+  content: string = ''; 
   peoples?:People[];
+  showReactions: { [postId: number]: boolean } = {}; // Object to track reactions per post
+  selectedReactionIcon: string | null = null;
   showCommentModal = false;
-  isOpen=false;
+  isCardBoxVisible = false;
+  role?: string | any;
   userId: string | any = null;
+  user:User=new User();
   tweet = { content: '', media_url: '', tweet_id:''};
   tweets?:TweetTs[];
-  user:User=new User();
-  content: string = ''; 
-  selectedReactionIcon: string | null = null;
-  role?: string | any;
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
-  
-  constructor(
-    private authService: LoginServiceService,
-    private twitterService: TwitterServiceService,private loginService: LoginServiceService,
-    private followService: FollowService,
-    private router: Router) { }
-  commentUserName?:string;
-  commentProfileUrl?:string;
-  commentMediaUrl?:string;
   comments:Comments[]=[];
   comment: Comments = new Comments();
-  userName?: string = 'John Doe';
+  commentInput?:any;
+  parentId?:any;
+  selectedFile?: File;
+  imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
+    userName?: string = 'John Doe';
   statusList?: [];
   followers?: number = 1500;
   following?: number = 300;
@@ -58,11 +54,54 @@ export class DashboardComponent implements OnInit {
   likeCount = 789;
   showNotifications: boolean = false;
   showComment: boolean = false;
-  imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
-  selectedFile?: File;
-  parentId?:any;
-  isCardBoxVisible = false;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
+
+  constructor(
+    private authService: LoginServiceService,
+    private twitterService: TwitterServiceService,private loginService: LoginServiceService,
+    private followService: FollowService,
+    private router: Router) { }
+  ngOnInit(): void {
+    this.authService.me().subscribe(resp=>{
+      localStorage.setItem("userId", resp.id);
+      this.userId=localStorage.getItem('userId');
+      localStorage.setItem("profile_image_url", resp.profile_image_url);
+      this.loginService.findByUserId(this.userId).subscribe(res=>{
+        this.user=res;
+        console.log('profile image url' +this.user.profile_image_url);
+      });
+ });
+    this.comments=[];
+    this.twitterService.fetchTweets().subscribe(
+      response => {
+        this.tweets=response;
+        
+              },
+      error => {
+        console.error("error", error);
+      }
+    );
+    this.role = localStorage.getItem("role");
+    this.parentId=localStorage.getItem('parentTweetId');    
+    this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
+          response.reply_ids.forEach((reply: any) => {
+           this.twitterService.fetchTweetById(reply).subscribe(res=>{
+            this.comment=new Comments();
+            this.comment.username=res.user.username;
+            this.comment.profileUrl=res.user.profile_image_url;
+            this.comment.comment=res.content;
+            this.comment.mediaUrl=res.media_url;
+            this.comments?.push(this.comment);
+
+           })
+          });   
+    });
+    this.twitterService.fetchPeoples().subscribe(res=>{
+      this.peoples=res;
+ });
+    console.log('following page dashboard'+ this.isFollowingDashboard);
+    console.log(' current tweets ' +this.tweets?.length); 
+  }
 
   // Sample notifications data
   notifications = [
@@ -111,232 +150,7 @@ export class DashboardComponent implements OnInit {
   isVisible = false;
 
   isModalVisible = false;
-  commentInput = '';
 
-  dropdownOpen = false;
-
-
-  reactions = [
-    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
-    { type: 'love', iconPath: 'assets/reactions/love.png' },
-    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
-    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
-    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
-    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
-  ];
-  ngOnInit(): void {
-    this.authService.me().subscribe(resp=>{
-      localStorage.setItem("userId", resp.id);
-      this.userId=localStorage.getItem('userId');
-      localStorage.setItem("profile_image_url", resp.profile_image_url);
-      this.loginService.findByUserId(this.userId).subscribe(res=>{
-        this.user=res;
-        console.log('profile image url' +this.user.profile_image_url);
-      });
- });
-    this.comments=[];
-    this.twitterService.fetchTweets().subscribe(
-      response => {
-        this.tweets=response;
-        
-              },
-      error => {
-        console.error("error", error);
-      }
-    );
-    this.role = localStorage.getItem("role");
-    this.parentId=localStorage.getItem('parentTweetId');    
-    this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
-          response.reply_ids.forEach((reply: any) => {
-           this.twitterService.fetchTweetById(reply).subscribe(res=>{
-            this.comment=new Comments();
-            this.comment.username=res.user.username;
-            this.comment.profileUrl=res.user.profile_image_url;
-            this.comment.comment=res.content;
-            this.comment.mediaUrl=res.media_url;
-            this.comments?.push(this.comment);
-
-           })
-          });   
-    });
-    this.twitterService.fetchPeoples().subscribe(res=>{
-      this.peoples=res;
- });
-    console.log('following page dashboard'+ this.isFollowingDashboard);
-    console.log(' current tweets ' +this.tweets?.length); 
-  }
-
-  toggleCard(event: Event) {
-    event.stopPropagation(); // Prevent click propagation to document
-    this.isCardBoxVisible = !this.isCardBoxVisible;
-  }
-  
-
-  // Close the card box if clicked outside of it
-  @HostListener('document:click', ['$event'])
-  closeCardBox(event: MouseEvent) {
-    if (this.cardBox && !this.cardBox.nativeElement.contains(event.target)) {
-      this.isCardBoxVisible = false; // Close card box if clicked outside
-    }
-  }
-
-
-
-toggleDropdown() {
-  console.log('method is called');
-  this.dropdownOpen = !this.dropdownOpen;
-}
-
-logout() {
-  localStorage.removeItem('userId');
-  localStorage.removeItem('profile_image_url');
-  localStorage.removeItem('authToken'); 
-  this.router.navigate(['/login']);
-  console.log("User logged out");
-}
-
-navigateWithParams(id:any) {
-  console.log('id'+id);
-  // Using `navigate` with route parameters and query parameters
-  this.router.navigate(['/dashboard/profile', id]); 
-  this.ngOnInit();   
-}
-  profilePageRoute(userId?:any):void{
-    console.log('user id'+userId);
-    console.log('user profile');
-    this.router.navigate(['/dashboard/profile', userId]); 
-  }
-
-
-
-  openDialogueBox(parentTweetId?:any):void{
-    console.log('parent tweet value' +parentTweetId);
-    localStorage.setItem('parentTweetId', parentTweetId);
-    this.parentId=parentTweetId;
-    this.ngOnInit();
-    this.toggleCommentModal();
-  }
-
-  follow(userId:any):void{
-    console.log('following person');
-    console.log(' follow ' +userId);
-    this.followService.follow(userId).subscribe(resp=>{
-          console.log('follow is done'+resp);
-          this.ngOnInit();   
-    });
-  }
-
-  // Function to close the modal
-  closeModal() {
-    this.isOpen = false;
-  }
-
-  // Function to add a comment
-  addComment() {
-    console.log('sending data');
-    const formdata=new FormData();
-    formdata.append('parent_tweet_id', this.parentId);
-    formdata.append('content',this.commentInput);
-    console.log('user id ' +this.userId);
-    formdata.append('user_id', this.userId);
-    this.twitterService.submit(formdata).subscribe(resp=>{
-      console.log('comment is saved');
-      this.showCommentModal=false;
-      this.commentInput='';
-    });
-    const trimmedComment = this.commentInput.trim();
-  }
-  removeImage() {
-    this.selectedFile = undefined;
-    this.imagePreviewUrl = null; // Reset the image preview
-    const fileInput: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = ''; // Reset the file input
-    }
-  }
-
-
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0]; 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
-    };
-    if(this.selectedFile){
-    reader.readAsDataURL(this.selectedFile);
-    }
-  }
-
-
-  newPost?: string = '';
-
-  recentPosts: { content: string; timestamp: string }[] = [
-    { content: 'Had a great day at the beach!', timestamp: '2 hours ago' },
-    { content: 'Loving the new Angular features.', timestamp: '1 day ago' },
-    { content: 'Just finished a 5K run!', timestamp: '3 days ago' },
-  ];
-
-  toggleNotifications() {
-    this.showNotifications = !this.showNotifications;
-  }
-  increaseCount(reaction: string) {
-    if (reaction === 'comment') {
-      this.commentCount++;
-      this.showComment = true;
-    } else if (reaction === 'retweet') {
-      this.retweetCount++;
-    } else if (reaction === 'like') {
-      this.likeCount++;
-    }
-  }
-
-  toggleCommentPopup() {
-    this.showCommentModal = !this.showCommentModal;
-  }
-
-  commentOnPost(post: Post) {
-    post.comments++;
-    // Optional: Open a comment input or modal if needed
-  }
-
-  repost(post: Post) {
-    post.reposts++;
-  }
-
-  // Function to toggle like state for a post
-  public likePost(post: TweetTs) {
-    if (post.userReacted && post.likes) {
-      post.likes -= 1; // Remove like
-      post.selectedReactionIcon = null; // Clear selected reaction icon
-      post.reactionType = ''; // Reset reaction type
-    } else if(post.likes) {
-      post.likes += 1; // Add like
-      post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
-      post.reactionType = 'like'; // Set reaction type to like
-    }
-    post.userReacted = !post.userReacted; // Toggle like state
-    
-
-  }
-
-  // Function to handle reactions
-  public react(post: TweetTs, reaction: string, iconPath: string) {
-    post.selectedReactionIcon = iconPath; // Set the selected reaction icon
-    post.reactionType = reaction; // Update the reaction type
-
-    if (!post.userReacted) {
-      this.likePost(post); // Increment like count if not already liked
-    } else {
-      // (if the user clicks the same reaction again, you might want to reset it)
-    }
-
-    this.showReactions[post.id] = false;
-  }
-
-  toggleReactions(postId: number, state: boolean) {
-    this.showReactions[postId] = state;
-  }
 
   homePageDashboard():void{
     console.log("home page dashboard");
@@ -367,23 +181,38 @@ navigateWithParams(id:any) {
       }
     );
   }
+  // Function to open the modal
+  openModal() {
+    this.isModalVisible = true;
+  }
 
-  getReactionIcon(reactionType: string | undefined): string {
-    switch (reactionType) {
-      case 'like':
-        return 'fa-thumbs-up';
-      case 'love':
-        return 'fa-heart'; // Change this to your desired icon for 'love'
-      case 'haha':
-        return 'fa-laugh';
-      case 'wow':
-        return 'fa-surprise';
-      case 'sad':
-        return 'fa-sad-tear';
-      case 'angry':
-        return 'fa-angry';
-      default:
-        return 'fa-heart';
+  // Function to close the modal
+  closeModal() {
+    this.isModalVisible = false;
+  }
+
+  // Function to add a comment
+  addComment() {
+    console.log('sending data');
+    const formdata=new FormData();
+    formdata.append('parent_tweet_id', this.parentId);
+    formdata.append('content',this.commentInput);
+    console.log('user id ' +this.userId);
+    formdata.append('user_id', this.userId);
+    this.twitterService.submit(formdata).subscribe(resp=>{
+      console.log('comment is saved');
+      this.showCommentModal=false;
+      this.commentInput='';
+    });
+    const trimmedComment = this.commentInput.trim();
+  }
+
+  removeImage() {
+    this.selectedFile = undefined;
+    this.imagePreviewUrl = null; // Reset the image preview
+    const fileInput: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = ''; // Reset the file input
     }
   }
 
@@ -409,15 +238,150 @@ navigateWithParams(id:any) {
     )
   }
 
+  newPost?: string = '';
+
+  recentPosts: { content: string; timestamp: string }[] = [
+    { content: 'Had a great day at the beach!', timestamp: '2 hours ago' },
+    { content: 'Loving the new Angular features.', timestamp: '1 day ago' },
+    { content: 'Just finished a 5K run!', timestamp: '3 days ago' },
+  ];
+
+  toggleNotifications() {
+    this.showNotifications = !this.showNotifications;
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0]; 
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template
+    };
+    if(this.selectedFile){
+    reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+  increaseCount(reaction: string) {
+    if (reaction === 'comment') {
+      this.commentCount++;
+      this.showComment = true;
+    } else if (reaction === 'retweet') {
+      this.retweetCount++;
+    } else if (reaction === 'like') {
+      this.likeCount++;
+    }
+  }
+
+  profilePageRoute(userId?:any):void{
+    console.log('user id'+userId);
+    console.log('user profile');
+    this.router.navigate(['/dashboard/profile', userId]); 
+  }
+
+
+  toggleCommentPopup() {
+    this.showComment = !this.showComment;
+  }
+
+  openDialogueBox(parentTweetId?:any):void{
+    localStorage.setItem('parentTweetId', parentTweetId);
+    this.parentId=parentTweetId;
+    this.ngOnInit();
+    this.toggleCommentModal();
+  }
+
+
+  repost(post: Post) {
+    post.reposts++;
+  }
+  // Function to toggle like state for a post
+  public likePost(post: TweetTs) {
+    if (post.userReacted && post.likes) {
+      post.likes -= 1; // Remove like
+      post.selectedReactionIcon = null; // Clear selected reaction icon
+      post.reactionType = ''; // Reset reaction type
+    } else if(post.likes) {
+      post.likes += 1; // Add like
+      post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
+      post.reactionType = 'like'; // Set reaction type to like
+    }
+    post.userReacted = !post.userReacted; // Toggle like state
+    
+
+  }
+  // Function to handle reactions
+  public react(post: TweetTs, reaction: string, iconPath: string) {
+    post.selectedReactionIcon = iconPath; // Set the selected reaction icon
+    post.reactionType = reaction; // Update the reaction type
+
+    if (!post.userReacted) {
+      this.likePost(post); // Increment like count if not already liked
+    } else {
+      // (if the user clicks the same reaction again, you might want to reset it)
+    }
+
+    this.showReactions[post.id] = false;
+  }
+
+  getReactionIcon(reactionType: string | undefined): string {
+    switch (reactionType) {
+      case 'like':
+        return 'fa-thumbs-up';
+      case 'love':
+        return 'fa-heart'; // Change this to your desired icon for 'love'
+      case 'haha':
+        return 'fa-laugh';
+      case 'wow':
+        return 'fa-surprise';
+      case 'sad':
+        return 'fa-sad-tear';
+      case 'angry':
+        return 'fa-angry';
+      default:
+        return 'fa-heart';
+    }
+  }
+
   toggleCommentModal() {
+    console.log('toggleCommentModal');
     this.showCommentModal = !this.showCommentModal;
+    console.log(' showCommentModal '+this.showCommentModal);
+  }
+
+  // Call this method when the comment button is clicked
+  commentOnPost(post: Post) {
+    this.toggleCommentModal();
+  }
+
+  toggleReactions(postId: number, state: boolean) {
+    this.showReactions[postId] = state;
+  }
+
+  // Define reactions array
+  reactions = [
+    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
+    { type: 'love', iconPath: 'assets/reactions/love.png' },
+    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
+    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
+    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
+    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
+  ];
+
+  toggleCard(event: Event) {
+    event.stopPropagation(); // Prevent click propagation to document
+    this.isCardBoxVisible = !this.isCardBoxVisible;
+  }
+
+  // Close the card box if clicked outside of it
+  @HostListener('document:click', ['$event'])
+  closeCardBox(event: MouseEvent) {
+    if (this.cardBox && !this.cardBox.nativeElement.contains(event.target)) {
+      this.isCardBoxVisible = false; // Close card box if clicked outside
+    }
   }
 
   onOptionClick(event: MouseEvent) {
     event.stopPropagation(); // Prevent click from closing the card-box
     console.log('Option clicked:', event.target); // You can handle option selection here
-
   }
-
-
 }

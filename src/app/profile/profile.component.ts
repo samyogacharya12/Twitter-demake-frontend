@@ -41,9 +41,11 @@ export class ProfileComponent {
     this.userId = this.route.snapshot.paramMap.get('id');
     if(this.userId===localStorage.getItem('userId')){
       this.showProfile=true;
+      this.isAdminPage=true;
       console.log(this.showProfile);
     } else{
       this.showProfile=false;
+      this.isAdminPage=false;
     }
    this.loginService.findByUserId(this.userId).subscribe(
     response => {
@@ -80,10 +82,7 @@ export class ProfileComponent {
   }
 
   follow(userId:any):void{
-    console.log('following person');
-    console.log(' follow ' +userId);
     this.followService.follow(userId).subscribe(resp=>{
-          console.log('follow is done'+resp);
           this.ngOnInit();   
     });
   }

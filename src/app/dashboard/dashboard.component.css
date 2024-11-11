@@ -1,7 +1,3 @@
-input[type="range"] {
-  width: 100px;
-}
-
 body {
   display: block;
   margin: 0;
@@ -11,45 +7,6 @@ body {
   background-color: rgb(0, 0, 0);
   scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
 }
-
-.user-name {
-  position: relative;
-}
-
-.three-dots {
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 8px;
-  background-color: white;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  width: 150px;
-  padding: 8px 0;
-  z-index: 1000;
-  display: block; /* Ensures visibility */
-}
-
-.dropdown-item {
-  width: 100%;
-  padding: 10px 16px;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #333;
-}
-
-.dropdown-item:hover {
-  background-color: #f5f5f5;
-}
-
 
 .container-dashboard {
   display: flex;
@@ -63,10 +20,10 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 402px;
   align-items: flex-end;
   z-index: 3;
   height: 100vh;
+  width: 30%;
   border-right: 1px solid;
   padding: 20px;
   box-sizing: border-box;
@@ -309,14 +266,6 @@ i[class^="icon-"]:hover::before {
   /* The box will match the image's size */
 }
 
-.post-image-container {
-  width: 100%;
-  margin-top: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  /* Rounded corners like Twitter images */
-}
-
 .post-image-status {
   align-items: left;
   width: 900px;
@@ -327,9 +276,17 @@ i[class^="icon-"]:hover::before {
   /* Cover the container without distortion */
 }
 
+.post-image-container {
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  /* Rounded corners like Twitter images */
+}
+
 .post-image {
   align-items: left;
-  width: 4000px;
+  width: 1400px;
   /* Set the image width */
   height: 500px;
   /* Maintain aspect ratio */
@@ -439,54 +396,6 @@ i[class^="icon-"]:hover::before {
 .username {
   color: #657786;
   font-size: 14px;
-}
-
-.user-name {
-  position: relative;
-  display: flex;
-  padding: 15px;
-  /* Padding around username */
-  color: #e1e8ed;
-  /* Text color */
-  align-items: center;
-  transition: background-color 0.3s;
-}
-
-.user-name.hover-effect:hover {
-  background-color: #111111;
-  /* Twitter blue background on hover */
-  color: white;
-  /* White text on hover */
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-.card-box {
-  position: absolute;
-  bottom: 80px; /* Position the card box above the three dots */
-  right: 0;
-  background-color: rgba(0, 0, 0, 0);
-  border: 0px solid black;
-  z-index: 1000;
-  width: 280px; /* Adjust width as needed */
-  border-radius: 16px;
-  padding-bottom: 12px;
-  padding-top: 12px;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
-    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
-  cursor: pointer;
-}
-
-.card-box p {
-  padding: 15px; /* Initial padding */
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background color and padding */
-}
-
-.card-box p:hover {
-  background-color: #111111;
-  color: #fff;
 }
 
 .timestamp {
@@ -655,11 +564,6 @@ i[class^="icon-"]:hover::before {
   position: relative;
 }
 
-.like-button:hover + .reactions-overlay,
-.like-button-container:hover .reactions-overlay {
-  display: flex; /* or block, depending on layout */
-}
-
 .like-button {
   margin-right: 100px;
   /* Add space to the right of the like button */
@@ -798,12 +702,11 @@ i[class^="icon-"]:hover::before {
   margin-bottom: 16px;
 }
 
-
-
 .user-avatar {
-  width: 0%; /* Ensures the image fills the container */
-  height: 0%;
-  object-fit: cover;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
 }
 
 .user-info {
@@ -900,12 +803,23 @@ i[class^="icon-"]:hover::before {
 }
 
 .user-name {
+  position: relative;
   display: flex;
   padding: 15px;
   /* Padding around username */
   color: #e1e8ed;
   /* Text color */
   align-items: center;
+  transition: background-color 0.3s;
+}
+
+.user-name.hover-effect:hover {
+  background-color: #111111;
+  /* Twitter blue background on hover */
+  color: white;
+  /* White text on hover */
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 .logo-container {
@@ -1335,4 +1249,44 @@ aside {
   height: 30px; /* Adjust the height as needed */
   background-color: #ccc; /* Line color */
   margin-top: 4px; /* Space between the image and the line */
+}
+
+.like-button:hover + .reactions-overlay,
+.like-button-container:hover .reactions-overlay {
+  display: flex; /* or block, depending on layout */
+}
+
+.card-box {
+  position: absolute;
+  bottom: 80px; /* Position the card box above the three dots */
+  right: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid black;
+  z-index: 1000;
+  width: 280px; /* Adjust width as needed */
+  border-radius: 16px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  cursor: pointer;
+}
+
+.card-box p {
+  padding: 15px; /* Initial padding */
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background color and padding */
+}
+
+.card-box p:hover {
+  background-color: #111111;
+  color: #fff;
+}
+
+/* Profile Image Styling */
+.profile-image {
+  width: 40px; /* Small profile image */
+  height: 40px;
+  border-radius: 50%;
 }
