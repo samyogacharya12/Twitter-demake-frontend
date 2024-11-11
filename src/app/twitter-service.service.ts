@@ -38,7 +38,7 @@ export class TwitterServiceService {
       );
   }
 
-  submitLikes(tweet: { tweer_id: string }):Observable<any>{
+  submitLikes(tweet:any):Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
       'Accept': 'multipart/form-data'

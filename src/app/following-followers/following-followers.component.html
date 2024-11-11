@@ -13,9 +13,10 @@
           <li><i class="fas fa-search"></i>Explore</li>
           <li><i class="fas fa-bell"></i>Notifications</li>
           <li><i class="fas fa-envelope"></i>Messages</li>
-          <li routerLink="/dashboard/profile">
-            <i class="fas fa-user"></i> Profile
-          </li>
+          <li>
+            <a [routerLink]="['/dashboard/profile', userId]" style="color: white"
+              ><i class="fas fa-user"></i> Profile</a>
+          </li>  
           <button class="btn btn-primary mt-4">Post</button>
         </ul>
         <div class="flex flex-row justify-between">

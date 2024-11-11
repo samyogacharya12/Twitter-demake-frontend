@@ -26,7 +26,6 @@ export class FollowingFollowersComponent {
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
    this.followingType=localStorage.getItem('followingType');
-   console.log('followingType'+this.followingType);
    this.loginService.findByUserId(this.userId).subscribe(
     response => {
       this.user=response;// Navigate to a protected route on successful login
@@ -74,9 +73,6 @@ export class FollowingFollowersComponent {
     this.isFollowing=false;
     this.isFollowers=false;
     this.isVerifiedFollower=true;
-    this.followService.fetchFollowing(this.userId).subscribe(res=>{
-      this.users=res.following || [];
-    });
   }
 
 

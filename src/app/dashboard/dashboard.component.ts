@@ -384,4 +384,12 @@ export class DashboardComponent implements OnInit {
     event.stopPropagation(); // Prevent click from closing the card-box
     console.log('Option clicked:', event.target); // You can handle option selection here
   }
+
+  logout() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('profile_image_url');
+    localStorage.removeItem('authToken'); 
+    this.router.navigate(['/login']);
+    console.log("User logged out");
+  }
 }

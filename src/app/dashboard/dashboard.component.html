@@ -40,7 +40,7 @@
             <p (click)="onOptionClick($event)" class="option-item">
               Add an existing account
             </p>
-            <p (click)="onOptionClick($event)" class="option-item">Log out</p>
+            <p (click)="logout()" class="option-item">Log out</p>
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@
                    <a (click)="profilePageRoute(post.user?.id)">
                   <img
                   (click)="profilePageRoute(post.user?.id)"
-                  [src]="this.user.profile_image_url"
+                  [src]="post.user?.profile_image_url"
                   alt="User 1"
                   class="user-avatar"
                   />      
@@ -231,7 +231,7 @@
                   <a (click)="profilePageRoute(post.user?.id)">
                     <img
                     (click)="profilePageRoute(post.user?.id)"
-                    [src]="this.user.profile_image_url"
+                    [src]="post.user?.profile_image_url"
                     alt="User 1"
                     class="user-avatar"
                     />      
