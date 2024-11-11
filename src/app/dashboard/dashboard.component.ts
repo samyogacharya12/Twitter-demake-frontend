@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { TwitterServiceService } from '../twitter-service.service';
 import { LoginServiceService } from '../login/login-service.service';
@@ -8,7 +7,7 @@ import { IUser, User } from '../models/user';
 import { People } from '../models/people';
 import { Comments } from '../models/comments';
 import { FollowService } from '../follow-service.service';
-import { ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 interface  Post {
   id: number;
   userReacted: boolean;
@@ -30,7 +29,7 @@ export class DashboardComponent implements OnInit {
   showCommentModal = false;
   isOpen=false;
   userId: string | any = null;
-  tweet = { content: '', media_url: '' };
+  tweet = { content: '', media_url: '', tweet_id:''};
   tweets?:TweetTs[];
   user:User=new User();
   content: string = ''; 
@@ -38,6 +37,7 @@ export class DashboardComponent implements OnInit {
   role?: string | any;
   isHomeDashboard?:boolean=true;
   isFollowingDashboard?:boolean=false;
+  
   constructor(
     private authService: LoginServiceService,
     private twitterService: TwitterServiceService,private loginService: LoginServiceService,
@@ -61,6 +61,8 @@ export class DashboardComponent implements OnInit {
   imagePreviewUrl: string | ArrayBuffer | null = null; // This will store the preview URL
   selectedFile?: File;
   parentId?:any;
+  isCardBoxVisible = false;
+  @ViewChild('cardBox') cardBox: ElementRef | undefined;
 
   // Sample notifications data
   notifications = [
@@ -127,7 +129,10 @@ export class DashboardComponent implements OnInit {
       localStorage.setItem("userId", resp.id);
       this.userId=localStorage.getItem('userId');
       localStorage.setItem("profile_image_url", resp.profile_image_url);
-
+      this.loginService.findByUserId(this.userId).subscribe(res=>{
+        this.user=res;
+        console.log('profile image url' +this.user.profile_image_url);
+      });
  });
     this.comments=[];
     this.twitterService.fetchTweets().subscribe(
@@ -139,9 +144,6 @@ export class DashboardComponent implements OnInit {
         console.error("error", error);
       }
     );
-    this.loginService.findByUserId(this.userId).subscribe(res=>{
-      this.user=res;
-    });
     this.role = localStorage.getItem("role");
     this.parentId=localStorage.getItem('parentTweetId');    
     this.twitterService.fetchTweetById(this.parentId).subscribe(response=>{
@@ -163,6 +165,21 @@ export class DashboardComponent implements OnInit {
     console.log('following page dashboard'+ this.isFollowingDashboard);
     console.log(' current tweets ' +this.tweets?.length); 
   }
+
+  toggleCard(event: Event) {
+    event.stopPropagation(); // Prevent click propagation to document
+    this.isCardBoxVisible = !this.isCardBoxVisible;
+  }
+  
+
+  // Close the card box if clicked outside of it
+  @HostListener('document:click', ['$event'])
+  closeCardBox(event: MouseEvent) {
+    if (this.cardBox && !this.cardBox.nativeElement.contains(event.target)) {
+      this.isCardBoxVisible = false; // Close card box if clicked outside
+    }
+  }
+
 
 
 toggleDropdown() {
@@ -299,6 +316,8 @@ navigateWithParams(id:any) {
       post.reactionType = 'like'; // Set reaction type to like
     }
     post.userReacted = !post.userReacted; // Toggle like state
+    
+
   }
 
   // Function to handle reactions
@@ -393,5 +412,12 @@ navigateWithParams(id:any) {
   toggleCommentModal() {
     this.showCommentModal = !this.showCommentModal;
   }
+
+  onOptionClick(event: MouseEvent) {
+    event.stopPropagation(); // Prevent click from closing the card-box
+    console.log('Option clicked:', event.target); // You can handle option selection here
+
+  }
+
 
 }

@@ -14,9 +14,11 @@ export class TwitterServiceService {
 
   private serverURL = 'http://localhost:8090/users';  // Backend API URL
 
-
-
   constructor(private http: HttpClient) { }
+
+
+
+
 
   fetchPeoples(): Observable<any> {
     const headers = new HttpHeaders({
@@ -36,6 +38,22 @@ export class TwitterServiceService {
       );
   }
 
+  submitLikes(tweet: { tweer_id: string }):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Accept': 'multipart/form-data'
+    });
+    return this.http.post<any>(`${this.apiURL}/likes`, tweet, { headers })
+    .pipe(
+        tap(response => {
+          console.log('Summit User Response:', response);
+        }),
+        catchError(error => {
+          console.error('Error while submitting user:', error);
+          return throwError(error);
+        })
+      );
+  }
 
 
   submit(tweet: FormData): Observable<any> {

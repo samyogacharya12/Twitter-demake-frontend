@@ -24,14 +24,14 @@
             [ngClass]="{ 'hover-effect': !isCardBoxVisible }"
           >
             <img
-              src="../../assets/gaurav1.jpeg"
+              [src]="user.profile_image_url"
               alt="User 1"
               class="profile-image"
             />
             <div class="user-info flex justify-between ml-3">
               <div class="user-details">
-                <p>Gaurav Khadka</p>
-                <span class="txt1" style="color: #71761b">@khadhkagaurav</span>
+                <p>{{user.full_name}}</p>
+                <span class="txt1" style="color: #71761b">{{user.username}}</span>
               </div>
             </div>
             <i
@@ -61,8 +61,8 @@
             <div class="user-info">
               <div class="user-details">
                 <div class="name">
-                  <p>Gaurav Khadka</p>
-                  <p class="secondary-username text-muted m-0">@khadhkagaurav</p>
+                  <p>{{user.full_name}}</p>
+                  <p class="secondary-username text-muted m-0">{{user.username}}</p>
                 </div>
               </div>
             </div>
@@ -72,28 +72,52 @@
         <div class="custom-underline d-flex justify-between">
           <div class="main-tab-link flex-1">
             <a
+            *ngIf="!isVerifiedFollower"
+              (click)="isVerifiedFollowers()"
+              class="nav-link position-relative w-75 text-center nav-link ml-5"
+              aria-current="page">Verified <span class="ml-2">Followers</span></a>
+              <a 
+              *ngIf="isVerifiedFollower"
+              (click)="isVerifiedFollowers()"
+                class="nav-link position-relative w-75 text-center nav-link active ml-4"
+                aria-current="page"
+                >Verified <span class="ml-2">Followers</span></a
+              >
+          </div>
+          
+          <div class="main-tab-link flex-1">
+            <a
+            *ngIf="!isFollowers"
+            (click)="isFollowersTab()"
+            class="nav-link position-relative w-75 text-center nav-link-following ml-5"
+            aria-current="page"
+              ><span class="ml-2"> Followers </span></a
+            >
+            <a
+            *ngIf="isFollowers"
+              (click)="isFollowersTab()"
               class="nav-link position-relative w-75 text-center nav-link active ml-4"
               aria-current="page"
-              href="#"
-              >Verified <span class="ml-2">Followers</span></a
+                
+              ><span class="ml-2"> Followers </span></a
             >
           </div>
           <div class="main-tab-link flex-1">
             <a
-            (click)="isFollowersTab()"
-              class="nav-link position-relative w-75 text-center nav-link ml-5"
-              aria-current="page"
-              href="#"
-              >Followers</a
-            >
-          </div>
-          <div class="main-tab-link flex-1">
-            <a
+            *ngIf="!isFollowing"
               (click)="isFollowingTab()"
               class="nav-link position-relative w-75 text-center nav-link-following ml-5"
               aria-current="page"
                 
-              >Following</a
+              ><span class="ml-2"> Following </span></a
+            >
+            <a
+            *ngIf="isFollowing"
+              (click)="isFollowingTab()"
+              class="nav-link position-relative w-75 text-center nav-link active ml-4"
+              aria-current="page"
+                
+              ><span class="ml-2"> Following </span></a
             >
           </div>
         </div>
@@ -117,12 +141,32 @@
           <button class="medium-button mr-3">Follow</button>
         </div>
         </div>
+
+        <div *ngIf="isFollowers">
+          <div
+           *ngFor="let user of users"
+            class="user-profile d-flex align-items-center justify-content-between mt-3"
+          >
+            <div class="d-flex align-items-center ml-3">
+              <img
+                [src]="user.profile_image_url"
+                alt="User Profile"
+                class="profile-image"
+              />
+              <div class="user-details ml-3">
+                <p class="userfollowingname m-0">{{user.full_name}}</p>
+                <p class="secondary-username text-muted m-0">{{user.username}}</p>
+              </div>
+            </div>
+            <button class="medium-button mr-3">Follow</button>
+          </div>
+          </div>
         <p class="user-content mt-2">
           OpenAI’s mission is to ensure that artificial general intelligence
           benefits all of humanity. We’re hiring: http://openai.com/jobs
         </p>
       </div>
-  
+
       <aside class="flex flex-col overflow-auto mt-4 ml-4">
         <input type="text" class="search" placeholder="Search" />
         <div class="flex-1 flex flex-col overflow-auto">

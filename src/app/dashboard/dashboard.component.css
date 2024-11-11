@@ -441,6 +441,54 @@ i[class^="icon-"]:hover::before {
   font-size: 14px;
 }
 
+.user-name {
+  position: relative;
+  display: flex;
+  padding: 15px;
+  /* Padding around username */
+  color: #e1e8ed;
+  /* Text color */
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.user-name.hover-effect:hover {
+  background-color: #111111;
+  /* Twitter blue background on hover */
+  color: white;
+  /* White text on hover */
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.card-box {
+  position: absolute;
+  bottom: 80px; /* Position the card box above the three dots */
+  right: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid black;
+  z-index: 1000;
+  width: 280px; /* Adjust width as needed */
+  border-radius: 16px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  cursor: pointer;
+}
+
+.card-box p {
+  padding: 15px; /* Initial padding */
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background color and padding */
+}
+
+.card-box p:hover {
+  background-color: #111111;
+  color: #fff;
+}
+
 .timestamp {
   font-size: 12px;
   color: #657786;
