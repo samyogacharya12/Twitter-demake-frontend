@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FollowService } from '../follow-service.service';
 import { IUser, User } from '../models/user';
 import { LoginServiceService } from '../login/login-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-following-followers',
@@ -21,7 +22,11 @@ export class FollowingFollowersComponent {
   followingType:string | any;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
 
-  constructor(private route: ActivatedRoute,private location: Location, private followService:FollowService,private loginService:LoginServiceService) {}
+  constructor(private route: ActivatedRoute,
+              private location: Location, 
+              private followService:FollowService,
+              private loginService:LoginServiceService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
@@ -99,4 +104,23 @@ export class FollowingFollowersComponent {
       this.users=resp.followers || [];
      });
   }
+
+  unFollow(userId:any):void{
+    this.followService.delete(userId).subscribe(resp=>{
+          this.ngOnInit();   
+    });
+  }
+
+  follow(userId:any):void{
+    this.followService.follow(userId).subscribe(resp=>{
+          this.ngOnInit();   
+    });
+  }
+
+  profilePageRoute(userId?:string):void{
+    console.log('user id'+userId);
+    console.log('user profile');
+    this.router.navigate(['/dashboard/profile', userId]); 
+  }
+
 }

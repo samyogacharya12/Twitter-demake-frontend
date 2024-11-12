@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
   showNotifications: boolean = false;
   showComment: boolean = false;
   safeMediaUrl:string | any;
+  videoPreviewUrl: string | any;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
 
   constructor(
@@ -222,6 +223,11 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  removeVideo() {
+    this.selectedFile = undefined;
+    this.videoPreviewUrl = null; // Reset the Video Preview
+  }
+
   submit():void{
     const formData = new FormData();
     if (!this.selectedFile) {
@@ -255,7 +261,6 @@ export class DashboardComponent implements OnInit {
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;
   }
-
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0]; 
     if (this.selectedFile) {

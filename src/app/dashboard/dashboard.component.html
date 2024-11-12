@@ -159,19 +159,19 @@
                   <div class="post-text text-white leading-normal">
                     {{ post.content }}
                   </div>
-                  <div>
+                  <div *ngIf="post.media_type==='mp4'">
                     <iframe width="700" height="400" [src]="post.media_url"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
             </iframe>
                 </div>
 
-                  <!-- <div
+                  <div
                     class="uploaded-image rounded-lg mt-2"
-                    *ngIf="post.media_type==='.mp4'"
+                    *ngIf="post.media_type!=='mp4'"
                   >
                   <img [src]="post.media_url" alt="" class="post-image" /> 
-                </div> -->
+                </div>
                   <div
                     class="post-actions d-flex justify-content-between align-items-center mt-3"
                   >
@@ -233,23 +233,23 @@
           </div>
           <div class="posts-container" *ngIf="isFollowingDashboard">
             <div *ngFor="let post of tweets" class="posted">
-              <div class="d-flex gap-4 post-avatar-content">
+              <div class="d-flex gap-4 post-avatar-content" *ngIf="post.content">
                 <div class="bg-light avatar-placeholder">
-                  <a (click)="profilePageRoute(post.user?.id)">
-                    <img
-                    (click)="profilePageRoute(post.user?.id)"
-                    [src]="post.user?.profile_image_url"
-                    alt="User 1"
-                    class="user-avatar"
-                    />      
-                  </a>    
+                   <a (click)="profilePageRoute(post.user?.id)">
+                  <img
+                  (click)="profilePageRoute(post.user?.id)"
+                  [src]="post.user?.profile_image_url"
+                  alt="User 1"
+                  class="user-avatar"
+                  />      
+                </a>  
                 </div>
                 <div class="d-flex flex-column flex-1">
                   <div
                     class="d-flex flex-row align-items-center post-user-info1"
                   >
                     <div class="post-user font-weight-bold text-white">
-                      {{ post.user?.username }}
+                    <span (click)="profilePageRoute(post.user?.id)"> {{ post.user?.username }} </span>
                     </div>
                     <i
                       class="fa-solid fa-circle-check text-primary"
@@ -263,58 +263,66 @@
                     </div>
                   </div>
                   <div class="post-text text-white leading-normal">
+                    {{ post.content }}
                   </div>
+                  <div *ngIf="post.media_type==='mp4'">
+                    <iframe width="700" height="400" [src]="post.media_url"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+            </iframe>
+                </div>
+
                   <div
                     class="uploaded-image rounded-lg mt-2"
-                    *ngIf="post.media_url"
+                    *ngIf="post.media_type!=='mp4'"
                   >
-                    <img [src]="post.media_url" alt="" class="post-image" />
-                  </div>
+                  <img [src]="post.media_url" alt="" class="post-image" /> 
+                </div>
                   <div
-                  class="post-actions d-flex justify-content-between align-items-center mt-3"
-                >
-                  <div class="like-button-container">
-                    <!-- Like Button -->
-                    <button
-                      (mouseenter)="toggleReactions(post.id, true)"
-                      class="action-button like-button like-btn"
-                      [ngClass]="{ liked: post.userReacted }"
-                      (click)="likePost(post)"
-                    >
-                      <i
-                        class="fas"
-                        [ngClass]="getReactionIcon(post.reactionType)"
-                      ></i>
-                      <span>{{ post.like_count }}</span>
-                    </button>
-
-                    <!-- Reactions Overlay -->
-                    <div
-                      class="reactions-overlay"
-                      *ngIf="showReactions[post.id]"
-                      (mouseleave)="toggleReactions(post.id, false)"
-                    >
-                      <div
-                        *ngFor="let reaction of reactions"
-                        (click)="
-                          react(post, reaction.type, reaction.iconPath)
-                        "
+                    class="post-actions d-flex justify-content-between align-items-center mt-3"
+                  >
+                    <div class="like-button-container">
+                      <!-- Like Button -->
+                      <button
+                        (mouseenter)="toggleReactions(post.id, true)"
+                        class="action-button like-button like-btn"
+                        [ngClass]="{ liked: post.userReacted }"
+                        (click)="likePost(post)"
                       >
-                        <img
-                          [src]="reaction.iconPath"
-                          [alt]="reaction.type"
-                        />
+                        <i
+                          class="fas"
+                          [ngClass]="getReactionIcon(post.reactionType)"
+                        ></i>
+                        <span>{{ post.like_count }}</span>
+                      </button>
+
+                      <!-- Reactions Overlay -->
+                      <div
+                        class="reactions-overlay"
+                        *ngIf="showReactions[post.id]"
+                        (mouseleave)="toggleReactions(post.id, false)"
+                      >
+                        <div
+                          *ngFor="let reaction of reactions"
+                          (click)="
+                            react(post, reaction.type, reaction.iconPath)
+                          "
+                        >
+                          <img
+                            [src]="reaction.iconPath"
+                            [alt]="reaction.type"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
 
                     <!-- Comment Button -->
                     <button
+                    (click)="openDialogueBox(post.id)" 
                       class="action-button comment-btn"
-                      (click)="openDialogueBox(post.id)" 
                     >
                       <i class="fas fa-comment"></i>
-                      <span></span>
+                      <span>{{ post.comments }}</span>
                     </button>
 
                     <!-- Repost Button -->
@@ -322,7 +330,7 @@
                       class="action-button repost-btn"
                     >
                       <i class="fas fa-retweet"></i>
-                      <span></span>
+                      <span>{{ post.reposts }}</span>
                     </button>
                   </div>
                 </div>

@@ -139,7 +139,7 @@
               <p class="secondary-username text-muted m-0">{{user.username}}</p>
             </div>
           </div>
-          <button class="medium-button mr-3">Follow</button>
+          <button class="medium-button mr-3">UnFollow</button>
         </div>
         </div>
 
@@ -155,11 +155,12 @@
                 class="profile-image"
               />
               <div class="user-details ml-3">
-                <p class="userfollowingname m-0">{{user.full_name}}</p>
-                <p class="secondary-username text-muted m-0">{{user.username}}</p>
+                <p class="userfollowingname m-0"><span (click)="profilePageRoute(user.id)"> {{user.full_name}} </span></p>
+                <p class="secondary-username text-muted m-0"> <span (click)="profilePageRoute(user.id)"> {{user.username}} </span> </p>
               </div>
             </div>
-            <button class="medium-button mr-3">Follow</button>
+            <button *ngIf="user.is_followed" class="medium-button mr-3" (click)="follow(user.id)">UnFollow</button>
+            <button *ngIf="!user.is_followed" class="medium-button mr-3" (click)="unFollow(user.id)">Follow</button>
           </div>
           </div>
         <p class="user-content mt-2">
