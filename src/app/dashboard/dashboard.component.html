@@ -159,12 +159,19 @@
                   <div class="post-text text-white leading-normal">
                     {{ post.content }}
                   </div>
-                  <div
+                  <div>
+                    <iframe width="700" height="400" [src]="post.media_url"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+            </iframe>
+                </div>
+
+                  <!-- <div
                     class="uploaded-image rounded-lg mt-2"
-                    *ngIf="post.media_url"
+                    *ngIf="post.media_type==='.mp4'"
                   >
                   <img [src]="post.media_url" alt="" class="post-image" /> 
-                </div>
+                </div> -->
                   <div
                     class="post-actions d-flex justify-content-between align-items-center mt-3"
                   >

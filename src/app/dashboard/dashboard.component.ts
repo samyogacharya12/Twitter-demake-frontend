@@ -8,6 +8,7 @@ import { TweetTs } from '../models/tweet.ts';
 import { People } from '../models/people';
 import { IUser, User } from '../models/user';
 import { Comments } from '../models/comments';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface Post {
   id: number;
@@ -54,12 +55,14 @@ export class DashboardComponent implements OnInit {
   likeCount = 789;
   showNotifications: boolean = false;
   showComment: boolean = false;
+  safeMediaUrl:string | any;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
 
   constructor(
     private authService: LoginServiceService,
     private twitterService: TwitterServiceService,private loginService: LoginServiceService,
     private followService: FollowService,
+    private sanitizer: DomSanitizer,
     private router: Router) { }
   ngOnInit(): void {
     this.authService.me().subscribe(resp=>{
@@ -75,7 +78,10 @@ export class DashboardComponent implements OnInit {
     this.twitterService.fetchTweets().subscribe(
       response => {
         this.tweets=response;
-        
+        this.tweets?.forEach((tweet) => {
+          this.safeMediaUrl=this.sanitizer.bypassSecurityTrustResourceUrl(tweet.media_url);
+          tweet.media_url=this.safeMediaUrl;
+        });
               },
       error => {
         console.error("error", error);
@@ -252,6 +258,10 @@ export class DashboardComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0]; 
+    if (this.selectedFile) {
+      console.log('Selected File Type ' + this.selectedFile.type);
+    const fileType = this.selectedFile.type; // Get the file type
+    }
     const reader = new FileReader();
     reader.onload = (e) => {
       this.imagePreviewUrl = reader.result; // Store the image URL to be used in the template

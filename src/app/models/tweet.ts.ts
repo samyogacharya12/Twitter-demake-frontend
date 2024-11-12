@@ -14,6 +14,7 @@ export class TweetTs {
     comments?: number;
     reposts?: number;
     selectedReactionIcon?: string | null;
+    media_type?:string;
     
     
     constructor(id: string, content: string, media_url: string, created_at?: number,user?:IUser, 
@@ -24,7 +25,8 @@ export class TweetTs {
       likes?: number,
       comments?: number,
       reposts?: number,
-      selectedReactionIcon?: string | null) {
+      selectedReactionIcon?: string | null,
+      media_type?:string) {
       this.id = id;
       this.content = content;
       this.media_url = media_url;
@@ -39,5 +41,6 @@ export class TweetTs {
       this.comments=comments;
       this.reposts=reposts;
       this.selectedReactionIcon=selectedReactionIcon;
+      this.media_type=media_type;
     }
 };
