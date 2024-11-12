@@ -110,7 +110,7 @@
                   <div class="icons">
                     <label class="btn-icon" for="fileInput">
                       <i class="fas fa-image"></i>
-                      <input id="fileInput" type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" required>
+                      <input id="fileInput" type="file" accept="image/*,video/*" (change)="onFileSelected($event)" style="display: none;" required>
                     </label>
                     <button type="button" class="btn-icon">
                       <i class="fas fa-smile"></i>
@@ -180,7 +180,7 @@
                           class="fas"
                           [ngClass]="getReactionIcon(post.reactionType)"
                         ></i>
-                        <span>{{ post.likes }}</span>
+                        <span>{{ post.like_count }}</span>
                       </button>
 
                       <!-- Reactions Overlay -->
@@ -278,7 +278,7 @@
                         class="fas"
                         [ngClass]="getReactionIcon(post.reactionType)"
                       ></i>
-                      <span>{{ post.likes }}</span>
+                      <span>{{ post.like_count }}</span>
                     </button>
 
                     <!-- Reactions Overlay -->

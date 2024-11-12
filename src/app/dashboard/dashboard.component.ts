@@ -27,7 +27,7 @@ interface Post {
 export class DashboardComponent implements OnInit {
   content: string = ''; 
   peoples?:People[];
-  showReactions: { [postId: number]: boolean } = {}; // Object to track reactions per post
+  showReactions: { [postId: string]: boolean } = {}; // Object to track reactions per post
   selectedReactionIcon: string | null = null;
   showCommentModal = false;
   isCardBoxVisible = false;
@@ -296,17 +296,18 @@ export class DashboardComponent implements OnInit {
   }
   // Function to toggle like state for a post
   public likePost(post: TweetTs) {
-    if (post.userReacted && post.likes) {
-      post.likes -= 1; // Remove like
+    if (post.userReacted && post.like_count) {
       post.selectedReactionIcon = null; // Clear selected reaction icon
       post.reactionType = ''; // Reset reaction type
-    } else if(post.likes) {
-      post.likes += 1; // Add like
+    } else if(post.like_count) {
       post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
       post.reactionType = 'like'; // Set reaction type to like
     }
     post.userReacted = !post.userReacted; // Toggle like state
-    
+    this.tweet.tweet_id=post.id;
+    this.twitterService.submitLikes(this.tweet).subscribe(resp=>{
+      this.ngOnInit();
+    });
 
   }
   // Function to handle reactions
@@ -338,7 +339,7 @@ export class DashboardComponent implements OnInit {
       case 'angry':
         return 'fa-angry';
       default:
-        return 'fa-heart';
+        return 'fa-thumbs-up';
     }
   }
 
@@ -353,18 +354,13 @@ export class DashboardComponent implements OnInit {
     this.toggleCommentModal();
   }
 
-  toggleReactions(postId: number, state: boolean) {
+  toggleReactions(postId: string, state: boolean) {
     this.showReactions[postId] = state;
   }
 
   // Define reactions array
   reactions = [
-    { type: 'like', iconPath: 'assets/reactions/like (1).png' },
-    { type: 'love', iconPath: 'assets/reactions/love.png' },
-    { type: 'haha', iconPath: 'assets/reactions/haha.png' },
-    { type: 'wow', iconPath: 'assets/reactions/wow.png' },
-    { type: 'sad', iconPath: 'assets/reactions/sad.png' },
-    { type: 'angry', iconPath: 'assets/reactions/angry.png' },
+    { type: 'like', iconPath: 'assets/reactions/like (1).png' }
   ];
 
   toggleCard(event: Event) {

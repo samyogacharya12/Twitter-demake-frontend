@@ -1,3 +1,4 @@
+
 <body>
   <div class="container-dashboard flex flex-row">
     <div class="sidebar flex flex-col justify-between">
@@ -69,14 +70,37 @@
         </div>
       </div>
 
-      <div class="box-content p-4 ...">
-        <div class="d-flex">
+      <div class="box-content ..." (click)="triggerImageUpload()">
+        <img
+          *ngIf="profileImageUrl"
+          [src]="profileImageUrl"
+          alt="Uploaded Image"
+          class="uploaded-img"
+        />
+        <!-- Remove Icon - Display only if an image is uploaded -->
+        <span
+          *ngIf="profileImageUrl"
+          class="remove-icon"
+          >&#10005;</span
+        >
+        <!-- Hidden File Input for Image Upload -->
+        <input
+          type="file"
+          id="upload-photo"
+          class="upload-input"
+          (change)="onImageUpload($event)"
+        />
+      </div>
+
+      <div class="position-relative">
+        <div class="d-flex position-absolute">
           <img
             alt="User 1"
             [src]="this.user.profile_image_url"
             class="profile-img"
           />
-          <button *ngIf="this.showProfile" class="edit-profile-btn" (click)="openModal()">
+          </div>
+          <button class="edit-profile-btn" (click)="openModal()">
             Edit Profile
           </button>
 
@@ -85,7 +109,6 @@
             (close)="closeModal()"
           >
           </app-editprofile-modal>
-        </div>
       </div>
 
       <div class="d-flex flex-column p-3">
@@ -124,7 +147,7 @@
               ><span class="text-white">{{user.num_following}}</span>
               <span class="ml-1" (click)="navigateFollowDetail('Following')">Following</span></a
             >
-            <a class="link" href=""
+            <a class="link" 
               ><span class="text-white ml-2">{{user.num_followers}}</span>
               <span class="ml-1" (click)="navigateFollowDetail('Followers')">Followers</span></a
             >

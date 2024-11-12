@@ -37,10 +37,16 @@ export class FollowingFollowersComponent {
     }
   );
    if(this.followingType==='Following'){
+    this.isVerifiedFollower=false;
+    this.isFollowing=true;
+    this.isFollowers=false;
    this.followService.fetchFollowing(this.userId).subscribe(res=>{
      this.users=res.following || [];
    });
   } else if(this.followingType==='Followers'){
+    this.isFollowers=true;
+    this.isVerifiedFollower=false;
+    this.isFollowing=false;
      this.followService.fetchFollowers(this.userId).subscribe(resp=>{
       this.users=resp.followers || [];
      });
