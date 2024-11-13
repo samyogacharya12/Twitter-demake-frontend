@@ -60,7 +60,9 @@ export class DashboardComponent implements OnInit {
   safeMediaUrl:string | any;
   videoPreviewUrl: string | any;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
-
+  @ViewChild('fileInput') fileInput: any;
+  uploadedMedia: string | null = null;
+  isImage: boolean = false;
   constructor(
     private authService: LoginServiceService,
     private twitterService: TwitterServiceService,private loginService: LoginServiceService,
@@ -280,6 +282,43 @@ export class DashboardComponent implements OnInit {
     { content: 'Loving the new Angular features.', timestamp: '1 day ago' },
     { content: 'Just finished a 5K run!', timestamp: '3 days ago' },
   ];
+
+  removeUploadedMedia() {
+    this.uploadedMedia = null;
+    this.isImage = false;
+  }
+
+  handleFileUpload(event: Event) {
+    this.onFileSelected(event);
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput?.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      console.log('File selected:', file); // Debugging log
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadedMedia = reader.result as string;
+        this.isImage = file.type.startsWith('image/'); // Check if the file is an image
+        console.log('File uploaded:', this.uploadedMedia); // Debugging log
+      };
+      reader.readAsDataURL(file);
+    } else {
+      console.log('No file selected'); // Debugging log if no file selected
+    }
+  }
+
+  triggerFileInput() {
+    if (this.fileInput) {
+      console.log('File input triggered');
+      this.fileInput.nativeElement.click(); // Trigger file input click
+    } else {
+      console.log('File input not found!');
+    }
+  }
+  
+  ngAfterViewInit() {
+    console.log('View initialized. File input:', this.fileInput);
+  }
 
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;

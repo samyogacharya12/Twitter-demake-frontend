@@ -129,12 +129,12 @@
               ></span>
               Get verified
             </button>
-            <button (click)="unFollow(user.id)" class="followbtn text-sm px-4 ml-auto" *ngIf="!this.isAdminPage && user.is_followed">
+            <button (click)="unFollow(user.id)" class="followbtn text-sm px-2 ml-3" *ngIf="!this.isAdminPage && user.is_followed">
               UnFollow
             </button>
   
   
-            <button (click)="follow(user.id)" class="followbtn text-sm px-4 ml-auto" *ngIf="!this.isAdminPage && !user.is_followed">
+            <button (click)="follow(user.id)" class="followbtn text-sm px-2 ml-3" *ngIf="!this.isAdminPage && !user.is_followed">
               Follow
             </button>
             <p class="profile-details">{{user.username}}</p>

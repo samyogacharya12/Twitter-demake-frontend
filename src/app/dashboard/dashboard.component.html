@@ -98,21 +98,15 @@
                   name="content"></textarea>
                   <div class="custom-line"></div>
                 </div>
-                <div
-                class="post-image-container"
-                *ngIf="this.imagePreviewUrl"
-              >
-              <button type="button" class="btn-remove" (click)="removeImage()">
-                <i class="fas fa-times"></i> <!-- X icon -->
-              </button>
-                <img [src]="this.imagePreviewUrl" alt=""  class="post-image-status" />
-              </div>
                 <div class="status-actions py-2">
                   <div class="icons">
-                    <label class="btn-icon" for="fileInput">
-                      <i class="fas fa-image"></i>
-                      <input id="fileInput" type="file" accept="image/*,video/*" (change)="onFileSelected($event)" style="display: none;" required>
-                    </label>
+                    <button
+                    type="button"
+                    class="btn-icon"
+                    (click)="triggerFileInput()"
+                  >
+                    <i class="fas fa-image"></i>
+                  </button>
                     <button type="button" class="btn-icon">
                       <i class="fas fa-smile"></i>
                     </button>
@@ -120,6 +114,48 @@
                       <i class="fas fa-poll"></i>
                     </button>
                   </div>
+                  <input
+                  type="file"
+                  #fileInput
+                  style="display: none"
+                  accept="image/*,video/*"
+                  (change)="handleFileUpload($event)"
+                />
+                <!-- Display the uploaded media (image or video) -->
+                <div *ngIf="uploadedMedia">
+                  <div style="position: relative; display: inline-block">
+                    <div *ngIf="isImage; else videoTemplate">
+                      <img
+                        [src]="uploadedMedia"
+                        alt="Uploaded Media"
+                        style="width: 100px; height: 100px"
+                      />
+                      <button
+                        (click)="removeUploadedMedia()"
+                        style="
+                          position: absolute;
+                          top: 0px;
+                          left: 0%;
+                          background-color: rgba(255, 255, 255, 0.8);
+                          font-size: 16px;
+                          color: white;
+                          border: none;
+                          cursor: pointer;
+                        "
+                      >
+                        <i class="fas fa-times" style="color: red"></i>
+                      </button>
+                    </div>
+                    <ng-template #videoTemplate>
+                      <video
+                        [src]="uploadedMedia"
+                        controls
+                        style="width: 100px; height: 100px"
+                      >
+                    </video>
+                    </ng-template>
+                  </div>
+                </div>
                   <div class="dropdown ml-2">
                     <button
                       class="btn btn-secondary dropdown-toggle"
