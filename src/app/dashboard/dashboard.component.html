@@ -125,7 +125,7 @@
                           style="
                             position: absolute;
                             top: 0px;
-                            left: 0%;
+                            left: 0px;
                             background-color: rgba(255, 255, 255, 0.8);
                             font-size: 16px;
                             color: white;
@@ -140,8 +140,23 @@
                         <video
                           [src]="uploadedMedia"
                           controls
-                          style="width: 100px; height: 100px"
+                          style="width: 150px; height: 150px"
                         ></video>
+                        <button
+                          (click)="removeUploadedMedia()"
+                          style="
+                            position: absolute;
+                            top: 30px;
+                            left: 0px;
+                            background-color: rgba(255, 255, 255, 0.8);
+                            font-size: 16px;
+                            color: white;
+                            border: none;
+                            cursor: pointer;
+                          "
+                        >
+                          <i class="fas fa-times" style="color: red"></i>
+                        </button>
                       </ng-template>
                     </div>
                   </div>
