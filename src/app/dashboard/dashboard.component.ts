@@ -23,6 +23,9 @@ export class DashboardComponent implements OnInit {
   isCardBoxVisible = false;
   role?: string | any;
   @ViewChild('cardBox') cardBox: ElementRef | undefined;
+  @ViewChild('fileInput') fileInput: any;
+  uploadedMedia: string | null = null;
+  isImage: boolean = false;
 
   constructor() {}
 
@@ -236,5 +239,41 @@ export class DashboardComponent implements OnInit {
   filterPoetry() {
     console.log('Poetry post...');
     // Implement draft saving logic here
+  }
+
+  triggerFileInput() {
+    if (this.fileInput) {
+      console.log('File input triggered');
+      this.fileInput.nativeElement.click(); // Trigger file input click
+    } else {
+      console.log('File input not found!');
+    }
+  }
+
+  handleFileUpload(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput?.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      console.log('File selected:', file); // Debugging log
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadedMedia = reader.result as string;
+        this.isImage = file.type.startsWith('image/'); // Check if the file is an image
+        console.log('File uploaded:', this.uploadedMedia); // Debugging log
+      };
+      reader.readAsDataURL(file);
+    } else {
+      console.log('No file selected'); // Debugging log if no file selected
+    }
+  }
+
+  removeUploadedMedia() {
+    this.uploadedMedia = null;
+    this.isImage = false;
+  }
+
+  ngAfterViewInit() {
+    console.log('View initialized. File input:', this.fileInput);
   }
 }
