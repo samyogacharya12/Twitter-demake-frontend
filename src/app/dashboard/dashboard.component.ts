@@ -26,7 +26,7 @@ interface Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  selectedOption: string | any;
+  selectedOption: string | any='Sarcastic';
   content: string = ''; 
   tone:string | any;
   peoples?:People[];

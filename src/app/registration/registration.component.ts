@@ -11,9 +11,8 @@ export class RegistrationComponent {
   checkUsername=false;
   isInvalidEmail=false;
    onSelectUsername(event: any):void{
-    if(this.user.username.length<3){
+    if(this.user.username.length<=3 && this.user.password.length>=50){
      this.checkUsername=true;
-     console.log('character is less');
     } else{
       this.checkUsername=false;
     }
@@ -21,17 +20,16 @@ export class RegistrationComponent {
 
    validateEmail(event: any): void {
     // Simple email regex pattern
-    console.log('simple email regex pattern');
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    if (emailPattern.test(this.user.email)) {
-      // The email is valid
-      this.isInvalidEmail = false;
-      console.log('Email is valid');
-    } else {
-      // The email is not valid
-      this.isInvalidEmail = true;
+    // Set `isInvalidEmail` based on whether the pattern matches
+    this.isInvalidEmail = !emailPattern.test(this.user.email);
+
+    // Logging validation status
+    if (this.isInvalidEmail) {
       console.log('Email is not valid');
+    } else {
+      console.log('Email is valid');
     }
 
   }

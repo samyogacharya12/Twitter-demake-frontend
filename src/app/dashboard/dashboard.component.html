@@ -156,34 +156,23 @@
                     </ng-template>
                   </div>
                 </div>
-                  <div class="dropdown ml-2">
-                    <button
-                      class="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Choose
-                    </button>
-                    <div
-                      class="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <a
-                        class="dropdown-item"
-                        (click)="filterSarcastic('sarcastic')"
-                        >Sarcastic</a
-                      >
-                      <a class="dropdown-item"  (click)="filterPoetry('Poetic')"
-                        >Poetry</a
-                      >
-                      <a class="dropdown-item"  (click)="filterPoetry('funny')"
-                      >Funny</a
-                    >
-                    </div>
-                  </div> 
+                <div class="dropdown ml-2">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {{ selectedOption }}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="filterSarcastic('Sarcastic')">Sarcastic</a>
+                    <a class="dropdown-item" (click)="filterPoetry('Poetry')">Poetry</a>
+                    <a class="dropdown-item" (click)="filterPoetry('Funny')">Funny</a>
+                  </div>
+                </div>
 
                   <button type="submit" class="btn-post" >Post</button>
                 </div>
@@ -224,7 +213,7 @@
                   <div class="post-text text-white leading-normal">
                     {{ post.content }}
                   </div>
-                  <div *ngIf="isMediaUrlAvailable(post)">
+                  <div>
                     <div *ngIf="post.media_type==='mp4'">
                     <iframe width="700" height="400" [src]="post.resource_url"
                     title="YouTube video player" frameborder="0"
