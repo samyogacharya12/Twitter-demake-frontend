@@ -259,7 +259,7 @@ export class DashboardComponent implements OnInit {
     }
     console.log('data' +this.content);
     this.tweet.content=this.content;
-    if (this.tone) {
+    if (this.tone!=='Normal') {
     formData.append('tone', this.tone);
     }
     formData.append('content', this.tweet.content);

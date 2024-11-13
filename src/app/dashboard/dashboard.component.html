@@ -168,6 +168,7 @@
                     {{ selectedOption }}
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="filterSarcastic('Normal')">Normal</a>
                     <a class="dropdown-item" (click)="filterSarcastic('Sarcastic')">Sarcastic</a>
                     <a class="dropdown-item" (click)="filterPoetry('Poetry')">Poetry</a>
                     <a class="dropdown-item" (click)="filterPoetry('Funny')">Funny</a>

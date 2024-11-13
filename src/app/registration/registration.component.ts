@@ -16,6 +16,7 @@ export class RegistrationComponent {
     } else{
       this.checkUsername=false;
     }
+    console.log(this.checkUsername);
    }
 
    validateEmail(event: any): void {
@@ -24,6 +25,7 @@ export class RegistrationComponent {
 
     // Set `isInvalidEmail` based on whether the pattern matches
     this.isInvalidEmail = !emailPattern.test(this.user.email);
+    console.log(this.isInvalidEmail);
 
     // Logging validation status
     if (this.isInvalidEmail) {
