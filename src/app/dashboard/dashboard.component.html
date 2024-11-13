@@ -16,7 +16,7 @@
         <li>
           <a [routerLink]="['/dashboard/profile', userId]" style="color: white"
             ><i class="fas fa-user"></i> Profile</a>
-        </li>  
+        </li>
         <button class="btn btn-primary mt-4">Post</button>
       </ul>
       <div class="flex flex-row justify-between">
@@ -93,6 +93,7 @@
                 />
               <form class="flex-1" #form="ngForm" (ngSubmit)="submit()" novalidate>
                 <div class="m-0">
+
                   <textarea placeholder="Share your thoughts here!!" id="status-input" rows="3" cols="80" [(ngModel)]="content" 
                   name="content"></textarea>
                   <div class="custom-line"></div>
@@ -119,6 +120,32 @@
                       <i class="fas fa-poll"></i>
                     </button>
                   </div>
+                  <div class="dropdown ml-2">
+                    <button
+                      class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Choose
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        (click)="filterSarcastic('Sarcastic')"
+                        >Sarcastic</a
+                      >
+                      <a class="dropdown-item" href="#" (click)="filterPoetry('Poetry')"
+                        >Poetry</a
+                      >
+                    </div>
+                  </div> 
 
                   <button type="submit" class="btn-post" >Post</button>
                 </div>

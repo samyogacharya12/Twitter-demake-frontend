@@ -266,16 +266,6 @@ i[class^="icon-"]:hover::before {
   /* The box will match the image's size */
 }
 
-.post-image-status {
-  align-items: left;
-  width: 900px;
-  /* Set the image width */
-  height: 500px;
-  /* Maintain aspect ratio */
-  object-fit: cover;
-  /* Cover the container without distortion */
-}
-
 .post-image-container {
   width: 100%;
   margin-top: 10px;
@@ -1152,7 +1142,7 @@ aside {
 .profile-icon {
   width: 40px; /* Adjust the size as needed */
   height: 40px;
-  border-radius: 70%; /* Makes it circular */
+  border-radius: 50%; /* Makes it circular */
   margin-right: 10px;
   object-fit: cover;
 }
@@ -1289,4 +1279,12 @@ aside {
   width: 40px; /* Small profile image */
   height: 40px;
   border-radius: 50%;
+}
+
+.dropdown .btn-secondary {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
 }

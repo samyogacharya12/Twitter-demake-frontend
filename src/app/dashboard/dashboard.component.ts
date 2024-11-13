@@ -26,7 +26,9 @@ interface Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  selectedOption: string = '';
   content: string = ''; 
+  tone:string | any;
   peoples?:People[];
   showReactions: { [postId: string]: boolean } = {}; // Object to track reactions per post
   selectedReactionIcon: string | null = null;
@@ -255,6 +257,9 @@ export class DashboardComponent implements OnInit {
     }
     console.log('data' +this.content);
     this.tweet.content=this.content;
+    if (this.tone) {
+    formData.append('tone', this.tone);
+    }
     formData.append('content', this.tweet.content);
     this.twitterService.submit(formData).subscribe(
       response=>{
@@ -420,5 +425,13 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('authToken'); 
     this.router.navigate(['/login']);
     console.log("User logged out");
+  }
+
+  filterSarcastic(requestType?:string) {
+    this.tone=requestType;
+  }
+
+  filterPoetry(requestType?:string) {
+    this.tone=requestType;
   }
 }
