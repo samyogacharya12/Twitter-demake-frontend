@@ -118,8 +118,6 @@ export class FollowingFollowersComponent {
   }
 
   profilePageRoute(userId?:string):void{
-    console.log('user id'+userId);
-    console.log('user profile');
     this.router.navigate(['/dashboard/profile', userId]); 
   }
 

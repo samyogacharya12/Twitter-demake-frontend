@@ -696,6 +696,7 @@ body {
   .user-details {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
   }
   
   .name {

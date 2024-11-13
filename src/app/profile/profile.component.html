@@ -100,7 +100,7 @@
               class="profile-img"
             />
             </div>
-            <button class="edit-profile-btn" (click)="openModal()">
+            <button *ngIf="isAdminPage" class="edit-profile-btn" (click)="openModal()">
               Edit Profile
             </button>
   
