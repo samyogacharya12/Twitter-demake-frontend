@@ -26,7 +26,7 @@ interface Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  selectedOption: string = '';
+  selectedOption: string | any;
   content: string = ''; 
   tone:string | any;
   peoples?:People[];
@@ -468,9 +468,11 @@ export class DashboardComponent implements OnInit {
 
   filterSarcastic(requestType?:string) {
     this.tone=requestType;
+    this.selectedOption = requestType;
   }
 
   filterPoetry(requestType?:string) {
     this.tone=requestType;
+    this.selectedOption = requestType;
   }
 }
