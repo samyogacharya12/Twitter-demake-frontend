@@ -127,7 +127,7 @@
           </div>
           <div class="posts-container" *ngIf="isHomeDashboard">
             <div *ngFor="let post of tweets" class="posted">
-              <div class="d-flex gap-4 post-avatar-content" *ngIf="post.content">
+              <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
                    <a (click)="profilePageRoute(post.user?.id)">
                   <img
@@ -159,8 +159,9 @@
                   <div class="post-text text-white leading-normal">
                     {{ post.content }}
                   </div>
-                  <div *ngIf="post.media_type==='mp4'">
-                    <iframe width="700" height="400" [src]="post.media_url"
+                  <div *ngIf="isMediaUrlAvailable(post)">
+                    <div *ngIf="post.media_type==='mp4'">
+                    <iframe width="700" height="400" [src]="post.resource_url"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
             </iframe>
@@ -170,7 +171,9 @@
                     class="uploaded-image rounded-lg mt-2"
                     *ngIf="post.media_type!=='mp4'"
                   >
-                  <img [src]="post.media_url" alt="" class="post-image" /> 
+                  <div *ngIf="post.media_url">
+                  <img [src]="post.resource_url" alt="" class="post-image" /> 
+                  </div>
                 </div>
                   <div
                     class="post-actions d-flex justify-content-between align-items-center mt-3"
@@ -226,6 +229,7 @@
                       <i class="fas fa-retweet"></i>
                       <span>{{ post.reposts }}</span>
                     </button>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -233,7 +237,7 @@
           </div>
           <div class="posts-container" *ngIf="isFollowingDashboard">
             <div *ngFor="let post of tweets" class="posted">
-              <div class="d-flex gap-4 post-avatar-content" *ngIf="post.content">
+              <div class="d-flex gap-4 post-avatar-content">
                 <div class="bg-light avatar-placeholder">
                    <a (click)="profilePageRoute(post.user?.id)">
                   <img
@@ -265,8 +269,9 @@
                   <div class="post-text text-white leading-normal">
                     {{ post.content }}
                   </div>
+                  <div>
                   <div *ngIf="post.media_type==='mp4'">
-                    <iframe width="700" height="400" [src]="post.media_url"
+                    <iframe width="700" height="400" [src]="post.resource_url"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
             </iframe>
@@ -276,7 +281,9 @@
                     class="uploaded-image rounded-lg mt-2"
                     *ngIf="post.media_type!=='mp4'"
                   >
-                  <img [src]="post.media_url" alt="" class="post-image" /> 
+                  <div *ngIf="post.media_url">
+                  <img [src]="post.resource_url" alt="" class="post-image" /> 
+                  </div>
                 </div>
                   <div
                     class="post-actions d-flex justify-content-between align-items-center mt-3"
@@ -332,6 +339,7 @@
                       <i class="fas fa-retweet"></i>
                       <span>{{ post.reposts }}</span>
                     </button>
+                  </div>
                   </div>
                 </div>
               </div>

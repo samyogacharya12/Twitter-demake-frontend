@@ -65,6 +65,16 @@ export class DashboardComponent implements OnInit {
     private followService: FollowService,
     private sanitizer: DomSanitizer,
     private router: Router) { }
+
+    isMediaUrlAvailable(tweet?:TweetTs): boolean {
+      console.log('media url' +tweet?.media_url);
+      if(tweet?.media_url){
+        return true;
+      } else{
+        return false;
+      }
+    }
+    
   ngOnInit(): void {
     this.authService.me().subscribe(resp=>{
       localStorage.setItem("userId", resp.id);
@@ -81,7 +91,7 @@ export class DashboardComponent implements OnInit {
         this.tweets=response;
         this.tweets?.forEach((tweet) => {
           this.safeMediaUrl=this.sanitizer.bypassSecurityTrustResourceUrl(tweet.media_url);
-          tweet.media_url=this.safeMediaUrl;
+          tweet.resource_url=this.safeMediaUrl;
         });
               },
       error => {
@@ -167,6 +177,10 @@ export class DashboardComponent implements OnInit {
     this.twitterService.fetchTweets().subscribe(
       response => {
         this.tweets=response;
+        this.tweets?.forEach((tweet) => {
+          this.safeMediaUrl=this.sanitizer.bypassSecurityTrustResourceUrl(tweet.media_url);
+          tweet.resource_url=this.safeMediaUrl;
+        });
               },
       error => {
         console.error("error", error);
@@ -182,6 +196,10 @@ export class DashboardComponent implements OnInit {
     this.twitterService.fetchTweets('following').subscribe(
       response => {
         this.tweets=response;
+        this.tweets?.forEach((tweet) => {
+          this.safeMediaUrl=this.sanitizer.bypassSecurityTrustResourceUrl(tweet.media_url);
+          tweet.resource_url=this.safeMediaUrl;
+        });
               },
       error => {
         console.error("error", error);

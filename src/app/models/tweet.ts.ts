@@ -4,6 +4,7 @@ export class TweetTs {
     id: string;
     content: string;
     media_url: string;
+    resource_url:string;
     created_at?: number;  
     user?:IUser;
     like_count?:number;
@@ -17,7 +18,10 @@ export class TweetTs {
     media_type?:string;
     
     
-    constructor(id: string, content: string, media_url: string, created_at?: number,user?:IUser, 
+    constructor(id: string, content: string, 
+      media_url: string, 
+      resource_url:string,
+      created_at?: number,user?:IUser, 
       like_count?:number,retweet_count?:number, 
       comment_count?:number,
       reactionType?:string,
@@ -29,6 +33,7 @@ export class TweetTs {
       media_type?:string) {
       this.id = id;
       this.content = content;
+      this.resource_url=resource_url;
       this.media_url = media_url;
       this.created_at = created_at; 
       this.user=user;

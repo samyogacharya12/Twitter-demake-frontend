@@ -72,8 +72,8 @@
 
       <div class="box-content ..." (click)="triggerImageUpload()">
         <img
-          *ngIf="profileImageUrl"
-          [src]="profileImageUrl"
+          *ngIf="this.user.header_image_url"
+          [src]="this.user.header_image_url"
           alt="Uploaded Image"
           class="uploaded-img"
         />
