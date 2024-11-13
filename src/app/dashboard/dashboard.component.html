@@ -99,11 +99,39 @@
                     </button>
                   </div>
 
+                  <!--dropdown-->
+                  <div class="dropdown ml-2">
+                    <button
+                      class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Choose
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        (click)="filterSarcastic()"
+                        >Sarcastic</a
+                      >
+                      <a class="dropdown-item" href="#" (click)="filterPoetry()"
+                        >Poetry</a
+                      >
+                    </div>
+                  </div>
                   <button type="submit" class="btn-post">Post</button>
                 </div>
               </form>
             </div>
           </div>
+
           <div class="posts-container">
             <div *ngFor="let post of newPosts" class="posted">
               <div class="d-flex gap-4 post-avatar-content">

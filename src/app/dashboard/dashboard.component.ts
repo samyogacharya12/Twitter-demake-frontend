@@ -227,4 +227,14 @@ export class DashboardComponent implements OnInit {
     event.stopPropagation(); // Prevent click from closing the card-box
     console.log('Option clicked:', event.target); // You can handle option selection here
   }
+
+  filterSarcastic() {
+    console.log('Sarcastic post...');
+    // Implement scheduling logic here
+  }
+
+  filterPoetry() {
+    console.log('Poetry post...');
+    // Implement draft saving logic here
+  }
 }

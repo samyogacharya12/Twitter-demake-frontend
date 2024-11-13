@@ -1280,3 +1280,11 @@ aside {
   height: 40px;
   border-radius: 50%;
 }
+
+.dropdown .btn-secondary {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+}
