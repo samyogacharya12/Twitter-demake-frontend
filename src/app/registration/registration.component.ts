@@ -23,7 +23,7 @@ export class RegistrationComponent {
 
 
    onSelectPassword():void{
-    if(this.user.password.length<9){
+    if(this.user.password.length<8){
      this.isInvalidPassword=true;
     } else{
       this.isInvalidPassword=false;
