@@ -10,14 +10,28 @@ export class RegistrationComponent {
   constructor(private userService: LoginServiceService) {}
   checkUsername=false;
   isInvalidEmail=false;
-   onSelectUsername(event: any):void{
-    if(this.user.username.length<=3 && this.user.password.length>=50){
+  isInvalidPassword=false;
+
+   onSelectUsername():void{
+    if(this.user.username.length<=3 || this.user.username.length>=50){
      this.checkUsername=true;
     } else{
       this.checkUsername=false;
     }
     console.log(this.checkUsername);
    }
+
+
+   onSelectPassword():void{
+    if(this.user.password.length<9){
+     this.isInvalidPassword=true;
+    } else{
+      this.isInvalidPassword=false;
+    }
+   }
+
+
+
 
    validateEmail(event: any): void {
     // Simple email regex pattern
@@ -33,8 +47,9 @@ export class RegistrationComponent {
     } else {
       console.log('Email is valid');
     }
-
   }
+
+
 
   user = {
     username: '',

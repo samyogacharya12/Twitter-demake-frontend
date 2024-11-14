@@ -383,7 +383,7 @@ export class DashboardComponent implements OnInit {
       post.selectedReactionIcon = null; // Clear selected reaction icon
       post.reactionType = ''; // Reset reaction type
     } else if(post.like_count) {
-      post.selectedReactionIcon = 'assets/reactions/like (1).png'; // Set default like icon
+      post.selectedReactionIcon = 'assets/reactions/love.png'; // Set default like icon
       post.reactionType = 'like'; // Set reaction type to like
     }
     post.userReacted = !post.userReacted; // Toggle like state
@@ -409,8 +409,6 @@ export class DashboardComponent implements OnInit {
 
   getReactionIcon(reactionType: string | undefined): string {
     switch (reactionType) {
-      case 'like':
-        return 'fa-thumbs-up';
       case 'love':
         return 'fa-heart'; // Change this to your desired icon for 'love'
       case 'haha':
@@ -422,7 +420,7 @@ export class DashboardComponent implements OnInit {
       case 'angry':
         return 'fa-angry';
       default:
-        return 'fa-thumbs-up';
+        return 'fa-heart';
     }
   }
 
@@ -443,7 +441,7 @@ export class DashboardComponent implements OnInit {
 
   // Define reactions array
   reactions = [
-    { type: 'like', iconPath: 'assets/reactions/like (1).png' }
+    { type: 'like', iconPath: 'assets/reactions/love.png' }
   ];
 
   toggleCard(event: Event) {
