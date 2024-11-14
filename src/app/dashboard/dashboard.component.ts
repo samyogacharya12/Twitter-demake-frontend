@@ -26,7 +26,7 @@ interface Post {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  selectedOption: string | any='Sarcastic';
+  selectedOption: string | any='Normal';
   content: string = ''; 
   tone:string | any;
   peoples?:People[];
@@ -269,6 +269,8 @@ export class DashboardComponent implements OnInit {
         this.content='';
         this.selectedFile=undefined;
         this.removeImage();
+        this.imagePreviewUrl=null;
+        this.videoPreviewUrl=null;
         this.ngOnInit();
         }
       }
