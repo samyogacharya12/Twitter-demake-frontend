@@ -257,9 +257,13 @@ export class DashboardComponent implements OnInit {
     }  else{
       formData.append('media', this.selectedFile);
     }
+    if(this.tone===undefined){
+      this.tone='Normal';
+    }
     console.log('data' +this.content);
     this.tweet.content=this.content;
     if (this.tone!=='Normal') {
+    console.log('tonbe'+this.tone);  
     formData.append('tone', this.tone);
     }
     formData.append('content', this.tweet.content);
